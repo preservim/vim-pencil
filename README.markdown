@@ -4,10 +4,11 @@
 
 Features of this plugin:
 
-* Configures Vim for word processing, with key mappings, undo points, etc.
-* Agnostic on hard line endings _versus_ soft wrapping
+* Sets up buffer for word processing
 * Use for editing markdown, textile, documentation, etc.
-* Can detect wrapping approach via modeline
+* Configures wrap mode, auto-detecting from modeline if present
+* Adjusts navigation key mappings to suit the wrap mode
+* Creates undo points on common punctuation
 
 Why such a minimalistic approach? There are several Vim plugins for
 writing that take a comprehensive approach, including changing not only
@@ -56,14 +57,12 @@ plugin.)
 
 ## Configuration
 
-### Hard breaks or soft wrapping?
+### Hard line breaks or soft line wrapping?
 
-Where do you stand on hard line breaks versus soft line wrapping?
-
-Typically, coders will have the most experience with the former, and
-writers the latter. But whatever your background, chances are that you
-will be living in a mixed environment where you must contend with both.
-This plugin doesn't force you to choose a side—each buffer is configured
+Coders will have the most experience with the former, and writers the 
+latter. But whatever your background, chances are that you will be living 
+in a mixed environment where you must contend with both. This plugin 
+doesn't force you to choose a side—each buffer is configured
 independently.
 
 In most cases you can set a default to suit your preference and let
@@ -116,7 +115,7 @@ let g:pencil#textwidth = 74
 `joinspaces` determines number of spaces after period (`0`=1 space, `1`=2 spaces)
 
 ```vim
-let g:pencil#joinspaces=0
+let g:pencil#joinspaces = 0
 ```
 
 ## Automatic formatting
