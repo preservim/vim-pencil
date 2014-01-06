@@ -1,7 +1,5 @@
 # vim-pencil
 
-> Because Vim can be great for writing prose and documentation
-
 - - -
 ![demo](screenshots/demo.gif)
 - - -
