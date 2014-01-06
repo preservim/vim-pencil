@@ -1,24 +1,27 @@
 # vim-pencil
 
-> “Extending Vim to better support writing prose and documentation”
+> Because Vim can be great for writing prose and documentation
 
-Features of this plugin:
+![demo](screenshots/demo.gif)
+
+# Features
+
+This plugin focus on the basics:
 
 * Sets up buffer for word processing
 * Use for editing markdown, textile, documentation, etc.
 * Configures wrap mode, auto-detecting from modeline if present
 * Adjusts navigation key mappings to suit the wrap mode
+* For hard line breaks, enables Insert-mode only autoformat
 * Creates undo points on common punctuation
 
 Why such a minimalistic approach? There are several Vim plugins for
-writing that take a comprehensive approach, including changing not only
+writing that offer a comprehensive solution, including changing not only
 the functional behavior of the editor, but also visual aspects such as
 colorscheme and font. This plugin heads in the opposite direction,
 focusing narrowly on the few tweaks needed to smooth the path to writing
-prose in Vim.
-
-Where you need more features, you can tailor your environment
-by installing those plugins that meet your specific needs.
+prose in Vim. Where you need more features, you can tailor your
+environment by installing those plugins that meet your specific needs.
 
 ## Why use Vim for writing?
 
@@ -51,19 +54,18 @@ other writing tools:
 Install using Pathogen, Vundle, Neobundle, or your favorite Vim package
 manager.
 
-(For those who are new to Vim: you should first work through one of the
-Vim tutorials listed at the bottom of this document. Then, once you are
-comfortable with the basics of Vim, consider installing this plugin.)
+(For those new to Vim: you should first work through one of the many Vim
+tutorials available. Then, once you are comfortable with the basics of
+Vim, consider installing this plugin.)
 
 ## Configuration
 
 ### Hard line breaks or soft line wrapping?
 
 Coders will have the most experience with the former, and writers the
-latter. But whatever your background, chances are that you will be living
-in a mixed environment where you must contend with both. This plugin
-doesn't force you to choose a side—each buffer is configured
-independently.
+latter. But whatever your background, chances are that you are living in
+a mixed environment where you must contend with both. This plugin doesn't
+force you to choose a side—each buffer can be configured independently.
 
 In most cases you can set a default to suit your preference and let
 auto-detection figure out what to do. Add to your `.vimrc`:
