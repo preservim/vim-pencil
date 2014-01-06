@@ -40,28 +40,28 @@ There are good reasons NOT to use Vim for writing:
 But then again Vim offers a unique editing environment not matched by
 other writing tools:
 
-* Your hands rest in a neutral ‘home’ position, only rarely straying to
-  reach for mouse, track pad, or arrow keys
+* Hands rest in a neutral ‘home’ position, only rarely straying to reach
+  for mouse, track pad, or arrow keys
 * Minimal chording, with many mnemonic-friendly commands
 * Sophisticated capabilities for navigating and manipulating text
 * Highly configurable to suit your needs, with many plugins available
 
 ## Installation
 
-Install using Pathogen, Vundle, Neobundle, or your favorite Vim package manager.
+Install using Pathogen, Vundle, Neobundle, or your favorite Vim package
+manager.
 
-(Suggestion for those who are new to Vim: you should first work through
-one of the Vim tutorials listed at the bottom of this document. Then, once
-you are comfortable with the basics of Vim, consider installing this
-plugin.)
+(For those who are new to Vim: you should first work through one of the
+Vim tutorials listed at the bottom of this document. Then, once you are
+comfortable with the basics of Vim, consider installing this plugin.)
 
 ## Configuration
 
 ### Hard line breaks or soft line wrapping?
 
-Coders will have the most experience with the former, and writers the 
-latter. But whatever your background, chances are that you will be living 
-in a mixed environment where you must contend with both. This plugin 
+Coders will have the most experience with the former, and writers the
+latter. But whatever your background, chances are that you will be living
+in a mixed environment where you must contend with both. This plugin
 doesn't force you to choose a side—each buffer is configured
 independently.
 
@@ -84,7 +84,7 @@ But for files of type `text`, it will *always* use hard line endings.
 
 ### Commands
 
-Because auto-detect doesn’t always work correctly, you can invoke commands 
+Because auto-detect doesn’t always work correctly, you can invoke commands
 to set the behavior for the current buffer:
 
 * `SoftPencil` - configure for soft wrapping
@@ -120,17 +120,17 @@ let g:pencil#joinspaces = 0
 
 ## Automatic formatting
 
-(This feature affects ‘hard’ line break mode only.)
+_This ‘autoformat’ feature affects ‘hard’ line break mode only._
 
 When using hard line breaks, Vim’s autoformat feature can offer many of
 the same benefits as soft wrapping lines. But autoformat can cause havoc
-when editing outside of paragraphs of sentences. Occasionally, you will
-need to disable it.
+when editing outside of paragraphs of sentences, such as when editing
+a table or code block. In these cases you will need to disable it.
 
 To set the default behavior, add to your `.vimrc`:
 
 ```vim
-let g:pencil#autoformat = 1      " 1=enable, 0=disable
+let g:pencil#autoformat = 1      " 1=auto, 0=manual
 ```
 
 You can override this default during initialization, as in:
@@ -153,15 +153,28 @@ You can also toggle it as needed with a command:
 Or bind to keys in your `.vimrc`:
 
 ```vim
-nmap <silent> <leader>pa :AutoPencil<cr>
-nmap <silent> <leader>pm :ManualPencil<cr>
-nmap <silent> <leader>pt :ToggleAutoPencil<cr>
+nnoremap <silent> <leader>pa :AutoPencil<cr>
+nnoremap <silent> <leader>pm :ManualPencil<cr>
+nnoremap <silent> <leader>pt :ToggleAutoPencil<cr>
 ```
 
-Again, when using soft line wrapping, Vim’s autoformat feature does not
-apply.
+Note that you don’t have to rely on autoformat and can alway reformat your
+paragraphs manually with the standard Vim commands:
+
+* `gqip` - manual format
+* `vipJ` - manual unformat
+
+Optionally, you may want to map these to keys in your `.vimrc`:
+
+```vim
+nnoremap <silent> Q gqip
+nnoremap <silent> K vipJ
+```
 
 ## Auto-detection via modeline
+
+Will the wrapping mode be detected automatically? Maybe. But you can
+improve its chances by giving it a hint.
 
 At the bottom of this document is a strange code:
 
@@ -180,6 +193,12 @@ That’s a strong hint to this plugin that we should assume hard line
 endings, regardless of whether or not soft wrapping is the default editing
 mode for files of type ‘markdown’.
 
+If it’s 0, then soft line wrapping is assumed.
+
+```
+<!-- vim: set tw=0 :-->
+```
+
 To provide a hint for detection, you can add a modeline to the last line
 of your documents. For more details:
 
@@ -193,7 +212,7 @@ reasons) the textwidth will still be set by this plugin.
 ## See also
 
 * [Vim for Writers](http://therandymon.com/woodnotes/vim-for-writers/vimforwriters.html) - guide to the basics geared to writers
-* [Vim-related books](http://iccf-holland.org/click5.html) 
+* [Vim-related books](http://iccf-holland.org/click5.html)
 * [Vim Training Class - Basic motions and commands](https://www.youtube.com/watch?v=Nim4_f5QUxA) - video tutorial by Shawn Biddle
 
 If you like this plugin, you might like these others from the same author:
