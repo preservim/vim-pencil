@@ -6,13 +6,12 @@
 
 # Features
 
-This plugin focus on the basics:
+This plugin focuses on the fundamentals of word processing in Vim:
 
-* Sets up buffer for word processing
 * Use for editing markdown, textile, documentation, etc.
-* Configures wrap mode, auto-detecting via modeline if present
+* Configures wrap mode for buffer, auto-detecting via modeline if present
 * Adjusts navigation key mappings to suit the wrap mode
-* For hard line breaks, enables Insert-mode only autoformat
+* For hard line break mode, enables Insert-mode only autoformat
 * Creates undo points on common punctuation
 
 Why such a minimalistic approach? There are several Vim plugins for
