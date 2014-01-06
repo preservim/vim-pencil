@@ -192,8 +192,9 @@ reasons) the textwidth will still be set by this plugin.
 
 ## See also
 
-* [Vim for Writers](http://therandymon.com/woodnotes/vim-for-writers/vimforwriters.html)
-* [Vim-related books](http://iccf-holland.org/click5.html)
+* [Vim for Writers](http://therandymon.com/woodnotes/vim-for-writers/vimforwriters.html) - guide to the basics geared to writers
+* [Vim-related books](http://iccf-holland.org/click5.html) 
+* [Vim Training Class - Basic motions and commands](https://www.youtube.com/watch?v=Nim4_f5QUxA) - video tutorial by Shawn Biddle
 
 If you like this plugin, you might like these others from the same author:
 
