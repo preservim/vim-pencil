@@ -87,18 +87,18 @@ But for files of type `text`, it will *always* use hard line endings.
 Because auto-detect doesn’t always work correctly, you can invoke commands 
 to set the behavior for the current buffer:
 
-* `PencilSoft` - configure for soft wrapping
-* `PencilHard` - configure for hard line endings
-* `PencilToggle` - if off, enables with detection; if on, turns off
-* `PencilOff` - removing mappings and restore global settings
+* `SoftPencil` - configure for soft wrapping
+* `HardPencil` - configure for hard line endings
+* `TogglePencil` - if off, enables with detection; if on, turns off
+* `NoPencil` - removing mappings and restore global settings
 
 Optionally, you can map to keys in your `.vimrc`:
 
 ```vim
-nmap <silent> <leader>ws :PencilSoft<cr>
-nmap <silent> <leader>wh :PencilHard<cr>
-nmap <silent> <leader>ww :PencilToggle<cr>
-nmap <silent> <leader>w0 :PencilOff<cr>
+nmap <silent> <leader>ps :SoftPencil<cr>
+nmap <silent> <leader>ph :HardPencil<cr>
+nmap <silent> <leader>pn :NoPencil<cr>
+nmap <silent> <leader>pp :TogglePencil<cr>
 ```
 
 Also, more commands in ‘Automatic Formatting’ below.
@@ -146,16 +146,16 @@ augroup END
 
 You can also toggle it as needed with a command:
 
-* `PencilFormatAuto` - enables autoformat
-* `PencilFormatManual` - disables autoformat
-* `PencilFormatToggle`
+* `AutoPencil` - enables autoformat
+* `ManualPencil` - disables autoformat
+* `ToggleAutoPencil` - enables if disabled, etc.
 
 Or bind to keys in your `.vimrc`:
 
 ```vim
-nmap <silent> <leader>wa :PencilFormatAuto<cr>
-nmap <silent> <leader>wm :PencilFormatManual<cr>
-nmap <silent> <leader>wf :PencilFormatToggle<cr>
+nmap <silent> <leader>pa :AutoPencil<cr>
+nmap <silent> <leader>pm :ManualPencil<cr>
+nmap <silent> <leader>pt :ToggleAutoPencil<cr>
 ```
 
 Again, when using soft line wrapping, Vim’s autoformat feature does not
