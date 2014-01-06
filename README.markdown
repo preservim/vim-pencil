@@ -164,8 +164,7 @@ paragraphs manually with the standard Vim commands:
 * `gqip` - manual format
 * `vipJ` - manual unformat
 
-Optionally, you may want to map these to underutilized keys in your
-`.vimrc`:
+Optionally, you can map these to underutilized keys in your `.vimrc`:
 
 ```vim
 nnoremap <silent> Q gqip
