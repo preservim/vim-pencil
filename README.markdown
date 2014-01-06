@@ -10,7 +10,7 @@ This plugin focus on the basics:
 
 * Sets up buffer for word processing
 * Use for editing markdown, textile, documentation, etc.
-* Configures wrap mode, auto-detecting from modeline if present
+* Configures wrap mode, auto-detecting via modeline if present
 * Adjusts navigation key mappings to suit the wrap mode
 * For hard line breaks, enables Insert-mode only autoformat
 * Creates undo points on common punctuation
@@ -89,10 +89,10 @@ But for files of type `text`, it will *always* use hard line endings.
 Because auto-detect doesn’t always work correctly, you can invoke commands
 to set the behavior for the current buffer:
 
-* `SoftPencil` - configure for soft wrapping
+* `SoftPencil` - configure for soft line wrapping
 * `HardPencil` - configure for hard line endings
 * `TogglePencil` - if off, enables with detection; if on, turns off
-* `NoPencil` - removing mappings and restore global settings
+* `NoPencil` - removes navigation mappings and restores global settings
 
 Optionally, you can map to keys in your `.vimrc`:
 
@@ -195,7 +195,7 @@ That’s a strong hint to this plugin that we should assume hard line
 endings, regardless of whether or not soft wrapping is the default editing
 mode for files of type ‘markdown’.
 
-If it’s 0, then soft line wrapping is assumed.
+If it’s 0, then pencil assumes you want soft line wrapping.
 
 ```
 <!-- vim: set tw=0 :-->
