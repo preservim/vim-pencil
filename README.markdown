@@ -91,7 +91,7 @@ to set the behavior for the current buffer:
 * `SoftPencil` - configure for soft line wrapping
 * `HardPencil` - configure for hard line endings
 * `TogglePencil` - if off, enables with detection; if on, turns off
-* `NoPencil` - removes navigation mappings and restores global settings
+* `NoPencil` - removes navigation mappings and restores buffer to global settings
 
 Optionally, you can map to keys in your `.vimrc`:
 
