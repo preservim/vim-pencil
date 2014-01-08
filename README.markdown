@@ -1,5 +1,9 @@
 # vim-pencil
 
+> “Rethinking Vim as tool for writers”
+
+<br/>
+
 - - -
 ![demo](screenshots/demo.gif)
 - - -
