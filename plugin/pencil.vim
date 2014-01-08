@@ -2,7 +2,7 @@
 " File:        pencil.vim
 " Description: vim-pencil plugin
 " Maintainer:  Reed Esau <github.com/reedes>
-" Last Change: December 28, 2013
+" Created:     December 28, 2013
 " License:     The MIT License (MIT)
 " ============================================================================
 "
