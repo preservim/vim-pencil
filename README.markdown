@@ -1,18 +1,18 @@
 # vim-pencil
 
-> Because Vim can be great for writing prose and documentation
-
+- - -
 ![demo](screenshots/demo.gif)
+- - -
 
 # Features
 
-This plugin focus on the basics:
+This plugin focuses on the fundamentals of word processing in Vim:
 
 * Configures a buffer for word processing
 * Use for editing markdown, textile, documentation, etc.
-* Configures wrap mode, auto-detecting from modeline if present
+* Configures wrap mode for buffer, auto-detecting via modeline if present
 * Adjusts navigation key mappings to suit the wrap mode
-* For hard line breaks, enables Insert-mode only autoformat
+* For hard line break mode, enables Insert-mode only autoformat
 * Creates undo points on common punctuation
 
 Why such a minimalistic approach? There are several Vim plugins for
@@ -92,7 +92,7 @@ to set the behavior for the current buffer:
 * `SoftPencil` - configure for the soft wrapping of very long lines
 * `HardPencil` - configure for line endings with hard line breaks
 * `TogglePencil` - if off, enables with detection; if on, turns off
-* `NoPencil` - removing mappings and restore global settings
+* `NoPencil` - removes navigation mappings and restores buffer to global settings
 
 Optionally, you can map to keys in your `.vimrc`:
 
@@ -210,7 +210,7 @@ That’s a strong hint to this plugin that we should assume hard line
 endings, regardless of whether or not soft wrapping is the default editing
 mode for files of type ‘markdown’.
 
-If it’s 0, then soft line wrapping is assumed.
+If it’s 0, then pencil assumes you want soft line wrapping.
 
 ```
 <!-- vim: set tw=0 :-->
