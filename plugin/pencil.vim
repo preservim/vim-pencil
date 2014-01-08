@@ -42,14 +42,14 @@ if !exists('g:pencil#cursorwrap')
 endif
 
 " # Commands
-command -nargs=0 HardPencil   call pencil#init({'wrap': 'hard'})
-command -nargs=0 SoftPencil   call pencil#init({'wrap': 'soft'})
-command -nargs=0 NoPencil     call pencil#init({'wrap': 'off' })
-command -nargs=0 TogglePencil call pencil#init({'wrap': 'toggle'})
+command -nargs=0 HardPencil    call pencil#init({'wrap': 'hard'})
+command -nargs=0 SoftPencil    call pencil#init({'wrap': 'soft'})
+command -nargs=0 DropPencil    call pencil#init({'wrap': 'off' })
+command -nargs=0 ChangePencils call pencil#init({'wrap': 'toggle'})
 
-command -nargs=0 AutoPencil        call pencil#setAutoFormat(1)
-command -nargs=0 ManualPencil      call pencil#setAutoFormat(0)
-command -nargs=0 ToggleAutoPencil  call pencil#setAutoFormat(-1)
+command -nargs=0 AutoPencil    call pencil#setAutoFormat(1)
+command -nargs=0 ManualPencil  call pencil#setAutoFormat(0)
+command -nargs=0 ShiftPencil   call pencil#setAutoFormat(-1)
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

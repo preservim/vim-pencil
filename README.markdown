@@ -8,7 +8,7 @@
 
 This plugin focuses on the fundamentals of word processing in Vim:
 
-* Use for editing text, markdown, textile, and other file types.
+* Use for editing text, markdown, textile, and other file types
 * Configures wrap mode for buffer, auto-detecting via modeline if present
 * Adjusts navigation key mappings to suit the wrap mode
 * For hard line break mode, enables Insert-mode only autoformat
@@ -27,7 +27,7 @@ environment by installing those plugins that meet your specific needs.
 While programmers will extol the many virtues of Vim in writing code, few
 will appreciate its powerful text manipulation capabilities for writing
 documentation and prose. But with plenty of word processing tools
-available, including those which specifically cater to writers, why use
+available, including those that specifically cater to writers, why use
 a programmer’s editor like Vim for writing?
 
 There are good reasons NOT to use Vim for writing:
@@ -86,40 +86,40 @@ But for files of type `text`, it will *always* use hard line endings.
 Because auto-detect might not work as intended, you can invoke a command
 to set the behavior for the current buffer:
 
-* `SoftPencil` - configure for the soft wrapping of very long lines
-* `HardPencil` - configure for line endings with hard line breaks
-* `TogglePencil` - if off, enables with detection; if on, turns off
-* `NoPencil` - removes navigation mappings and restores buffer to global settings
+* `SoftPencil` - mode for soft line wrapping
+* `HardPencil` - mode for hard line breaks
+* `ChangePencils` - if off, enables with detection; if on, turns off
+* `DropPencil` - removes navigation mappings and restores buffer to global settings
 
 Optionally, you can map to keys in your `.vimrc`:
 
 ```vim
 nmap <silent> <leader>ps :SoftPencil<cr>
 nmap <silent> <leader>ph :HardPencil<cr>
-nmap <silent> <leader>pn :NoPencil<cr>
-nmap <silent> <leader>pp :TogglePencil<cr>
+nmap <silent> <leader>pd :DropPencil<cr>
+nmap <silent> <leader>pc :ChangePencils<cr>
 ```
 
 ### Automatic formatting
 
 _This ‘autoformat’ feature affects **HardPencil** mode only._
 
-When using **HardPencil** mode, Vim’s autoformat feature will be enabled
-by default and can offer many of the same benefits as soft wrapping lines.
-But autoformat can cause havoc when editing anything but paragraphs of
-words, such as a table or code block. In these cases you will need to
-disable it, at least temporarily, via a command:
+When in **HardPencil** mode, Vim’s autoformat feature will be enabled by
+default and can offer many of the same benefits as soft line wrapping. But
+autoformat can cause havoc when editing anything but paragraphs of words,
+such as a code block or table. In these cases you will need to disable it,
+at least temporarily, via a command:
 
 * `AutoPencil` - enables autoformat
 * `ManualPencil` - disables autoformat
-* `ToggleAutoPencil` - enables if disabled, etc.
+* `ShiftPencil` - enables if disabled, etc.
 
 Or optionally map to keys in your `.vimrc`:
 
 ```vim
 nnoremap <silent> <leader>pa :AutoPencil<cr>
 nnoremap <silent> <leader>pm :ManualPencil<cr>
-nnoremap <silent> <leader>pt :ToggleAutoPencil<cr>
+nnoremap <silent> <leader>pp :ShiftPencil<cr>
 ```
 
 To set the default behavior, add to your `.vimrc`:

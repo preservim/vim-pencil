@@ -43,11 +43,11 @@ endfunction
 
 function! pencil#setAutoFormat(mode)
   " 1=auto, 0=manual, -1=toggle
-  if !exists('b:lastAF')
-    let b:lastAF = 0
+  if !exists('b:last_autoformat')
+    let b:last_autoformat = 0
   endif
-  let b:lastAF = a:mode == -1 ? !b:lastAF : a:mode
-  if b:lastAF
+  let b:last_autoformat = a:mode == -1 ? !b:last_autoformat : a:mode
+  if b:last_autoformat
     augroup pencil_autoformat
       autocmd InsertEnter <buffer> set formatoptions+=a
       autocmd InsertLeave <buffer> set formatoptions-=a
