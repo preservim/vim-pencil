@@ -115,7 +115,7 @@ function! pencil#init(...) abort
     setlocal textwidth=0
     setlocal wrap
     setlocal linebreak
-    setlocal colorcolumn=0
+    setlocal colorcolumn=0      " doesn't align as expected
   else
     setlocal textwidth<
     setlocal wrap< nowrap<
@@ -124,16 +124,32 @@ function! pencil#init(...) abort
   endif
 
   if b:wrap_mode
+    setlocal autoindent         " needed by fo=n
     setlocal nolist
     setlocal wrapmargin=0
     setlocal display+=lastline
     setlocal formatoptions+=1   " don't break line before 1 letter word
     setlocal formatoptions+=t
+    setlocal formatoptions+=n   " recognize numbered lists
+    "setlocal formatoptions+=b   " investigate this
+    "setlocal formatoptions+=m   " investigate this
+    "setlocal formatoptions+=MB   " investigate this
+
+    if g:pencil#cursorwrap
+      setlocal whichwrap+=<,>,h,l,[,]
+    endif
+
+    " clean out stuff we likely don't want
+    setlocal formatoptions-=2
+    setlocal formatoptions-=v
+    setlocal formatoptions-=w   " trailing whitespace continues paragraph
   else
+    setlocal autoindent<
     setlocal list< nolist<
     setlocal wrapmargin<
     setlocal display<
     setlocal formatoptions<
+    setlocal whichwrap<
   endif
 
   if b:wrap_mode

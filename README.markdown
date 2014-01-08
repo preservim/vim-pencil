@@ -8,7 +8,7 @@
 
 This plugin focus on the basics:
 
-* Sets up buffer for word processing
+* Configures a buffer for word processing
 * Use for editing markdown, textile, documentation, etc.
 * Configures wrap mode, auto-detecting from modeline if present
 * Adjusts navigation key mappings to suit the wrap mode
@@ -47,7 +47,7 @@ other writing tools:
   for mouse, track pad, or arrow keys
 * Minimal chording, with many mnemonic-friendly commands
 * Sophisticated capabilities for navigating and manipulating text
-* Highly configurable to suit your needs, with many plugins available
+* Highly configurable to suit your needs, with many great plugins available
 
 ## Installation
 
@@ -63,9 +63,9 @@ Vim, consider installing this plugin.)
 ### Hard line breaks or soft line wrapping?
 
 Coders will have the most experience with the former, and writers the
-latter. But whatever your background, chances are that you are living in
-a mixed environment where you must contend with both. This plugin doesn't
-force you to choose a side—each buffer can be configured independently.
+latter. But whatever your background, chances are that you are must
+contend with both conventions. This plugin doesn't force you to choose
+a side, where each buffer can be configured independently.
 
 In most cases you can set a default to suit your preference and let
 auto-detection figure out what to do. Add to your `.vimrc`:
@@ -89,8 +89,8 @@ But for files of type `text`, it will *always* use hard line endings.
 Because auto-detect doesn’t always work correctly, you can invoke commands
 to set the behavior for the current buffer:
 
-* `SoftPencil` - configure for soft wrapping
-* `HardPencil` - configure for hard line endings
+* `SoftPencil` - configure for the soft wrapping of very long lines
+* `HardPencil` - configure for line endings with hard line breaks
 * `TogglePencil` - if off, enables with detection; if on, turns off
 * `NoPencil` - removing mappings and restore global settings
 
@@ -103,31 +103,27 @@ nmap <silent> <leader>pn :NoPencil<cr>
 nmap <silent> <leader>pp :TogglePencil<cr>
 ```
 
-Also, more commands in ‘Automatic Formatting’ below.
+### Automatic formatting
 
-### Additional settings
+_This ‘autoformat’ feature affects **HardPencil** mode only._
 
-You can configure the default `textwidth` for Hard mode, when none is set
-or available via modeline:
+When using **HardPencil** mode, Vim’s autoformat feature will be enabled
+by default and can offer many of the same benefits as soft wrapping lines.
+But autoformat can cause havoc when editing outside of paragraphs of
+sentences, such as when editing a table or code block. In these cases you
+will need to disable it, at least temporarily, via a command:
+
+* `AutoPencil` - enables autoformat
+* `ManualPencil` - disables autoformat
+* `ToggleAutoPencil` - enables if disabled, etc.
+
+Or optionally map to keys in your `.vimrc`:
 
 ```vim
-let g:pencil#textwidth = 74
+nnoremap <silent> <leader>pa :AutoPencil<cr>
+nnoremap <silent> <leader>pm :ManualPencil<cr>
+nnoremap <silent> <leader>pt :ToggleAutoPencil<cr>
 ```
-
-`joinspaces` determines number of spaces after period (`0`=1 space, `1`=2 spaces)
-
-```vim
-let g:pencil#joinspaces = 0
-```
-
-## Automatic formatting
-
-_This ‘autoformat’ feature affects ‘hard’ line break mode only._
-
-When using hard line breaks, Vim’s autoformat feature can offer many of
-the same benefits as soft wrapping lines. But autoformat can cause havoc
-when editing outside of paragraphs of sentences, such as when editing
-a table or code block. In these cases you will need to disable it.
 
 To set the default behavior, add to your `.vimrc`:
 
@@ -146,31 +142,50 @@ augroup pencil
 augroup END
 ```
 
-You can also toggle it as needed with a command:
+### Manual formatting
 
-* `AutoPencil` - enables autoformat
-* `ManualPencil` - disables autoformat
-* `ToggleAutoPencil` - enables if disabled, etc.
-
-Or bind to keys in your `.vimrc`:
-
-```vim
-nnoremap <silent> <leader>pa :AutoPencil<cr>
-nnoremap <silent> <leader>pm :ManualPencil<cr>
-nnoremap <silent> <leader>pt :ToggleAutoPencil<cr>
-```
-
-Note that you don’t have to rely on autoformat and can alway reformat your
-paragraphs manually with the standard Vim commands:
+Note that you need not rely on autoformat and can alway reformat your
+paragraphs manually with standard Vim commands:
 
 * `gqip` - manual format
 * `vipJ` - manual unformat
 
-Optionally, you can map these to underutilized keys in your `.vimrc`:
+Optionally, you can map these sequences to underutilized keys in your
+`.vimrc`:
 
 ```vim
 nnoremap <silent> Q gqip
 nnoremap <silent> K vipJ
+```
+
+### Default textwidth
+
+You can configure the default `textwidth` for HardPencil mode, when none
+is set globally, for your buffer, or available via modeline:
+
+```vim
+let g:pencil#textwidth = 74
+```
+
+### Sentence spacing
+
+When formatting, by default only one space will be inserted after
+a period(`.`), exclamation point(`!`), or question mark(`?`). You can
+change this default.
+
+```vim
+let g:pencil#joinspaces = 0     "`0`=1 space, `1`=2 spaces
+```
+
+### Cursor wrap
+
+By default, `h`/`l` and the left/right cursor keys will move to the
+previous/next line after reaching first/last character in a line with
+a hard break. If you wish to retain the default Vim behavior, set the
+`cursorwrap` value to 0.
+
+```vim
+let g:pencil#cursorwrap = 1     " `0`=disable, `1`=enable
 ```
 
 ## Auto-detection via modeline

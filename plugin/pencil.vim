@@ -35,6 +35,12 @@ if !exists('g:pencil#joinspaces')
   let g:pencil#joinspaces = 0
 endif
 
+if !exists('g:pencil#cursorwrap')
+  " by default, h/l and cursor keys will wrap around hard 
+  " linebreaks. Set to 0 if you don't want this behavior
+  let g:pencil#cursorwrap = 1
+endif
+
 " # Commands
 command -nargs=0 HardPencil   call pencil#init({'wrap': 'hard'})
 command -nargs=0 SoftPencil   call pencil#init({'wrap': 'soft'})
