@@ -22,13 +22,13 @@ processing:
 * When using hard line breaks, enables autoformat while inserting text
 * Configuration is buffer scoped and leaves your global settings alone
 
-So why such a minimalistic approach given competing plugins that not only
+So why such a bare-bones approach given competing plugins that not only
 change the functional behavior of the editor, but also control visual
-aspects such as colorscheme and font? It’s because Vim is about choice,
-where you compose the editing environment that suits you best, extending
-Vim in the ways that meet your specific needs. To that end, _pencil_
-focuses narrowly on the few tweaks needed to smooth the path to writing
-prose in Vim.
+aspects such as colorscheme and font? It’s because Vim is about choice and
+customization, where you compose the editing environment that suits you
+best, extending Vim in the ways that meet your specific needs. To that
+end, _pencil_ focuses narrowly on the few tweaks needed to smooth the path
+to writing prose in Vim.
 
 ## Why use Vim for writing?
 
