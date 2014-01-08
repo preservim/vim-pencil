@@ -228,9 +228,10 @@ reasons) the textwidth may nevertheless be set by this plugin.
 
 ## See also
 
-* [Vim for Writers](http://therandymon.com/woodnotes/vim-for-writers/vimforwriters.html) - guide to the basics geared to writers
-* [Vim-related books](http://iccf-holland.org/click5.html)
+* [To Vim](http://ianhocking.com/2013/11/17/to-vim/) - Writer and psychologist Ian Hocking on using Vim for writing
 * [Vim Training Class - Basic motions and commands](https://www.youtube.com/watch?v=Nim4_f5QUxA) - video tutorial by Shawn Biddle
+* [Vim for Writers](http://therandymon.com/woodnotes/vim-for-writers/vimforwriters.html) - guide to the basics geared to writers
+* [Vim-related books](http://iccf-holland.org/click5.html) - collection of books on learning Vim
 
 If you like this plugin, you might like these others from the same author:
 
