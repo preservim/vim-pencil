@@ -42,7 +42,7 @@ function! s:detect_mode() abort
 endfunction
 
 function! pencil#setAutoFormat(mode)
-  " 1=enable, 0=disable, -1=toggle
+  " 1=auto, 0=manual, -1=toggle
   if !exists('b:lastAF')
     let b:lastAF = 0
   endif

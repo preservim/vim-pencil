@@ -8,18 +8,17 @@
 
 This plugin focuses on the fundamentals of word processing in Vim:
 
-* Configures a buffer for word processing
-* Use for editing markdown, textile, documentation, etc.
+* Use for editing text, markdown, textile, and other file types.
 * Configures wrap mode for buffer, auto-detecting via modeline if present
 * Adjusts navigation key mappings to suit the wrap mode
 * For hard line break mode, enables Insert-mode only autoformat
 * Creates undo points on common punctuation
+* Buffer scoped; leaves your global settings alone
 
 Why such a minimalistic approach? There are several Vim plugins for
-writing that offer a comprehensive solution, including changing not only
-the functional behavior of the editor, but also visual aspects such as
-colorscheme and font. This plugin heads in the opposite direction,
-focusing narrowly on the few tweaks needed to smooth the path to writing
+writing that not only change the functional behavior of the editor, but
+also visual aspects such as colorscheme and font. In contrast, this plugin
+focuses narrowly on the few tweaks needed to smooth the path to writing
 prose in Vim. Where you need more features, you can tailor your
 environment by installing those plugins that meet your specific needs.
 
@@ -27,11 +26,9 @@ environment by installing those plugins that meet your specific needs.
 
 While programmers will extol the many virtues of Vim in writing code, few
 will appreciate its powerful text manipulation capabilities for writing
-documentation and prose.
-
-But with plenty of word processing tools available, including those which
-specifically cater to writers, why use a programmer’s editor like Vim for
-writing?
+documentation and prose. But with plenty of word processing tools
+available, including those which specifically cater to writers, why use
+a programmer’s editor like Vim for writing?
 
 There are good reasons NOT to use Vim for writing:
 
@@ -54,9 +51,9 @@ other writing tools:
 Install using Pathogen, Vundle, Neobundle, or your favorite Vim package
 manager.
 
-(For those new to Vim: you should first work through one of the many Vim
+_For those new to Vim: you should first work through one of the many Vim
 tutorials available. Then, once you are comfortable with the basics of
-Vim, consider installing this plugin.)
+Vim, consider installing this plugin._
 
 ## Configuration
 
@@ -65,7 +62,7 @@ Vim, consider installing this plugin.)
 Coders will have the most experience with the former, and writers the
 latter. But whatever your background, chances are that you are must
 contend with both conventions. This plugin doesn't force you to choose
-a side, where each buffer can be configured independently.
+a side, where you can configure each buffer independently.
 
 In most cases you can set a default to suit your preference and let
 auto-detection figure out what to do. Add to your `.vimrc`:
@@ -86,7 +83,7 @@ But for files of type `text`, it will *always* use hard line endings.
 
 ### Commands
 
-Because auto-detect doesn’t always work correctly, you can invoke commands
+Because auto-detect might not work as intended, you can invoke a command
 to set the behavior for the current buffer:
 
 * `SoftPencil` - configure for the soft wrapping of very long lines
@@ -109,9 +106,9 @@ _This ‘autoformat’ feature affects **HardPencil** mode only._
 
 When using **HardPencil** mode, Vim’s autoformat feature will be enabled
 by default and can offer many of the same benefits as soft wrapping lines.
-But autoformat can cause havoc when editing outside of paragraphs of
-sentences, such as when editing a table or code block. In these cases you
-will need to disable it, at least temporarily, via a command:
+But autoformat can cause havoc when editing anything but paragraphs of
+words, such as a table or code block. In these cases you will need to
+disable it, at least temporarily, via a command:
 
 * `AutoPencil` - enables autoformat
 * `ManualPencil` - disables autoformat
@@ -128,7 +125,7 @@ nnoremap <silent> <leader>pt :ToggleAutoPencil<cr>
 To set the default behavior, add to your `.vimrc`:
 
 ```vim
-let g:pencil#autoformat = 1      " 1=auto, 0=manual
+let g:pencil#autoformat = 1      " 0=manual, 1=auto
 ```
 
 You can override this default during initialization, as in:
@@ -144,8 +141,8 @@ augroup END
 
 ### Manual formatting
 
-Note that you need not rely on autoformat and can alway reformat your
-paragraphs manually with standard Vim commands:
+Note that you need not rely on autoformat exclusively and can always
+reformat your paragraphs manually with standard Vim commands:
 
 * `gqip` - manual format
 * `vipJ` - manual unformat
@@ -160,8 +157,8 @@ nnoremap <silent> K vipJ
 
 ### Default textwidth
 
-You can configure the default `textwidth` for HardPencil mode, when none
-is set globally, for your buffer, or available via modeline:
+You can configure the default `textwidth` for **HardPencil** mode, when
+none is set globally, locally, or available via modeline:
 
 ```vim
 let g:pencil#textwidth = 74
@@ -174,7 +171,7 @@ a period(`.`), exclamation point(`!`), or question mark(`?`). You can
 change this default.
 
 ```vim
-let g:pencil#joinspaces = 0     "`0`=1 space, `1`=2 spaces
+let g:pencil#joinspaces = 0     " 0=one_space, 1=two_spaces
 ```
 
 ### Cursor wrap
@@ -185,13 +182,13 @@ a hard break. If you wish to retain the default Vim behavior, set the
 `cursorwrap` value to 0.
 
 ```vim
-let g:pencil#cursorwrap = 1     " `0`=disable, `1`=enable
+let g:pencil#cursorwrap = 1     " 0=disable, 1=enable
 ```
 
 ## Auto-detection via modeline
 
 Will the wrapping mode be detected automatically? Maybe. But you can
-improve its chances by giving it a hint.
+improve its accuracy by giving it a hint.
 
 At the bottom of this document is a strange code:
 
@@ -210,7 +207,7 @@ That’s a strong hint to this plugin that we should assume hard line
 endings, regardless of whether or not soft wrapping is the default editing
 mode for files of type ‘markdown’.
 
-If it’s 0, then pencil assumes you want soft line wrapping.
+If it’s `0`, then pencil assumes you want soft line wrapping.
 
 ```
 <!-- vim: set tw=0 :-->
@@ -224,7 +221,7 @@ of your documents. For more details:
 ```
 
 Note that even if the modelines feature is disabled (such as for security
-reasons) the textwidth will still be set by this plugin.
+reasons) the textwidth may nevertheless be set by this plugin.
 
 ## See also
 
