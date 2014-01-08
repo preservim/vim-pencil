@@ -169,6 +169,8 @@ function! pencil#init(...) abort
     vnoremap <buffer> <silent> 0 g0
     noremap  <buffer> <silent> <Home> g<Home>
     noremap  <buffer> <silent> <End>  g<End>
+    inoremap <buffer> <silent> <Home> <C-o>g<Home>
+    inoremap <buffer> <silent> <End>  <C-o>g<End>
   else
     silent! nunmap <buffer> $
     silent! nunmap <buffer> 0
@@ -176,26 +178,28 @@ function! pencil#init(...) abort
     silent! vunmap <buffer> 0
     silent! nunmap <buffer> <Home>
     silent! nunmap <buffer> <End>
+    silent! iunmap <buffer> <Home>
+    silent! iunmap <buffer> <End>
   endif
 
   if b:wrap_mode
-    inoremap <buffer> <silent> <Up> <C-o>g<Up>
-    inoremap <buffer> <silent> <Down> <C-o>g<Down>
-    noremap  <buffer> <silent> <Up>   gk
-    noremap  <buffer> <silent> <Down> gj
     nnoremap <buffer> <silent> j gj
     nnoremap <buffer> <silent> k gk
     vnoremap <buffer> <silent> j gj
     vnoremap <buffer> <silent> k gk
+    inoremap <buffer> <silent> <Up>   <C-o>g<Up>
+    inoremap <buffer> <silent> <Down> <C-o>g<Down>
+    noremap  <buffer> <silent> <Up>   gk
+    noremap  <buffer> <silent> <Down> gj
   else
-    silent! iunmap <buffer> <Up>
-    silent! iunmap <buffer> <Down>
-    silent! unmap <buffer> <Up>
-    silent! unmap <buffer> <Down>
     silent! nunmap <buffer> j
     silent! nunmap <buffer> k
     silent! vunmap <buffer> j
     silent! vunmap <buffer> k
+    silent! iunmap <buffer> <Up>
+    silent! iunmap <buffer> <Down>
+    silent! unmap  <buffer> <Up>
+    silent! unmap  <buffer> <Down>
   endif
 
   " set undo points around common punctuation
