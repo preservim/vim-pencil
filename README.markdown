@@ -187,8 +187,8 @@ let g:pencil#cursorwrap = 1     " 0=disable, 1=enable
 
 ## Auto-detection via modeline
 
-Will the wrapping mode be detected automatically? Maybe. But you can
-improve its accuracy by giving it a hint.
+Will the wrapping mode be detected accurately? Maybe. But you can improve
+its chances by giving it a hint.
 
 At the bottom of this document is a strange code:
 
@@ -213,8 +213,7 @@ If it’s `0`, then pencil assumes you want soft line wrapping.
 <!-- vim: set tw=0 :-->
 ```
 
-To provide a hint for detection, you can add a modeline to the last line
-of your documents. For more details:
+For more details:
 
 ```vim
 :help modeline
