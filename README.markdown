@@ -8,7 +8,7 @@
 
 This plugin focuses on the fundamentals of word processing in Vim:
 
-* Use for editing text, markdown, textile, and other file types
+* Use for editing text, markdown, textile, and other prose-oriented file types
 * Configures wrap mode for buffer, auto-detecting via modeline if present
 * Adjusts navigation key mappings to suit the wrap mode
 * For hard line break mode, enables Insert-mode only autoformat
@@ -88,8 +88,8 @@ to set the behavior for the current buffer:
 
 * `SoftPencil` - mode for soft line wrapping
 * `HardPencil` - mode for hard line breaks
-* `ChangePencils` - if off, enables with detection; if on, turns off
 * `DropPencil` - removes navigation mappings and restores buffer to global settings
+* `TogglePencil` - if off, enables with detection; if on, turns off
 
 Optionally, you can map to keys in your `.vimrc`:
 
@@ -97,7 +97,7 @@ Optionally, you can map to keys in your `.vimrc`:
 nmap <silent> <leader>ps :SoftPencil<cr>
 nmap <silent> <leader>ph :HardPencil<cr>
 nmap <silent> <leader>pd :DropPencil<cr>
-nmap <silent> <leader>pc :ChangePencils<cr>
+nmap <silent> <leader>pt :TogglePencil<cr>
 ```
 
 ### Automatic formatting
