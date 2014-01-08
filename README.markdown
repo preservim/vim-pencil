@@ -14,7 +14,8 @@ This plugin focuses on extending Vim to support the fundamentals of word
 processing:
 
 * For editing text, markdown, textile, and other prose-oriented file types
-* Agnostic on soft line wrapping versus hard line breaks, supporting both
+* Agnostic on soft line wrapping _versus_ hard line breaks, supporting
+  both
 * Auto-detects wrap mode via modeline if present
 * Adjusts navigation key mappings to suit the wrap mode
 * Creates undo points on common punctuation
