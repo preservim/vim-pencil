@@ -10,29 +10,30 @@
 
 # Features
 
-This plugin focuses on the fundamentals of word processing in Vim:
+This plugin focuses on extending Vim to support the fundamentals of word
+processing:
 
-* Use for editing text, markdown, textile, and other prose-oriented file types
-* Configures wrap mode for buffer, auto-detecting via modeline if present
+* For editing text, markdown, textile, and other prose-oriented file types
+* Agnostic on soft line wrapping versus hard line breaks, supporting both
+* Auto-detects wrap mode via modeline if present
 * Adjusts navigation key mappings to suit the wrap mode
-* For hard line break mode, enables Insert-mode only autoformat
 * Creates undo points on common punctuation
-* Buffer scoped; leaves your global settings alone
+* When using hard line breaks, enables autoformat while inserting text
+* Configuration is buffer scoped and leaves your global settings alone
 
-Why such a minimalistic approach? There are several Vim plugins for
-writing that not only change the functional behavior of the editor, but
-also visual aspects such as colorscheme and font. In contrast, this plugin
+So why such a minimalistic approach given competing plugins that not only
+change the functional behavior of the editor, but also control visual
+aspects such as colorscheme and font? It’s because Vim is about choice,
+where you compose the editing environment that suits you best, extending
+Vim in the ways that meet your specific needs. To that end, _pencil_
 focuses narrowly on the few tweaks needed to smooth the path to writing
-prose in Vim. Where you need more features, you can tailor your
-environment by installing those plugins that meet your specific needs.
+prose in Vim.
 
 ## Why use Vim for writing?
 
-While programmers will extol the many virtues of Vim in writing code, few
-will appreciate its powerful text manipulation capabilities for writing
-documentation and prose. But with plenty of word processing tools
-available, including those that specifically cater to writers, why use
-a programmer’s editor like Vim for writing?
+With plenty of word processing apps available, including those that
+specifically cater to writers, why use a programmer’s editor like Vim for
+writing? 
 
 There are good reasons NOT to use Vim for writing:
 
@@ -55,9 +56,9 @@ other writing tools:
 Install using Pathogen, Vundle, Neobundle, or your favorite Vim package
 manager.
 
-_For those new to Vim: you should first work through one of the many Vim
-tutorials available. Then, once you are comfortable with the basics of
-Vim, consider installing this plugin._
+_For those new to Vim: before installing this plugin, you should first
+work through one of the many tutorials available to get comfortable with
+the basics of Vim._
 
 ## Configuration
 
@@ -66,7 +67,7 @@ Vim, consider installing this plugin._
 Coders will have the most experience with the former, and writers the
 latter. But whatever your background, chances are that you are must
 contend with both conventions. This plugin doesn't force you to choose
-a side, where you can configure each buffer independently.
+a side—you can configure each buffer independently.
 
 In most cases you can set a default to suit your preference and let
 auto-detection figure out what to do. Add to your `.vimrc`:
@@ -110,7 +111,7 @@ _This ‘autoformat’ feature affects **HardPencil** mode only._
 
 When in **HardPencil** mode, Vim’s autoformat feature will be enabled by
 default and can offer many of the same benefits as soft line wrapping. But
-autoformat can cause havoc when editing anything but paragraphs of words,
+autoformat will cause havoc when editing anything but paragraphs of words,
 such as a code block or table. In these cases you will need to disable it,
 at least temporarily, via a command:
 
@@ -145,11 +146,13 @@ augroup END
 
 ### Manual formatting
 
-Note that you need not rely on autoformat exclusively and can always
-reformat your paragraphs manually with standard Vim commands:
+Note that you need not rely on autoformat exclusively and can manually
+reformat paragraphs with standard Vim commands:
 
-* `gqip` - manual format
-* `vipJ` - manual unformat
+* `gqip` - format current paragraph
+* `vipJ` - unformat current paragraph
+* `ggVGgq` - format all paragraphs in buffer
+* `:%norm vipJ` - unformat all paragraphs in buffer
 
 Optionally, you can map these sequences to underutilized keys in your
 `.vimrc`:
@@ -157,12 +160,15 @@ Optionally, you can map these sequences to underutilized keys in your
 ```vim
 nnoremap <silent> Q gqip
 nnoremap <silent> K vipJ
+nnoremap <silent> <leader>Q ggVGgq
+nnoremap <silent> <leader>K :%norm vipJ<cr>
 ```
 
 ### Default textwidth
 
-You can configure the default `textwidth` for **HardPencil** mode, when
-none is set globally, locally, or available via modeline:
+You can configure the textwidth to be used in **HardPencil** mode when no
+textwidth is set globally, locally, or available via modeline. It defaults
+to `74`, but you can change it in your `.vimrc`:
 
 ```vim
 let g:pencil#textwidth = 74
@@ -170,9 +176,9 @@ let g:pencil#textwidth = 74
 
 ### Sentence spacing
 
-When formatting, by default only one space will be inserted after
+By default, when formatting only one space will be inserted after
 a period(`.`), exclamation point(`!`), or question mark(`?`). You can
-change this default.
+change this default:
 
 ```vim
 let g:pencil#joinspaces = 0     " 0=one_space, 1=two_spaces
@@ -183,7 +189,7 @@ let g:pencil#joinspaces = 0     " 0=one_space, 1=two_spaces
 By default, `h`/`l` and the left/right cursor keys will move to the
 previous/next line after reaching first/last character in a line with
 a hard break. If you wish to retain the default Vim behavior, set the
-`cursorwrap` value to 0.
+`cursorwrap` value to 0 in your `.vimrc`:
 
 ```vim
 let g:pencil#cursorwrap = 1     " 0=disable, 1=enable
