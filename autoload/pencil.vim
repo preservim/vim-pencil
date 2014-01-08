@@ -144,7 +144,7 @@ function! pencil#init(...) abort
     setlocal formatoptions-=v
     setlocal formatoptions-=w   " trailing whitespace continues paragraph
   else
-    setlocal autoindent<
+    setlocal autoindent< noautoindent<
     setlocal list< nolist<
     setlocal wrapmargin<
     setlocal display<
