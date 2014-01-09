@@ -109,10 +109,10 @@ nmap <silent> <leader>pt :TogglePencil<cr>
 _This ‘autoformat’ feature affects **HardPencil** mode only._
 
 When in **HardPencil** mode, Vim’s autoformat feature will be enabled by
-default and can offer many of the same benefits as soft line wrapping. But
-autoformat will cause havoc when editing anything but paragraphs of words,
-such as a code block or table. In these cases you will need to disable it,
-at least temporarily, via a command:
+default in Insert mode and can offer many of the same benefits as soft
+line wrapping. But autoformat will cause havoc when editing anything but
+paragraphs of words, such as a code block or table. In these cases you
+will need to disable it, at least temporarily, via a command:
 
 * `AutoPencil` - enables autoformat
 * `ManualPencil` - disables autoformat
