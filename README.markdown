@@ -14,7 +14,7 @@ The _pencil_ plugin aspires to make Vim as powerful a tool for writers as
 it is for coders by focusing narrowly on the handful of tweaks needed to
 smooth the path to writing prose. 
 
-* Builds on existing plugins for _markdown_, _textile_, and other
+* For editing files in _text_, _markdown_, _textile_, and other
   prose-oriented file types
 * Agnostic on soft line wrapping _versus_ hard line breaks, supporting
   both
@@ -24,8 +24,9 @@ smooth the path to writing prose.
 * When using hard line breaks, enables autoformat while inserting text
 * Buffer-scoped configuration (leaves your global settings alone)
 
-Vim is about customization. To complete your editing environment, learn to
-configure Vim and draw upon its rich ecosystem of plugins.
+Need spellcheck and other features? Vim is about customization. To
+complete your editing environment, learn to configure Vim and draw upon
+its rich ecosystem of plugins.
 
 ## Why use Vim for writing?
 
@@ -86,7 +87,8 @@ But for files of type `text`, it will *always* use hard line endings.
 
 ### Commands
 
-Because auto-detect might not work as intended, you can invoke a command to set the behavior for the current buffer:
+Because auto-detect might not work as intended, you can invoke a command
+to set the behavior for the current buffer:
 
 * `SoftPencil` - mode for soft line wrapping
 * `HardPencil` - mode for hard line breaks
