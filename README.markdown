@@ -83,7 +83,8 @@ augroup END
 
 In the example above, for files of type `markdown` and `textile`, this
 plugin will auto-detect the wrapping approach, with `hard` as the default.
-But for files of type `text`, it will *always* use hard line endings.
+But for files of type `text`, it will *always* initialize with hard line 
+break mode.
 
 ### Commands
 
