@@ -10,25 +10,22 @@
 
 # Features
 
-This plugin focuses on extending Vim to support the fundamentals of word
-processing:
+The _pencil_ plugin aspires to make Vim as powerful a tool for writers as
+it is for coders by focusing narrowly on the handful of tweaks needed to
+smooth the path to writing prose. 
 
-* For editing text, markdown, textile, and other prose-oriented file types
+* Builds on existing plugins for _markdown_, _textile_, and other
+  prose-oriented file types
 * Agnostic on soft line wrapping _versus_ hard line breaks, supporting
   both
 * Auto-detects wrap mode via modeline if present
 * Adjusts navigation key mappings to suit the wrap mode
 * Creates undo points on common punctuation
 * When using hard line breaks, enables autoformat while inserting text
-* Configuration is buffer scoped and leaves your global settings alone
+* Buffer-scoped configuration (leaves your global settings alone)
 
-So why such a bare-bones approach given competing plugins that not only
-change the functional behavior of the editor, but also control visual
-aspects such as colorscheme and font? It’s because Vim is about choice and
-customization, where you compose the editing environment that suits you
-best, extending Vim in the ways that meet your specific needs. To that
-end, _pencil_ focuses narrowly on the few tweaks needed to smooth the path
-to writing prose in Vim.
+Vim is about customization. To complete your editing environment, learn to
+configure Vim and draw upon its rich ecosystem of plugins.
 
 ## Why use Vim for writing?
 
@@ -43,8 +40,8 @@ There are good reasons NOT to use Vim for writing:
 * A modal editor with a steep learning curve
 * Time and effort to configure to your needs
 
-But then again Vim offers a unique editing environment not matched by
-other writing tools:
+But Vim offers a unique editing environment not matched by other writing
+tools:
 
 * Hands rest in a neutral ‘home’ position, only rarely straying to reach
   for mouse, track pad, or arrow keys
@@ -66,9 +63,9 @@ the basics of Vim._
 ### Hard line breaks or soft line wrapping?
 
 Coders will have the most experience with the former, and writers the
-latter. But whatever your background, chances are that you are must
-contend with both conventions. This plugin doesn't force you to choose
-a side—you can configure each buffer independently.
+latter. But whatever your background, chances are that you must contend
+with both conventions. This plugin doesn't force you to choose a side—you
+can configure each buffer independently.
 
 In most cases you can set a default to suit your preference and let
 auto-detection figure out what to do. Add to your `.vimrc`:
@@ -89,8 +86,7 @@ But for files of type `text`, it will *always* use hard line endings.
 
 ### Commands
 
-Because auto-detect might not work as intended, you can invoke a command
-to set the behavior for the current buffer:
+Because auto-detect might not work as intended, you can invoke a command to set the behavior for the current buffer:
 
 * `SoftPencil` - mode for soft line wrapping
 * `HardPencil` - mode for hard line breaks
@@ -169,7 +165,7 @@ nnoremap <silent> <leader>K :%norm vipJ<cr>
 
 You can configure the textwidth to be used in **HardPencil** mode when no
 textwidth is set globally, locally, or available via modeline. It defaults
-to `74`, but you can change it in your `.vimrc`:
+to `74`, but you can change that value in your `.vimrc`:
 
 ```vim
 let g:pencil#textwidth = 74
