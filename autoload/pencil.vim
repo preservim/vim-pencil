@@ -137,6 +137,7 @@ function! pencil#init(...) abort
 
     if g:pencil#cursorwrap
       setlocal whichwrap+=<,>,h,l,[,]
+      set virtualedit+=onemore        " could break other plugins
     endif
 
     " clean out stuff we likely don't want
@@ -150,6 +151,7 @@ function! pencil#init(...) abort
     setlocal display<
     setlocal formatoptions<
     setlocal whichwrap<
+    setlocal virtualedit<
   endif
 
   if b:wrap_mode
@@ -222,16 +224,14 @@ endfunction
 fun! s:doOne(item) abort
   let l:matches = matchlist(a:item, '^\([a-z]\+\)=\([a-zA-Z0-9_\-.]\+\)$')
   if len(l:matches) > 1
-    if l:matches[1] ==# 'textwidth' ||
-     \ l:matches[1] ==# 'tw'
+    if l:matches[1] =~ 'textwidth\|tw'
       if l:matches[2] > b:max_textwidth
         let b:max_textwidth = l:matches[2]
       elseif l:matches[2] < b:min_textwidth
         let b:min_textwidth = l:matches[2]
       endif
     endif
-    if l:matches[1] ==# 'wrapmargin' ||
-     \ l:matches[1] ==# 'wm'
+    if l:matches[1] =~ 'wrapmargin\|wm'
       if l:matches[2] > b:max_wrapmargin
         let b:max_wrapmargin = l:matches[2]
       elseif l:matches[2] < b:min_wrapmargin
