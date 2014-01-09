@@ -239,6 +239,8 @@ reasons) the textwidth may nevertheless be set by this plugin.
 * [Vim for Writers](http://therandymon.com/woodnotes/vim-for-writers/vimforwriters.html) - guide to the basics geared to writers
 * [Vim-related books](http://iccf-holland.org/click5.html) - collection of books on learning Vim
 
+* [pencil at vim.org](http://www.vim.org/scripts/script.php?script_id=4824)
+
 If you like this plugin, you might like these others from the same author:
 
 * [vim-lexical](http://github.com/reedes/vim-lexical) - Building on Vim’s spell-check and thesaurus/dictionary completion
