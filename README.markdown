@@ -83,7 +83,8 @@ augroup END
 
 In the example above, for files of type `markdown` and `textile`, this
 plugin will auto-detect the wrapping approach, with `hard` as the default.
-But for files of type `text`, it will *always* use hard line endings.
+But for files of type `text`, it will *always* initialize with hard line 
+break mode.
 
 ### Commands
 
@@ -240,6 +241,8 @@ reasons) the textwidth may nevertheless be set by this plugin.
 * [Vim Training Class - Basic motions and commands](https://www.youtube.com/watch?v=Nim4_f5QUxA) - video tutorial by Shawn Biddle
 * [Vim for Writers](http://therandymon.com/woodnotes/vim-for-writers/vimforwriters.html) - guide to the basics geared to writers
 * [Vim-related books](http://iccf-holland.org/click5.html) - collection of books on learning Vim
+
+* [pencil at vim.org](http://www.vim.org/scripts/script.php?script_id=4824)
 
 If you like this plugin, you might like these others from the same author:
 

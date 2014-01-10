@@ -137,7 +137,7 @@ function! pencil#init(...) abort
 
     if g:pencil#cursorwrap
       setlocal whichwrap+=<,>,h,l,[,]
-      set virtualedit+=onemore        " could break other plugins
+      setlocal virtualedit+=onemore        " could break other plugins
     endif
 
     " clean out stuff we likely don't want
