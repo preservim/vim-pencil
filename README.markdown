@@ -143,6 +143,9 @@ augroup pencil
 augroup END
 ```
 
+...where by default, files of type `text` will use hard line endings
+(**HardPencil**), but with autoformat disabled (**ManualPencil**).
+
 ### Manual formatting
 
 Note that you need not rely on autoformat exclusively and can manually
