@@ -38,7 +38,7 @@ endif
 if !exists('g:pencil#cursorwrap')
   " by default, h/l and cursor keys will wrap around hard 
   " linebreaks. Set to 0 if you don't want this behavior
-  let g:pencil#cursorwrap = 1
+  let g:pencil#cursorwrap = 0
 endif
 
 " # Commands

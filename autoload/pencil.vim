@@ -140,16 +140,22 @@ function! pencil#init(...) abort
       setlocal virtualedit+=onemore        " could break other plugins
     endif
 
+    "setlocal cpoptions+=q       " leave cursor at position when joining two lines
+
     " clean out stuff we likely don't want
     setlocal formatoptions-=2
     setlocal formatoptions-=v
     setlocal formatoptions-=w   " trailing whitespace continues paragraph
+    "setlocal cpoptions-=J       " allow tab to be recognized as white space following sentence
+    "setlocal cpoptions-=j       " .!? all have same join behavior
+    "setlocal cpoptions-=n       " exclude number from text of wrapped lines
   else
     setlocal autoindent< noautoindent<
     setlocal list< nolist<
     setlocal wrapmargin<
     setlocal display<
     setlocal formatoptions<
+    "setlocal cpoptions<
     setlocal whichwrap<
     setlocal virtualedit<
   endif
