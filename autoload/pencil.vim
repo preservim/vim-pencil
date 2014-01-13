@@ -49,8 +49,8 @@ function! pencil#setAutoFormat(mode)
   let b:last_autoformat = a:mode == -1 ? !b:last_autoformat : a:mode
   if b:last_autoformat
     augroup pencil_autoformat
-      autocmd InsertEnter <buffer> set formatoptions+=a
-      autocmd InsertLeave <buffer> set formatoptions-=a
+      autocmd InsertEnter <buffer> set formatoptions+=aw
+      autocmd InsertLeave <buffer> set formatoptions-=aw
     augroup END
   else
     silent! autocmd! pencil_autoformat * <buffer>
@@ -131,31 +131,22 @@ function! pencil#init(...) abort
     setlocal formatoptions+=1   " don't break line before 1 letter word
     setlocal formatoptions+=t
     setlocal formatoptions+=n   " recognize numbered lists
-    "setlocal formatoptions+=b   " investigate this
-    "setlocal formatoptions+=m   " investigate this
-    "setlocal formatoptions+=MB   " investigate this
 
     if g:pencil#cursorwrap
       setlocal whichwrap+=<,>,h,l,[,]
       setlocal virtualedit+=onemore        " could break other plugins
     endif
 
-    "setlocal cpoptions+=q       " leave cursor at position when joining two lines
-
     " clean out stuff we likely don't want
     setlocal formatoptions-=2
     setlocal formatoptions-=v
-    setlocal formatoptions-=w   " trailing whitespace continues paragraph
-    "setlocal cpoptions-=J       " allow tab to be recognized as white space following sentence
-    "setlocal cpoptions-=j       " .!? all have same join behavior
-    "setlocal cpoptions-=n       " exclude number from text of wrapped lines
+    setlocal formatoptions-=w   " trailing whitespace continues paragraph (will enable in insert mode)
   else
     setlocal autoindent< noautoindent<
     setlocal list< nolist<
     setlocal wrapmargin<
     setlocal display<
     setlocal formatoptions<
-    "setlocal cpoptions<
     setlocal whichwrap<
     setlocal virtualedit<
   endif
