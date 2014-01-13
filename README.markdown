@@ -195,11 +195,8 @@ a hard break. If you wish to retain the default Vim behavior, set the
 `cursorwrap` value to 0 in your `.vimrc`:
 
 ```vim
-let g:pencil#cursorwrap = 0     " 0=disable, 1=enable
+let g:pencil#cursorwrap = 1     " 0=disable, 1=enable
 ```
-
-NOTE: temporarily disabled by default while I research related bug in
-vim-quotable.
 
 ## Auto-detection via modeline
 
