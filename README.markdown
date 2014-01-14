@@ -152,7 +152,7 @@ with autoformat disabled.
 Note that you need not rely on autoformat exclusively and can manually
 reformat paragraphs with standard Vim commands:
 
-* `gqip` - format current paragraph
+* `gqip` or `gwip` - format current paragraph
 * `vipJ` - unformat current paragraph
 * `ggVGgq` - format all paragraphs in buffer
 * `:%norm vipJ` - unformat all paragraphs in buffer
@@ -161,7 +161,7 @@ Optionally, you can map these sequences to underutilized keys in your
 `.vimrc`:
 
 ```vim
-nnoremap <silent> Q gqip
+nnoremap <silent> Q gwip
 nnoremap <silent> K vipJ
 nnoremap <silent> <leader>Q ggVGgq
 nnoremap <silent> <leader>K :%norm vipJ<cr>
