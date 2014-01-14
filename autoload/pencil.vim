@@ -49,8 +49,8 @@ function! pencil#setAutoFormat(mode)
   let b:last_autoformat = a:mode == -1 ? !b:last_autoformat : a:mode
   if b:last_autoformat
     augroup pencil_autoformat
-      autocmd InsertEnter <buffer> set formatoptions+=aw
-      autocmd InsertLeave <buffer> set formatoptions-=aw
+      autocmd InsertEnter <buffer> set formatoptions+=a
+      autocmd InsertLeave <buffer> set formatoptions-=a
     augroup END
   else
     silent! autocmd! pencil_autoformat * <buffer>
