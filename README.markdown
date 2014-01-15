@@ -201,10 +201,10 @@ let g:pencil#cursorwrap = 1     " 0=disable, 1=enable
 ## Auto-detecting wrap mode
 
 If you provided no explicit wrap mode during initialization, _pencil_ will
-attempt to automatically detect the wrap mode.
+attempt to detect the wrap mode.
 
 It will first look for a `textwidth` (or `tw`) specified in a modeline.
-Failing that _pencil_ will then sample lines from the start of the file.
+Failing that, _pencil_ will then sample lines from the start of the file.
 
 ### Detect via modeline
 
