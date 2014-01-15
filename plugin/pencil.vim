@@ -41,6 +41,19 @@ if !exists('g:pencil#cursorwrap')
   let g:pencil#cursorwrap = 1
 endif
 
+if !exists('g:pencil#softDetectSample')
+  " if no modeline, read as many as this many lines at
+  " start of file in attempt to detect at least one line
+  " whose byte count exceeds g:pencil#softDetectThreshold
+  let g:pencil#softDetectSample = 10
+endif
+
+if !exists('g:pencil#softDetectThreshold')
+  " if the byte count of at least one sampled line exceeds
+  " this number, then pencil assumes soft line wrapping
+  let g:pencil#softDetectThreshold = 130
+endif
+
 " # Commands
 command -nargs=0 HardPencil    call pencil#init({'wrap': 'hard'})
 command -nargs=0 SoftPencil    call pencil#init({'wrap': 'soft'})

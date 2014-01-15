@@ -15,30 +15,32 @@ let s:WRAP_MODE_HARD    = 1
 let s:WRAP_MODE_SOFT    = 2
 
 " Wrap-mode detector
-" attempt to determine user's intent from modeline
+" Scan lines at end and beginning of file to determine the wrap mode.
+" Modelines has priority over long lines found.
 function! s:detect_mode() abort
-  let b:max_textwidth = -1
-  let b:min_textwidth = 9999
-  let b:max_wrapmargin = -1
-  let b:min_wrapmargin = 9999
 
+  let b:max_textwidth = -1      " assume no relevant modeline
   call s:doModelines()
-  if b:max_textwidth  == -1   &&
-   \ b:min_textwidth  == 9999 &&
-   \ b:max_wrapmargin == -1   &&
-   \ b:min_wrapmargin == 9999
-    " no relevant modeline params present
-    return s:WRAP_MODE_DEFAULT
-  elseif b:max_textwidth <= 0 && b:max_wrapmargin <= 0
-    " no textwidth or wrapmargin were gt 0
+
+  if b:max_textwidth == 0
+    " modeline(s) found only with zero textwidth, so it's soft wrapped
     return s:WRAP_MODE_SOFT
-  elseif b:min_textwidth > 0 || b:min_wrapmargin > 0
-    " at least one textwidth or wrapmargin was gt 0
-    return s:WRAP_MODE_HARD
-  else
-    " unsure what to do!
-    return s:WRAP_MODE_DEFAULT
   endif
+
+  if b:max_textwidth > 0
+    " modelines(s) found with positive textwidth, so hard line breaks
+    return s:WRAP_MODE_HARD
+  endif
+
+  " scan initial lines in an attempt to detect long lines
+  for l:line in getline(1, g:pencil#softDetectSample)
+    if len(l:line) > g:pencil#softDetectThreshold
+      return s:WRAP_MODE_SOFT
+    endif
+  endfor
+
+  " punt
+  return s:WRAP_MODE_DEFAULT
 endfunction
 
 function! pencil#setAutoFormat(mode)
@@ -140,7 +142,10 @@ function! pencil#init(...) abort
     " clean out stuff we likely don't want
     setlocal formatoptions-=2
     setlocal formatoptions-=v
-    setlocal formatoptions-=w   " trailing whitespace continues paragraph (will enable in insert mode)
+
+    " trailing whitespace continues paragraph
+    " makes autoformat behave oddly where spaces aren't present
+    setlocal formatoptions-=w
   else
     setlocal autoindent< noautoindent<
     setlocal list< nolist<
@@ -224,15 +229,6 @@ fun! s:doOne(item) abort
     if l:matches[1] =~ 'textwidth\|tw'
       if l:matches[2] > b:max_textwidth
         let b:max_textwidth = l:matches[2]
-      elseif l:matches[2] < b:min_textwidth
-        let b:min_textwidth = l:matches[2]
-      endif
-    endif
-    if l:matches[1] =~ 'wrapmargin\|wm'
-      if l:matches[2] > b:max_wrapmargin
-        let b:max_wrapmargin = l:matches[2]
-      elseif l:matches[2] < b:min_wrapmargin
-        let b:min_wrapmargin = l:matches[2]
       endif
     endif
   endif
@@ -254,6 +250,8 @@ fun! s:doModeline(line) abort
   endif
 endfun
 
+" sample lines for detection, capturing both
+" modeline(s) and max line length
 " Hat tip to https://github.com/ciaranm/securemodelines
 fun! s:doModelines() abort
   if line("$") > &modelines
