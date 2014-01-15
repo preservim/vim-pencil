@@ -192,7 +192,7 @@ let g:pencil#joinspaces = 0     " 0=one_space, 1=two_spaces
 By default, `h`/`l` and the left/right cursor keys will move to the
 previous/next line after reaching first/last character in a line with
 a hard break. If you wish to retain the default Vim behavior, set the
-`cursorwrap` value to 0 in your `.vimrc`:
+`cursorwrap` value to `0` in your `.vimrc`:
 
 ```vim
 let g:pencil#cursorwrap = 1     " 0=disable, 1=enable
@@ -209,7 +209,7 @@ Failing that _pencil_ will then sample lines from the start of the file.
 ### Detect via modeline
 
 Will the wrap mode be detected accurately? Maybe. But you can improve its
-chances by giving it an explicit hint.
+chances by giving _pencil_ an explicit hint.
 
 At the bottom of this document is a odd-looking code:
 
@@ -224,18 +224,17 @@ loading the file into a buffer:
 :set textwidth=74
 ```
 
-That’s a strong hint to _pencil_ that it should assume hard line breaks,
-regardless of whether or not soft line wrap is the default editing mode
-for files of type ‘markdown’.
+This informs _pencil_ that it should assume hard line breaks, regardless
+of whether or not soft line wrap is the default editing mode for files of
+type ‘markdown’.
+
+You explicitly specify soft wrap mode by specifying a textwidth of `0`:
 
 ```
 <!-- vim: set tw=0 :-->
 ```
 
-If textwidth is `0` as shown above, then _pencil_ assumes you want soft
-line wrap.
-
-Note that even if the modelines feature is disabled (such as for security
+Note that if the modelines feature is disabled (such as for security
 reasons) the textwidth will still be set by this plugin.
 
 ### Detect via sampling
