@@ -45,7 +45,7 @@ if !exists('g:pencil#softDetectSample')
   " if no modeline, read as many as this many lines at
   " start of file in attempt to detect at least one line
   " whose byte count exceeds g:pencil#softDetectThreshold
-  let g:pencil#softDetectSample = 10
+  let g:pencil#softDetectSample = 20
 endif
 
 if !exists('g:pencil#softDetectThreshold')

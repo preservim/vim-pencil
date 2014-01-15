@@ -240,14 +240,14 @@ reasons) the textwidth will still be set by this plugin.
 ### Detect via sampling
 
 If no modeline with a textwidth is found, _pencil_ will sample the initial
-lines from the file looking for excessively-long lines.
+lines from the file, looking for those excessively-long.
 
 There are two settings you can add to your `.vimrc` to tweak this behavior.
 
 The maximum number of lines to sample from the start of the file:
 
 ```vim
-let g:pencil#softDetectSample = 10
+let g:pencil#softDetectSample = 20
 ```
 
 Set that value to `0` to disable detection via line sampling.

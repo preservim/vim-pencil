@@ -17,21 +17,23 @@ let s:WRAP_MODE_SOFT    = 2
 " Wrap-mode detector
 " Scan lines at end and beginning of file to determine the wrap mode.
 " Modelines has priority over long lines found.
-function! s:detect_mode() abort
+function! s:detect_wrap_mode() abort
 
   let b:max_textwidth = -1      " assume no relevant modeline
   call s:doModelines()
-
-  if b:max_textwidth == 0
-    " modeline(s) found only with zero textwidth, so it's soft wrapped
-    return s:WRAP_MODE_SOFT
-  endif
 
   if b:max_textwidth > 0
     " modelines(s) found with positive textwidth, so hard line breaks
     return s:WRAP_MODE_HARD
   endif
 
+  if b:max_textwidth == 0 || g:pencil#wrapModeDefault ==# 'soft'
+    " modeline(s) found only with zero textwidth, so it's soft line wrap
+    " or, the user wants to default to soft line wrap
+    return s:WRAP_MODE_SOFT
+  endif
+
+  " attempt to rule out soft line wrap
   " scan initial lines in an attempt to detect long lines
   for l:line in getline(1, g:pencil#softDetectSample)
     if len(l:line) > g:pencil#softDetectThreshold
@@ -83,7 +85,7 @@ function! pencil#init(...) abort
     let b:wrap_mode = s:WRAP_MODE_DEFAULT
   else
     " this can return s:WRAP_MODE_ for soft, hard or default
-    let b:wrap_mode = s:detect_mode()
+    let b:wrap_mode = s:detect_wrap_mode()
   endif
 
   " translate default(-1) to soft(1) or hard(2) or off(0)
