@@ -1,6 +1,6 @@
 # vim-pencil
 
-> “Rethinking Vim as a tool for writers”
+> Rethinking Vim as a tool for writers
 
 <br/>
 
