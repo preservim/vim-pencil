@@ -99,10 +99,10 @@ to set the behavior for the current buffer:
 Optionally, you can map to keys in your `.vimrc`:
 
 ```vim
-nmap <silent> <leader>ps :SoftPencil<cr>
-nmap <silent> <leader>ph :HardPencil<cr>
-nmap <silent> <leader>pd :DropPencil<cr>
-nmap <silent> <leader>pt :TogglePencil<cr>
+nnoremap <silent> <leader>ps :SoftPencil<cr>
+nnoremap <silent> <leader>ph :HardPencil<cr>
+nnoremap <silent> <leader>pd :DropPencil<cr>
+nnoremap <silent> <leader>pt :TogglePencil<cr>
 ```
 
 ### Automatic formatting
