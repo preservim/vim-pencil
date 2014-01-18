@@ -72,6 +72,11 @@ In most cases you can set a default to suit your preference and let
 auto-detection figure out what to do. Add to your `.vimrc`:
 
 ```vim
+" standard vim command to enable loading the plugin files 
+" (and their indent support) for specific file types.
+" It may already be in your .vimrc!
+filetype plugin indent on
+
 let g:pencil#wrapModeDefault = 'hard'   " or 'soft'
 augroup pencil
   autocmd!
