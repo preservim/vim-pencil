@@ -14,10 +14,8 @@ The _pencil_ plugin aspires to make Vim as powerful a tool for writers as
 it is for coders by focusing narrowly on the handful of tweaks needed to
 smooth the path to writing prose. 
 
-* For editing files in _text_, _markdown_, _textile_, and other
-  prose-oriented file types
-* Agnostic on soft line wrap _versus_ hard line breaks, supporting
-  both
+* For editing files in _text_, _markdown_, _textile_, and other prose-oriented file types
+* Agnostic on soft line wrap _versus_ hard line breaks, supporting both
 * Auto-detects wrap mode via modeline and sampling
 * Adjusts navigation key mappings to suit the wrap mode
 * Creates undo points on common punctuation
@@ -159,7 +157,7 @@ reformat paragraphs with standard Vim commands:
 
 * `gqip` or `gwip` - format current paragraph
 * `vipJ` - unformat current paragraph
-* `ggVGgq` - format all paragraphs in buffer
+* `ggVGgq` or `:g/^/norm gqq` - format all paragraphs in buffer
 * `:%norm vipJ` - unformat all paragraphs in buffer
 
 Optionally, you can map these sequences to underutilized keys in your
@@ -281,12 +279,12 @@ let g:pencil#wrapModeDefault = 'hard'   " or 'soft'
 If you find this plugin useful, you may want to check out these others by
 the same author:
 
-* [vim-colors-pencil][cp] — Color scheme for Vim inspired by IA Writer
-* [vim-lexical][lx] - Building on Vim’s spell-check and thesaurus/dictionary completion
-* [vim-litecorrect][lc] - Lightweight auto-correction for Vim
-* [vim-quotable][qu] - Extends Vim to support typographic (‘curly’) quotes
-* [vim-thematic][th] —  appearance to suit your task and environment 
-* [vim-wordy][wo] - Uncovering potential usage problems in writing 
+* [vim-colors-pencil][cp] — color scheme for Vim inspired by IA Writer
+* [vim-lexical][lx] - building on Vim’s spell-check and thesaurus/dictionary completion
+* [vim-litecorrect][lc] - lightweight auto-correction for Vim
+* [vim-quotable][qu] - extends Vim to support typographic (‘curly’) quotes
+* [vim-thematic][th] — modify Vim’s appearance to suit your task and environment 
+* [vim-wordy][wo] - uncovering usage problems in writing 
 
 [cp]: http://github.com/reedes/vim-colors-pencil
 [lx]: http://github.com/reedes/vim-lexical
