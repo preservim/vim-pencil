@@ -139,7 +139,6 @@ let g:pencil#autoformat = 1      " 0=manual, 1=auto
 You can override this default during initialization, as in:
 
 ```vim
-let g:pencil#wrapModeDefault = 'soft'
 augroup pencil
   autocmd!
   autocmd FileType text call pencil#init({'wrap': 'hard', 'autoformat': 0})
@@ -277,15 +276,16 @@ let g:pencil#wrapModeDefault = 'hard'   " or 'soft'
 * [pencil at vim.org](http://www.vim.org/scripts/script.php?script_id=4824)
 
 If you find this plugin useful, you may want to check out these others by
-the same author:
+[@reedes][re]:
 
-* [vim-colors-pencil][cp] — color scheme for Vim inspired by IA Writer
+* [vim-colors-pencil][cp] - color scheme for Vim inspired by IA Writer
 * [vim-lexical][lx] - building on Vim’s spell-check and thesaurus/dictionary completion
 * [vim-litecorrect][lc] - lightweight auto-correction for Vim
 * [vim-quotable][qu] - extends Vim to support typographic (‘curly’) quotes
 * [vim-thematic][th] — modify Vim’s appearance to suit your task and environment 
 * [vim-wordy][wo] - uncovering usage problems in writing 
 
+[re]: http://github.com/reedes
 [cp]: http://github.com/reedes/vim-colors-pencil
 [lx]: http://github.com/reedes/vim-lexical
 [lc]: http://github.com/reedes/vim-litecorrect
