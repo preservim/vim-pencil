@@ -21,8 +21,9 @@ smooth the path to writing prose.
 * Creates undo points on common punctuation
 * When using hard line breaks, enables autoformat while inserting text
 * Buffer-scoped configuration (leaves your global settings alone)
+* Pure Vimscript with no dependencies
 
-Need spellcheck and other features? Vim is about customization. To
+Need spell-check and other features? Vim is about customization. To
 complete your editing environment, learn to configure Vim and draw upon
 its rich ecosystem of plugins.
 
@@ -76,6 +77,7 @@ auto-detection figure out what to do. Add to your `.vimrc`:
 filetype plugin indent on
 
 let g:pencil#wrapModeDefault = 'hard'   " or 'soft'
+
 augroup pencil
   autocmd!
   autocmd FileType markdown call pencil#init()
@@ -97,7 +99,7 @@ to set the behavior for the current buffer:
 * `SoftPencil` - mode for soft line wrap
 * `HardPencil` - mode for hard line breaks
 * `DropPencil` - removes navigation mappings and restores buffer to global settings
-* `TogglePencil` - if off, enables with detection; if on, turns off
+* `TogglePencil` - if on, turns off; if off, enables with detection 
 
 Optionally, you can map to keys in your `.vimrc`:
 
@@ -110,9 +112,9 @@ nnoremap <silent> <leader>pt :TogglePencil<cr>
 
 ### Automatic formatting
 
-_This ‘autoformat’ feature affects **HardPencil** mode only._
+_This ‘autoformat’ feature affects *HardPencil* mode only._
 
-When in **HardPencil** mode, Vim’s autoformat feature will be enabled by
+When in *HardPencil* mode, Vim’s autoformat feature will be enabled by
 default in Insert mode and can offer many of the same benefits as soft
 line wrap. But autoformat will cause havoc when editing anything but
 paragraphs of words, such as a code block or table. In these cases you
@@ -120,7 +122,7 @@ will need to disable it, at least temporarily, via a command:
 
 * `AutoPencil` - enables autoformat
 * `ManualPencil` - disables autoformat
-* `ShiftPencil` - enables if disabled, etc.
+* `ShiftPencil` - toggle to enable if disabled, etc.
 
 Or optionally map to keys in your `.vimrc`:
 
@@ -219,16 +221,15 @@ At the bottom of this document is a odd-looking code:
 <!-- vim: set tw=74 :-->
 ```
 
-This is a ‘modeline’ that tells Vim to run the following command upon
-loading the file into a buffer:
+This is an optional ‘modeline’ that tells Vim to run the following command 
+upon loading the file into a buffer:
 
 ```vim
 :set textwidth=74
 ```
 
-This informs _pencil_ that it should assume hard line breaks, regardless
-of whether or not soft line wrap is the default editing mode for files of
-type ‘markdown’.
+It tells _pencil_ to assume hard line breaks, regardless of whether or 
+not soft line wrap is the default editing mode for files of type ‘markdown’.
 
 You explicitly specify soft wrap mode by specifying a textwidth of `0`:
 
@@ -261,7 +262,7 @@ then _pencil_ assumes soft line wrap.
 let g:pencil#softDetectThreshold = 130
 ```
 
-If no such lines found, _pencil_ falls back to the default:
+If no such lines found, _pencil_ falls back to the default mentioned earlier:
 
 ```vim
 let g:pencil#wrapModeDefault = 'hard'   " or 'soft'
