@@ -96,8 +96,8 @@ hard line break mode.
 Because auto-detect might not work as intended, you can invoke a command
 to set the behavior for the current buffer:
 
-* `SoftPencil` - mode for soft line wrap
-* `HardPencil` - mode for hard line breaks
+* `SoftPencil` - enable soft line wrap mode
+* `HardPencil` - enable hard line break mode
 * `DropPencil` - removes navigation mappings and restores buffer to global settings
 * `TogglePencil` - if on, turns off; if off, enables with detection 
 
