@@ -229,8 +229,9 @@ fun! s:doOne(item) abort
   let l:matches = matchlist(a:item, '^\([a-z]\+\)=\([a-zA-Z0-9_\-.]\+\)$')
   if len(l:matches) > 1
     if l:matches[1] =~ 'textwidth\|tw'
-      if l:matches[2] > b:max_textwidth
-        let b:max_textwidth = l:matches[2]
+      let l:tw = str2nr(l:matches[2])
+      if l:tw > b:max_textwidth
+        let b:max_textwidth = l:tw
       endif
     endif
   endif
