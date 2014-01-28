@@ -70,6 +70,9 @@ function! pencil#init(...) abort
   if !exists('b:wrap_mode')
     let b:wrap_mode = s:WRAP_MODE_OFF
   endif
+  if !exists("b:max_textwidth")
+    let b:max_textwidth = -1
+  endif
 
   " If user explicitly requested wrap_mode thru args, go with that.
   let l:wrap_arg = get(l:args, 'wrap', 'detect')
