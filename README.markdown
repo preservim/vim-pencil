@@ -12,15 +12,17 @@
 
 The _pencil_ plugin aspires to make Vim as powerful a tool for writers as
 it is for coders by focusing narrowly on the handful of tweaks needed to
-smooth the path to writing prose. 
+smooth the path to writing prose.
 
-* For editing files in _text_, _markdown_, _textile_, and other prose-oriented file types
+* For editing files in _text_, _markdown_, _textile_, and other
+  prose-oriented file types
 * Agnostic on soft line wrap _versus_ hard line breaks, supporting both
 * Auto-detects wrap mode via modeline and sampling
 * Adjusts navigation key mappings to suit the wrap mode
 * Creates undo points on common punctuation
 * When using hard line breaks, enables autoformat while inserting text
-* Buffer-scoped configuration (leaves your global settings alone)
+* Buffer-scoped configuration (with a few minor exceptions, _pencil_
+  preserves your global settings)
 * Pure Vimscript with no dependencies
 
 Need spell-check and other features? Vim is about customization. To
@@ -29,15 +31,15 @@ its rich ecosystem of plugins.
 
 ## Why use Vim for writing?
 
-With plenty of word processing apps available, including those that
-specifically cater to writers, why use a programmer’s editor like Vim for
-writing? 
+With plenty of word processing applications available, including those
+that specifically cater to writers, why use a programmer’s editor like Vim
+for writing?
 
 There are good reasons NOT to use Vim for writing:
 
 * Primitive in certain respects (no WYSIWYG or proportionally spaced
   characters, e.g.)
-* A modal editor with a steep learning curve
+* A modal editor with a relatively steep learning curve
 * Time and effort to configure to your needs
 
 But Vim offers a unique editing environment not matched by other writing
@@ -54,9 +56,9 @@ tools:
 Install using Pathogen, Vundle, Neobundle, or your favorite Vim package
 manager.
 
-_For those new to Vim: before installing this plugin, you should first
-work through one of the many tutorials available to get comfortable with
-the basics of Vim._
+_For those new to Vim: before installing this plugin, consider getting
+comfortable with the basics of Vim by working through one of the many
+tutorials available._
 
 ## Configuration
 
@@ -71,7 +73,7 @@ In most cases you can set a default to suit your preference and let
 auto-detection figure out what to do. Add to your `.vimrc`:
 
 ```vim
-" standard vim command to enable loading the plugin files 
+" standard vim command to enable loading the plugin files
 " (and their indent support) for specific file types.
 " It may already be in your .vimrc!
 filetype plugin indent on
@@ -99,7 +101,7 @@ to set the behavior for the current buffer:
 * `SoftPencil` - enable soft line wrap mode
 * `HardPencil` - enable hard line break mode
 * `DropPencil` - removes navigation mappings and restores buffer to global settings
-* `TogglePencil` - if on, turns off; if off, enables with detection 
+* `TogglePencil` - if on, turns off; if off, enables with detection
 
 Optionally, you can map to keys in your `.vimrc`:
 
@@ -161,7 +163,7 @@ reformat paragraphs with standard Vim commands:
 * `ggVGgq` or `:g/^/norm gqq` - format all paragraphs in buffer
 * `:%norm vipJ` - unformat all paragraphs in buffer
 
-Optionally, you can map these sequences to underutilized keys in your
+Optionally, you can map these operations to underutilized keys in your
 `.vimrc`:
 
 ```vim
@@ -204,7 +206,7 @@ let g:pencil#cursorwrap = 1     " 0=disable, 1=enable
 
 ## Auto-detecting wrap mode
 
-If you didn't explicitly specify a wrap mode during initialization, 
+If you didn't explicitly specify a wrap mode during initialization,
 _pencil_ will attempt to detect it.
 
 It will first look for a `textwidth` (or `tw`) specified in a modeline.
@@ -221,14 +223,14 @@ At the bottom of this document is a odd-looking code:
 <!-- vim: set tw=74 :-->
 ```
 
-This is an optional ‘modeline’ that tells Vim to run the following command 
-upon loading the file into a buffer:
+This is an **optional** ‘modeline’ that tells Vim to run the following
+command upon loading the file into a buffer:
 
 ```vim
 :set textwidth=74
 ```
 
-It tells _pencil_ to assume hard line breaks, regardless of whether or 
+It tells _pencil_ to assume hard line breaks, regardless of whether or
 not soft line wrap is the default editing mode for files of type ‘markdown’.
 
 You explicitly specify soft wrap mode by specifying a textwidth of `0`:
@@ -256,7 +258,7 @@ let g:pencil#softDetectSample = 20
 Set that value to `0` to disable detection via line sampling.
 
 When the number of bytes on a sampled line per exceeds this next value,
-then _pencil_ assumes soft line wrap. 
+then _pencil_ assumes soft line wrap.
 
 ```vim
 let g:pencil#softDetectThreshold = 130
@@ -284,9 +286,9 @@ If you find this plugin useful, you may want to check out these others by
 * [vim-litecorrect][lc] - lightweight auto-correction for Vim
 * [vim-quotable][qu] - extends Vim to support typographic (‘curly’) quotes
 * [vim-textobj-sentence][ts] - improving on Vim's native sentence motion command
-* [vim-thematic][th] — modify Vim’s appearance to suit your task and environment 
+* [vim-thematic][th] — modify Vim’s appearance to suit your task and environment
 * [vim-wheel][wh] - screen-anchored cursor movement for Vim
-* [vim-wordy][wo] - uncovering usage problems in writing 
+* [vim-wordy][wo] - uncovering usage problems in writing
 
 [re]: http://github.com/reedes
 [cp]: http://github.com/reedes/vim-colors-pencil

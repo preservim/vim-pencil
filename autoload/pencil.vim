@@ -78,7 +78,7 @@ function! pencil#init(...) abort
   let l:wrap_arg = get(l:args, 'wrap', 'detect')
 
   if (b:wrap_mode && l:wrap_arg ==# 'toggle') ||
-   \ l:wrap_arg =~# '^\(off\|disable\|false\)$'
+   \ l:wrap_arg =~# '^\(0\|off\|disable\|false\)$'
     let b:wrap_mode = s:WRAP_MODE_OFF
   elseif l:wrap_arg ==# 'hard'
     let b:wrap_mode = s:WRAP_MODE_HARD
@@ -93,7 +93,7 @@ function! pencil#init(...) abort
 
   " translate default(-1) to soft(1) or hard(2) or off(0)
   if b:wrap_mode == s:WRAP_MODE_DEFAULT
-    if g:pencil#wrapModeDefault =~# '^\(off\|disable\|false\)$'
+    if g:pencil#wrapModeDefault =~# '^\(0\|off\|disable\|false\)$'
       let b:wrap_mode = s:WRAP_MODE_OFF
     elseif g:pencil#wrapModeDefault ==# 'soft'
       let b:wrap_mode = s:WRAP_MODE_SOFT
@@ -130,45 +130,48 @@ function! pencil#init(...) abort
     setlocal colorcolumn<
   endif
 
+  " global settings
   if b:wrap_mode
-    setlocal autoindent         " needed by fo=n
+    set display+=lastline
+    set backspace=indent,eol,start      " via tpope/vim-sensible
+    if g:pencil#joinspaces
+      set joinspaces         " two spaces after .!?
+    else
+      set nojoinspaces       " only one space after a .!? (default)
+    endif
+  endif
+
+  " because ve=onemore is relatively rare and could break
+  " other plugins, restrict its presence to buffer
+  " Better: restore ve to original setting
+  if b:wrap_mode && g:pencil#cursorwrap
+    set whichwrap+=<,>,h,l,[,]
+    augroup pencil_cursorwrap
+      autocmd BufEnter <buffer> set virtualedit+=onemore
+      autocmd BufLeave <buffer> set virtualedit-=onemore
+    augroup END
+  else
+    silent! autocmd! pencil_cursorwrap * <buffer>
+  endif
+
+  " window/buffer settings
+  if b:wrap_mode
     setlocal nolist
     setlocal wrapmargin=0
-    setlocal display+=lastline
-    setlocal formatoptions+=1   " don't break line before 1 letter word
-    setlocal formatoptions+=t
+    setlocal autoindent         " needed by formatoptions=n
     setlocal formatoptions+=n   " recognize numbered lists
-
-    if g:pencil#cursorwrap
-      setlocal whichwrap+=<,>,h,l,[,]
-      setlocal virtualedit+=onemore        " could break other plugins
-    endif
+    setlocal formatoptions+=1   " don't break line before 1 letter word
+    setlocal formatoptions+=t   " autoformat of text, but not comments
 
     " clean out stuff we likely don't want
-    setlocal formatoptions-=2
-    setlocal formatoptions-=v
-
-    " trailing whitespace continues paragraph
-    " makes autoformat behave oddly where spaces aren't present
-    setlocal formatoptions-=w
+    setlocal formatoptions-=2   " use indent of 2nd line for rest of paragraph
+    setlocal formatoptions-=v   " only break line at blank entered during insert
+    setlocal formatoptions-=w   " avoid erratic behavior if mixed spaces
   else
     setlocal autoindent< noautoindent<
     setlocal list< nolist<
     setlocal wrapmargin<
-    setlocal display<
     setlocal formatoptions<
-    setlocal whichwrap<
-    setlocal virtualedit<
-  endif
-
-  if b:wrap_mode
-    if g:pencil#joinspaces
-      setlocal joinspaces         " two spaces after .!?
-    else
-      setlocal nojoinspaces       " only one space after a .!? (default)
-    endif
-  else
-    setlocal joinspaces< nojoinspaces<
   endif
 
   if b:wrap_mode == s:WRAP_MODE_SOFT
