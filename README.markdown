@@ -100,7 +100,7 @@ to set the behavior for the current buffer:
 
 * `SoftPencil` - enable soft line wrap mode
 * `HardPencil` - enable hard line break mode
-* `DropPencil` - removes navigation mappings and restores buffer to global settings
+* `NoPencil` - removes navigation mappings and restores buffer to global settings
 * `TogglePencil` - if on, turns off; if off, enables with detection
 
 Optionally, you can map to keys in your `.vimrc`:
@@ -108,7 +108,7 @@ Optionally, you can map to keys in your `.vimrc`:
 ```vim
 nnoremap <silent> <leader>ps :SoftPencil<cr>
 nnoremap <silent> <leader>ph :HardPencil<cr>
-nnoremap <silent> <leader>pd :DropPencil<cr>
+nnoremap <silent> <leader>pn :NoPencil<cr>
 nnoremap <silent> <leader>pt :TogglePencil<cr>
 ```
 
