@@ -276,9 +276,10 @@ let g:pencil#wrapModeDefault = 'hard'   " or 'soft'
 * [Vim Training Class - Basic motions and commands][tc] - video tutorial by Shawn Biddle
 * [Vim for Writers][vw] - guide to the basics geared to writers
 
-Lesser-known plugins that should be of interest to writers:
+Other plugins of specific interest to writers:
 
-* [tommcdo/vim-exchange][ex] - Easy text exchange operator for Vim
+* [tpope/vim-abolish][ab] - easily search for, substitute, and abbreviate multiple variants of a word
+* [tommcdo/vim-exchange][ex] - easy text exchange operator for Vim
 
 If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
 
@@ -287,10 +288,11 @@ If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
 * [vim-litecorrect][lc] - lightweight auto-correction for Vim
 * [vim-quotable][qu] - extends Vim to support typographic (‘curly’) quotes
 * [vim-textobj-sentence][ts] - improving on Vim's native sentence motion command
-* [vim-thematic][th] — modify Vim’s appearance to suit your task and environment
+* [vim-thematic][th] - modify Vim’s appearance to suit your task and environment
 * [vim-wheel][wh] - screen-anchored cursor movement for Vim
 * [vim-wordy][wo] - uncovering usage problems in writing
 
+[ab]: http://github.com/tpope/vim-abolish
 [ex]: http://github.com/tommcdo/vim-exchange
 [tv]: http://ianhocking.com/2013/11/17/to-vim/
 [tc]: https://www.youtube.com/watch?v=Nim4_f5QUxA
