@@ -272,14 +272,15 @@ let g:pencil#wrapModeDefault = 'hard'   " or 'soft'
 
 ## See also
 
-* [To Vim](http://ianhocking.com/2013/11/17/to-vim/) - Writer and psychologist Ian Hocking on using Vim for writing
-* [Vim Training Class - Basic motions and commands](https://www.youtube.com/watch?v=Nim4_f5QUxA) - video tutorial by Shawn Biddle
-* [Vim for Writers](http://therandymon.com/woodnotes/vim-for-writers/vimforwriters.html) - guide to the basics geared to writers
-* [Vim-related books](http://iccf-holland.org/click5.html) - collection of books on learning Vim
-* [pencil at vim.org](http://www.vim.org/scripts/script.php?script_id=4824)
+* [To Vim][tv] - Writer and psychologist Ian Hocking on using Vim for writing
+* [Vim Training Class - Basic motions and commands][tc] - video tutorial by Shawn Biddle
+* [Vim for Writers][vw] - guide to the basics geared to writers
 
-If you find this plugin useful, you may want to check out these others by
-[@reedes][re]:
+Lesser-known plugins that should be of interest to writers:
+
+* [tommcdo/vim-exchange][ex] - Easy text exchange operator for Vim
+
+If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
 
 * [vim-colors-pencil][cp] - color scheme for Vim inspired by IA Writer
 * [vim-lexical][lx] - building on Vim’s spell-check and thesaurus/dictionary completion
@@ -290,6 +291,10 @@ If you find this plugin useful, you may want to check out these others by
 * [vim-wheel][wh] - screen-anchored cursor movement for Vim
 * [vim-wordy][wo] - uncovering usage problems in writing
 
+[ex]: http://github.com/tommcdo/vim-exchange
+[tv]: http://ianhocking.com/2013/11/17/to-vim/
+[tc]: https://www.youtube.com/watch?v=Nim4_f5QUxA
+[vw]: http://therandymon.com/woodnotes/vim-for-writers/vimforwriters.html
 [re]: http://github.com/reedes
 [cp]: http://github.com/reedes/vim-colors-pencil
 [lx]: http://github.com/reedes/vim-lexical
