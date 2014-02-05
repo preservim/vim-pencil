@@ -58,6 +58,7 @@ endif
 command -nargs=0 HardPencil    call pencil#init({'wrap': 'hard'})
 command -nargs=0 SoftPencil    call pencil#init({'wrap': 'soft'})
 command -nargs=0 DropPencil    call pencil#init({'wrap': 'off' })
+command -nargs=0 NoPencil      call pencil#init({'wrap': 'off' })
 command -nargs=0 TogglePencil  call pencil#init({'wrap': 'toggle'})
 
 command -nargs=0 AutoPencil    call pencil#setAutoFormat(1)
