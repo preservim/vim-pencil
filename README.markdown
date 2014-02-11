@@ -32,8 +32,8 @@ its rich ecosystem of plugins.
 ## Why use Vim for writing?
 
 With plenty of word processing applications available, including those
-that specifically cater to writers, why use a fixed-width font modal
-editor like Vim for writing?
+that specifically cater to writers, why use a modal editor like Vim for 
+writing? Many reasons have been offered:
 
 * Your hands can rest in a neutral ‘home’ position, only rarely straying
   to reach for mouse, track pad, or arrow keys
@@ -44,17 +44,16 @@ editor like Vim for writing?
 
 But while such reasons might be sound, by themselves they are scant
 justification to switch from the familiar non-modal word processor.
-Instead, you need compelling reason—one that can appeal to a writer’s love
-for language and the tools of writing.
+Instead, you need a compelling reason—one that can appeal to a writer’s 
+love for language and the tools of writing.
 
-You can find that reason in the mysterious modal commands of a vi-style 
-editor like Vim. What’s the significance of a command like `cas` to 
-_Change Around Sentence_ to replace an existing sentence? You can see it as 
-a mnemonic. But dig a bit deeper to see that these vi commands have a grammar 
-of their own, comprised of nouns, verbs, and modifiers. Think of them as the 
-building blocks of a _domain specific language_ for manipulating text that 
-with mastery can become a powerful tool to express yourself, as many coders 
-have found. For more details:
+You can find that reason in Vim's mysterious modal commands. But what’s the 
+significance of a command like `cas` to _Change Around Sentence_ to replace 
+an existing sentence? You can see it as a mnemonic. Dig a bit deeper to see 
+that the vi commands have a grammar of their own, comprised of nouns, verbs, 
+and modifiers. Think of them as the building blocks of a 
+_domain specific language_ for manipulating text that with mastery can become 
+a powerful tool to express yourself. For more details:
 
 * [Learn to speak vim – verbs, nouns, and modifiers!][ls]
 * [Your problem with Vim is that you don't grok vi][gv]
