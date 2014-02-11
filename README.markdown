@@ -32,24 +32,35 @@ its rich ecosystem of plugins.
 ## Why use Vim for writing?
 
 With plenty of word processing applications available, including those
-that specifically cater to writers, why use a programmer’s editor like Vim
-for writing?
+that specifically cater to writers, why use a fixed-width font modal
+editor for writing?
 
-There are good reasons NOT to use Vim for writing:
-
-* Primitive in certain respects (no WYSIWYG or proportionally spaced
-  characters, e.g.)
-* A modal editor with a relatively steep learning curve
-* Time and effort to configure to your needs
-
-But Vim offers a unique editing environment not matched by other writing
-tools:
-
-* Hands rest in a neutral ‘home’ position, only rarely straying to reach
-  for mouse, track pad, or arrow keys
+* Your hands can rest in a neutral ‘home’ position, only rarely straying
+  to reach for mouse, track pad, or arrow keys
 * Minimal chording, with many mnemonic-friendly commands
 * Sophisticated capabilities for navigating and manipulating text
 * Highly configurable to suit your needs, with many great plugins available
+* No proprietary format lock-in
+
+But while such reasons might be sound, by themselves they are scant
+justification to switch from the familiar non-modal word processor.
+A compelling reason is called for—one that can appeal to a writer’s love
+for language and the tools of writing.
+
+To find that reason you must look behind the mysterious modal commands of
+a vi-style editor like Vim. What’s the significance of a command like
+`cas` to _Change Around Sentence_? On one level it’s merely a mnemonic. On
+another these vi commands can be thought of as a grammar of their own,
+comprised of nouns, verbs, and modifiers. Put another way, they are
+a _domain specific language_ for text manipulation. For more details:
+
+* [Learn to speak vim – verbs, nouns, and modifiers!][ls]
+* [Your problem with Vim is that you don't grok vi][gv]
+* [Intro to Vim's Grammar][ig]
+
+[ls]: http://yanpritzker.com/2011/12/16/learn-to-speak-vim-verbs-nouns-and-modifiers/
+[gv]: http://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118
+[ig]: http://takac.github.io/2013/01/30/vim-grammar/
 
 ## Installation
 
@@ -73,10 +84,8 @@ In most cases you can set a default to suit your preference and let
 auto-detection figure out what to do. Add to your `.vimrc`:
 
 ```vim
-" standard vim command to enable loading the plugin files
-" (and their indent support) for specific file types.
-" It may already be in your .vimrc!
-filetype plugin indent on
+set nocompatible
+filetype plugin indent on       " may already be in your .vimrc
 
 let g:pencil#wrapModeDefault = 'hard'   " or 'soft'
 
