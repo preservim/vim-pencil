@@ -33,7 +33,7 @@ its rich ecosystem of plugins.
 
 With plenty of word processing applications available, including those
 that specifically cater to writers, why use a fixed-width font modal
-editor for writing?
+editor like Vim for writing?
 
 * Your hands can rest in a neutral ‘home’ position, only rarely straying
   to reach for mouse, track pad, or arrow keys
@@ -44,15 +44,17 @@ editor for writing?
 
 But while such reasons might be sound, by themselves they are scant
 justification to switch from the familiar non-modal word processor.
-A compelling reason is called for—one that can appeal to a writer’s love
+Instead, you need compelling reason—one that can appeal to a writer’s love
 for language and the tools of writing.
 
-To find that reason you must look behind the mysterious modal commands of
-a vi-style editor like Vim. What’s the significance of a command like
-`cas` to _Change Around Sentence_? On one level it’s merely a mnemonic. On
-another these vi commands can be thought of as a grammar of their own,
-comprised of nouns, verbs, and modifiers. Put another way, they are
-a _domain specific language_ for text manipulation. For more details:
+You can find that reason in the mysterious modal commands of a vi-style 
+editor like Vim. What’s the significance of a command like `cas` to 
+_Change Around Sentence_ to replace an existing sentence? You can see it as 
+a mnemonic. But dig a bit deeper to see that these vi commands have a grammar 
+of their own, comprised of nouns, verbs, and modifiers. Think of them as the 
+building blocks of a _domain specific language_ for manipulating text that 
+with mastery can become a powerful tool to express yourself, as many coders 
+have found. For more details:
 
 * [Learn to speak vim – verbs, nouns, and modifiers!][ls]
 * [Your problem with Vim is that you don't grok vi][gv]
