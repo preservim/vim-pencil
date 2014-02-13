@@ -49,11 +49,12 @@ love for language and the tools of writing.
 
 You can find that reason in Vim's mysterious command sequences. Take `cas`
 for instance. You might see it as a mnemonic for _Change Around Sentence_ to
-replace an existing sentence. But dig a bit deeper to see that such 
+replace an existing sentence. But dig a bit deeper to discover that such 
 commands have a grammar of their own, comprised of nouns, verbs, 
 and modifiers. Think of them as the building blocks of a 
-_domain specific language_ for manipulating text that with mastery 
-can become a powerful tool to express yourself. For more details:
+_domain specific language_ for manipulating text —a different 
+kind of language whose mastery can become a powerful tool to 
+express yourself. For more details:
 
 * [Learn to speak vim – verbs, nouns, and modifiers!][ls]
 * [Your problem with Vim is that you don't grok vi][gv]
