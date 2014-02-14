@@ -19,7 +19,7 @@ smooth the path to writing prose.
 * Agnostic on soft line wrap _versus_ hard line breaks, supporting both
 * Auto-detects wrap mode via modeline and sampling
 * Adjusts navigation key mappings to suit the wrap mode
-* Creates undo points on common punctuation
+* Creates undo points on common punctuation, line and word deletion
 * When using hard line breaks, enables autoformat while inserting text
 * Buffer-scoped configuration (with a few minor exceptions, _pencil_
   preserves your global settings)

@@ -215,19 +215,24 @@ function! pencil#init(...) abort
     silent! unmap  <buffer> <Down>
   endif
 
-  " set undo points around common punctuation
+  " set undo points around common punctuation,
+  " line <c-u> and word <c-w> deletions
   if b:wrap_mode
-    inoremap <buffer> . .<C-g>u
-    inoremap <buffer> ! !<C-g>u
-    inoremap <buffer> ? ?<C-g>u
-    inoremap <buffer> , ,<C-g>u
-    inoremap <buffer> ; ;<C-g>u
+    inoremap <buffer> . .<c-g>u
+    inoremap <buffer> ! !<c-g>u
+    inoremap <buffer> ? ?<c-g>u
+    inoremap <buffer> , ,<c-g>u
+    inoremap <buffer> ; ;<c-g>u
+    inoremap <buffer> <c-u> <c-g>u<c-u>
+    inoremap <buffer> <c-w> <c-g>u<c-w>
   else
     silent! iunmap <buffer> .
     silent! iunmap <buffer> !
     silent! iunmap <buffer> ?
     silent! iunmap <buffer> ,
     silent! iunmap <buffer> ;
+    silent! iunmap <buffer> <c-u>
+    silent! iunmap <buffer> <c-w>
   endif
 endfunction
 
