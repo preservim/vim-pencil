@@ -161,7 +161,8 @@ function! pencil#init(...) abort
     setlocal autoindent         " needed by formatoptions=n
     setlocal formatoptions+=n   " recognize numbered lists
     setlocal formatoptions+=1   " don't break line before 1 letter word
-    setlocal formatoptions+=t   " autoformat of text, but not comments
+    setlocal formatoptions+=t   " autoformat of text
+    setlocal formatoptions+=c   " autoformat of comments
 
     " clean out stuff we likely don't want
     setlocal formatoptions-=2   " use indent of 2nd line for rest of paragraph
