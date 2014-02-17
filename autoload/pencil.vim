@@ -133,7 +133,7 @@ function! pencil#init(...) abort
   " global settings
   if b:wrap_mode
     set display+=lastline
-    set backspace=indent,eol,start      " via tpope/vim-sensible
+    set backspace=indent,eol,start
     if g:pencil#joinspaces
       set joinspaces         " two spaces after .!?
     else
@@ -145,7 +145,7 @@ function! pencil#init(...) abort
   " other plugins, restrict its presence to buffer
   " Better: restore ve to original setting
   if b:wrap_mode && g:pencil#cursorwrap
-    set whichwrap+=<,>,h,l,[,]
+    set whichwrap+=<,>,b,s,h,l,[,]
     augroup pencil_cursorwrap
       autocmd BufEnter <buffer> set virtualedit+=onemore
       autocmd BufLeave <buffer> set virtualedit-=onemore
@@ -168,6 +168,7 @@ function! pencil#init(...) abort
     setlocal formatoptions-=2   " use indent of 2nd line for rest of paragraph
     setlocal formatoptions-=v   " only break line at blank entered during insert
     setlocal formatoptions-=w   " avoid erratic behavior if mixed spaces
+    setlocal formatoptions-=a   " autoformat will turn on with Insert in HardPencil mode
   else
     setlocal autoindent< noautoindent<
     setlocal list< nolist<
@@ -223,6 +224,8 @@ function! pencil#init(...) abort
     inoremap <buffer> ? ?<c-g>u
     inoremap <buffer> , ,<c-g>u
     inoremap <buffer> ; ;<c-g>u
+    inoremap <buffer> : :<c-g>u
+    inoremap <buffer> - -<c-g>u
     inoremap <buffer> <c-u> <c-g>u<c-u>
     inoremap <buffer> <c-w> <c-g>u<c-w>
   else
@@ -231,6 +234,8 @@ function! pencil#init(...) abort
     silent! iunmap <buffer> ?
     silent! iunmap <buffer> ,
     silent! iunmap <buffer> ;
+    silent! iunmap <buffer> :
+    silent! iunmap <buffer> -
     silent! iunmap <buffer> <c-u>
     silent! iunmap <buffer> <c-w>
   endif
