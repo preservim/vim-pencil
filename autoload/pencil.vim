@@ -45,6 +45,14 @@ function! s:detect_wrap_mode() abort
   return s:WRAP_MODE_DEFAULT
 endfunction
 
+function! s:imap(preserve_completion, key, icmd)
+  if a:preserve_completion
+    execute ":inoremap <silent> <expr> " . a:key . " pumvisible() ? \"" . a:key . "\" : \"" . a:icmd . "\""
+  else
+    execute ":inoremap <silent> " . a:key . " " . a:icmd
+  endif
+endfunction
+
 function! pencil#setAutoFormat(mode)
   " 1=auto, 0=manual, -1=toggle
   if !exists('b:last_autoformat')
@@ -139,6 +147,11 @@ function! pencil#init(...) abort
     else
       set nojoinspaces       " only one space after a .!? (default)
     endif
+    "if b:wrap_mode == s:WRAP_MODE_SOFT
+    "  " augment with additional chars
+    "  " TODO not working yet with n and m-dash
+    "  set breakat=\ !@*-+;:,./?([{
+    "endif
   endif
 
   " because ve=onemore is relatively rare and could break
@@ -183,8 +196,10 @@ function! pencil#init(...) abort
     vnoremap <buffer> <silent> 0 g0
     noremap  <buffer> <silent> <Home> g<Home>
     noremap  <buffer> <silent> <End>  g<End>
-    inoremap <buffer> <silent> <Home> <C-o>g<Home>
-    inoremap <buffer> <silent> <End>  <C-o>g<End>
+
+    " preserve behavior of home/end keys in popups
+    call s:imap(1, '<Home>', '<C-o>g<Home>')
+    call s:imap(1, '<End>' , '<C-o>g<End>' )
   else
     silent! nunmap <buffer> $
     silent! nunmap <buffer> 0
@@ -201,19 +216,22 @@ function! pencil#init(...) abort
     nnoremap <buffer> <silent> k gk
     vnoremap <buffer> <silent> j gj
     vnoremap <buffer> <silent> k gk
-    inoremap <buffer> <silent> <Up>   <C-o>g<Up>
-    inoremap <buffer> <silent> <Down> <C-o>g<Down>
     noremap  <buffer> <silent> <Up>   gk
     noremap  <buffer> <silent> <Down> gj
+
+    " preserve behavior of up/down keys in popups
+    call s:imap(1, '<Up>'  , '<C-o>g<Up>'  )
+    call s:imap(1, '<Down>', '<C-o>g<Down>')
   else
     silent! nunmap <buffer> j
     silent! nunmap <buffer> k
     silent! vunmap <buffer> j
     silent! vunmap <buffer> k
-    silent! iunmap <buffer> <Up>
-    silent! iunmap <buffer> <Down>
     silent! unmap  <buffer> <Up>
     silent! unmap  <buffer> <Down>
+
+    silent! iunmap <buffer> <Up>
+    silent! iunmap <buffer> <Down>
   endif
 
   " set undo points around common punctuation,
