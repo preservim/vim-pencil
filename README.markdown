@@ -19,7 +19,7 @@ smooth the path to writing prose.
 * Agnostic on soft line wrap _versus_ hard line breaks, supporting both
 * Auto-detects wrap mode via modeline and sampling
 * Adjusts navigation key mappings to suit the wrap mode
-* Creates undo points on common punctuation, line and word deletion
+* Creates undo points on common punctuation, line `<C-U>` and word `<C-W>` deletion
 * When using hard line breaks, enables autoformat while inserting text
 * Buffer-scoped configuration (with a few minor exceptions, _pencil_
   preserves your global settings)
@@ -42,10 +42,10 @@ writing? Many reasons have been offered:
 * Highly configurable to suit your needs, with many great plugins available
 * No proprietary format lock-in
 
-But while such reasons might be sound, by themselves they are scant
-justification to switch from the familiar non-modal word processor.
-Instead, you need a compelling reason—one that can appeal to a writer’s 
-love for language and the tools of writing.
+But while such reasons might be sound, they are scant justification to
+switch away from the familiar word processor. Instead, you need
+a compelling reason—one that can appeal to a writer’s love for language
+and the tools of writing.
 
 You can find that reason in Vim's mysterious command sequences. Take `cas`
 for instance. You might see it as a mnemonic for _Change Around Sentence_ to
@@ -87,7 +87,7 @@ auto-detection figure out what to do. Add to your `.vimrc`:
 
 ```vim
 set nocompatible
-filetype plugin indent on       " may already be in your .vimrc
+filetype plugin on       " may already be in your .vimrc
 
 let g:pencil#wrapModeDefault = 'hard'   " or 'soft'
 
