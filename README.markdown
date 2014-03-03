@@ -19,7 +19,8 @@ smooth the path to writing prose.
 * Agnostic on soft line wrap _versus_ hard line breaks, supporting both
 * Auto-detects wrap mode via modeline and sampling
 * Adjusts navigation key mappings to suit the wrap mode
-* Creates undo points on common punctuation, line `<C-U>` and word `<C-W>` deletion
+* Creates undo points on common punctuation during insert, incl. deletion
+  via line `<C-U>` and word `<C-W>`
 * When using hard line breaks, enables autoformat while inserting text
 * Buffer-scoped configuration (with a few minor exceptions, _pencil_
   preserves your global settings)
@@ -32,8 +33,8 @@ its rich ecosystem of plugins.
 ## Why use Vim for writing?
 
 With plenty of word processing applications available, including those
-that specifically cater to writers, why use a modal editor like Vim for 
-writing? Many reasons have been offered:
+that specifically cater to writers, why use a modal editor like Vim?
+Several reasons have been offered:
 
 * Your hands can rest in a neutral ‘home’ position, only rarely straying
   to reach for mouse, track pad, or arrow keys
@@ -42,19 +43,18 @@ writing? Many reasons have been offered:
 * Highly configurable to suit your needs, with many great plugins available
 * No proprietary format lock-in
 
-But while such reasons might be sound, they are scant justification to
+But while such reasons might be sound, they remain scant justification to
 switch away from the familiar word processor. Instead, you need
 a compelling reason—one that can appeal to a writer’s love for language
 and the tools of writing.
 
 You can find that reason in Vim's mysterious command sequences. Take `cas`
-for instance. You might see it as a mnemonic for _Change Around Sentence_ to
-replace an existing sentence. But dig a bit deeper to discover that such 
-commands have a grammar of their own, comprised of nouns, verbs, 
-and modifiers. Think of them as the building blocks of a 
-_domain specific language_ for manipulating text —a different 
-kind of language whose mastery can become a powerful tool to 
-express yourself. For more details:
+for instance. You might see it as a mnemonic for _Change Around Sentence_
+to replace an existing sentence. But dig a bit deeper to discover that
+such commands have a grammar of their own, comprised of nouns, verbs, and
+modifiers. Think of them as the building blocks of a _domain specific
+language_ for manipulating text, one that can become a powerful tool in
+expressing yourself. For more details:
 
 * [Learn to speak vim – verbs, nouns, and modifiers!][ls]
 * [Your problem with Vim is that you don't grok vi][gv]
@@ -128,8 +128,8 @@ nnoremap <silent> <leader>pt :TogglePencil<cr>
 _This ‘autoformat’ feature affects *HardPencil* mode only._
 
 When in *HardPencil* mode, Vim’s autoformat feature will be enabled by
-default in Insert mode and can offer many of the same benefits as soft
-line wrap. But autoformat will cause havoc when editing anything but
+default while in Insert mode and can offer many of the same benefits as
+soft line wrap. But autoformat will cause havoc when editing anything but
 paragraphs of words, such as a code block or table. In these cases you
 will need to disable it, at least temporarily, via a command:
 
@@ -148,7 +148,7 @@ nnoremap <silent> <leader>pp :ShiftPencil<cr>
 To set the default behavior, add to your `.vimrc`:
 
 ```vim
-let g:pencil#autoformat = 1      " 0=manual, 1=auto
+let g:pencil#autoformat = 1      " 0=manual, 1=auto (def)
 ```
 
 You can override this default during initialization, as in:
@@ -201,7 +201,7 @@ a period(`.`), exclamation point(`!`), or question mark(`?`). You can
 change this default:
 
 ```vim
-let g:pencil#joinspaces = 0     " 0=one_space, 1=two_spaces
+let g:pencil#joinspaces = 0     " 0=one_space (def), 1=two_spaces
 ```
 
 ### Cursor wrap
@@ -212,7 +212,7 @@ a hard break. If you wish to retain the default Vim behavior, set the
 `cursorwrap` value to `0` in your `.vimrc`:
 
 ```vim
-let g:pencil#cursorwrap = 1     " 0=disable, 1=enable
+let g:pencil#cursorwrap = 1     " 0=disable, 1=enable (def)
 ```
 
 ## Auto-detecting wrap mode
