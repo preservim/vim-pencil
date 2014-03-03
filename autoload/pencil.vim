@@ -243,7 +243,6 @@ function! pencil#init(...) abort
     inoremap <buffer> , ,<c-g>u
     inoremap <buffer> ; ;<c-g>u
     inoremap <buffer> : :<c-g>u
-    inoremap <buffer> - -<c-g>u
     inoremap <buffer> <c-u> <c-g>u<c-u>
     inoremap <buffer> <c-w> <c-g>u<c-w>
   else
@@ -253,7 +252,6 @@ function! pencil#init(...) abort
     silent! iunmap <buffer> ,
     silent! iunmap <buffer> ;
     silent! iunmap <buffer> :
-    silent! iunmap <buffer> -
     silent! iunmap <buffer> <c-u>
     silent! iunmap <buffer> <c-w>
   endif
