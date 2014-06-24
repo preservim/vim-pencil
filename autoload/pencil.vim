@@ -174,14 +174,16 @@ function! pencil#init(...) abort
     setlocal autoindent         " needed by formatoptions=n
     setlocal formatoptions+=n   " recognize numbered lists
     setlocal formatoptions+=1   " don't break line before 1 letter word
-    setlocal formatoptions+=t   " autoformat of text
-    setlocal formatoptions+=c   " autoformat of comments
+    setlocal formatoptions+=t   " autoformat of text (vim default)
+    setlocal formatoptions+=c   " autoformat of comments (vim default)
 
     " clean out stuff we likely don't want
     setlocal formatoptions-=2   " use indent of 2nd line for rest of paragraph
     setlocal formatoptions-=v   " only break line at blank entered during insert
     setlocal formatoptions-=w   " avoid erratic behavior if mixed spaces
     setlocal formatoptions-=a   " autoformat will turn on with Insert in HardPencil mode
+    setlocal formatoptions-=r   " don't insert comment leader
+    setlocal formatoptions-=o   " don't insert comment leader
   else
     setlocal autoindent< noautoindent<
     setlocal list< nolist<
@@ -245,6 +247,7 @@ function! pencil#init(...) abort
     inoremap <buffer> : :<c-g>u
     inoremap <buffer> <c-u> <c-g>u<c-u>
     inoremap <buffer> <c-w> <c-g>u<c-w>
+    inoremap <buffer> <cr> <c-g>u<cr>
   else
     silent! iunmap <buffer> .
     silent! iunmap <buffer> !
@@ -254,6 +257,7 @@ function! pencil#init(...) abort
     silent! iunmap <buffer> :
     silent! iunmap <buffer> <c-u>
     silent! iunmap <buffer> <c-w>
+    silent! iunmap <buffer> <cr>
   endif
 endfunction
 
