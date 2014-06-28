@@ -5,7 +5,7 @@
 <br/>
 
 - - -
-![demo](screenshots/demo.gif)
+![demo](http://i.imgur.com/0KYl5vU.gif)
 - - -
 
 # Features
