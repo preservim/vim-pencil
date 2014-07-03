@@ -293,6 +293,7 @@ Other plugins of specific interest to writers:
 
 * [tpope/vim-abolish][ab] - easily search for, substitute, and abbreviate multiple variants of a word
 * [tommcdo/vim-exchange][ex] - easy text exchange operator for Vim
+* [junegunn/limelight.vim][jl] - focus mode that brightens current paragraph
 
 If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
 
@@ -307,18 +308,19 @@ If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
 * [vim-wordy][wo] - uncovering usage problems in writing
 
 [ab]: http://github.com/tpope/vim-abolish
-[ex]: http://github.com/tommcdo/vim-exchange
-[tv]: http://ianhocking.com/2013/11/17/to-vim/
-[tc]: https://www.youtube.com/watch?v=Nim4_f5QUxA
-[vw]: http://therandymon.com/woodnotes/vim-for-writers/vimforwriters.html
-[re]: http://github.com/reedes
 [cp]: http://github.com/reedes/vim-colors-pencil
-[lx]: http://github.com/reedes/vim-lexical
+[ex]: http://github.com/tommcdo/vim-exchange
+[jl]: http://github.com/junegunn/limelight
 [lc]: http://github.com/reedes/vim-litecorrect
-[vo]: http://github.com/reedes/vim-one
+[lx]: http://github.com/reedes/vim-lexical
 [qu]: http://github.com/reedes/vim-textobj-quote
-[ts]: http://github.com/reedes/vim-textobj-sentence
+[re]: http://github.com/reedes
+[tc]: https://www.youtube.com/watch?v=Nim4_f5QUxA
 [th]: http://github.com/reedes/vim-thematic
+[ts]: http://github.com/reedes/vim-textobj-sentence
+[tv]: http://ianhocking.com/2013/11/17/to-vim/
+[vo]: http://github.com/reedes/vim-one
+[vw]: http://therandymon.com/woodnotes/vim-for-writers/vimforwriters.html
 [wh]: http://github.com/reedes/vim-wheel
 [wo]: http://github.com/reedes/vim-wordy
 
