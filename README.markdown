@@ -310,7 +310,7 @@ If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
 [ab]: http://github.com/tpope/vim-abolish
 [cp]: http://github.com/reedes/vim-colors-pencil
 [ex]: http://github.com/tommcdo/vim-exchange
-[jl]: http://github.com/junegunn/limelight
+[jl]: http://github.com/junegunn/limelight.vim
 [lc]: http://github.com/reedes/vim-litecorrect
 [lx]: http://github.com/reedes/vim-lexical
 [qu]: http://github.com/reedes/vim-textobj-quote
