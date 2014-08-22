@@ -220,8 +220,8 @@ let g:pencil#cursorwrap = 1     " 0=disable, 1=enable (def)
 ### Concealing markup in Markdown
 
 For syntaxes such as [tpope/markdown][tm] which support Vim’s Conceal
-feature, you can display \_*italic*\_, \*\***bold**\*\* and \*\*\****bold
-italic***\*\*\* markup where the `_` and `*` characters will be hidden
+feature, you can display \_*italic*\_, \*\*__bold__\*\* and \*\*\*___bold
+italic___\*\*\* markup where the `_` and `*` characters will be hidden
 when you’re not on the line. Set the following to `0` if you don’t want
 this behavior.
 
