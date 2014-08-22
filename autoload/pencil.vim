@@ -187,7 +187,9 @@ fun! pencil#init(...) abort
     setl formatoptions-=r   " don't insert comment leader
     setl formatoptions-=o   " don't insert comment leader
 
-    exe ":setl cole=" . g:pencil#conceallevel
+    if has("conceal")
+      exe ":setl cole=" . g:pencil#conceallevel
+    en
   el
     setl smartindent< nosmartindent<
     setl autoindent< noautoindent<
