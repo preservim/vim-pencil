@@ -217,6 +217,32 @@ a hard break. If you wish to retain the default Vim behavior, set the
 let g:pencil#cursorwrap = 1     " 0=disable, 1=enable (def)
 ```
 
+### Concealing markup in Markdown
+
+For syntaxes such as [tpope/markdown][tm] which support Vim’s Conceal
+feature, you can display \_*italic*\_, \*\***bold**\*\* and \*\*\****bold
+italic***\*\*\* markup where the `_` and `*` characters will be hidden
+when you’re not on the line. Set the following to `0` if you don’t want
+this behavior.
+
+```vim
+let g:pencil#conceallevel = 2     " 0=disable, 1=onechar, 2=hide (def)
+```
+
+Note that to display the _italic_ and **bold** styles in Vim, you may need
+both a font (such as [Cousine][co]) with those style variants as well as
+a colorscheme (such as [reedes/vim-colors-pencil][cp]) which supports the
+Markdown-specific highlight groups.
+
+For more details on Vim’s Conceal feature, see:
+
+```vim
+:help conceallevel
+```
+
+[co]: http://www.google.com/fonts/specimen/Cousine
+[tm]: http://github.com/tpope/vim-markdown
+
 ## Auto-detecting wrap mode
 
 If you didn't explicitly specify a wrap mode during initialization,
@@ -300,7 +326,7 @@ If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
 * [vim-colors-pencil][cp] - color scheme for Vim inspired by IA Writer
 * [vim-lexical][lx] - building on Vim’s spell-check and thesaurus/dictionary completion
 * [vim-litecorrect][lc] - lightweight auto-correction for Vim
-* [vim-one][vo] - make use of Vim’s _+clientserver_ capabilities 
+* [vim-one][vo] - make use of Vim’s _+clientserver_ capabilities
 * [vim-textobj-quote][qu] - extends Vim to support typographic (‘curly’) quotes
 * [vim-textobj-sentence][ts] - improving on Vim's native sentence motion command
 * [vim-thematic][th] - modify Vim’s appearance to suit your task and environment
