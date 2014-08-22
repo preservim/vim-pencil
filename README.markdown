@@ -222,11 +222,11 @@ let g:pencil#cursorwrap = 1     " 0=disable, 1=enable (def)
 For syntaxes such as [tpope/markdown][tm] which support Vim’s Conceal
 feature, you can display \_*italic*\_, \*\*__bold__\*\* and \*\*\*___bold
 italic___\*\*\* styles where the `_` and `*` characters will be hidden
-when you’re not on the line. Set the following to `0` if you don’t want
-this behavior.
+when you’re not on the line. Set the following to `2` to enable automatic
+hiding:
 
 ```vim
-let g:pencil#conceallevel = 2     " 0=disable, 1=onechar, 2=hide (def)
+let g:pencil#conceallevel = 2     " 0=disable (def), 1=onechar, 2=autohide
 ```
 
 A couple of requirements: to display the _italic_, **bold**, and ***bold
@@ -234,6 +234,9 @@ italic*** styles in Vim, you will need both a font (such as [Cousine][co])
 featuring those style variants as well as a colorscheme (such as
 [reedes/vim-colors-pencil][cp]) which supports the Markdown-specific
 highlight groups.
+
+For those using Vim in terminal mode, such as with iTerm, you’ll have to
+read your documentation to determine how to enable bold and italic styles.
 
 For more details on Vim’s Conceal feature, see:
 
