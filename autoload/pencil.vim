@@ -196,7 +196,9 @@ fun! pencil#init(...) abort
     setl list< nolist<
     setl wrapmargin<
     setl formatoptions<
-    setl cole<
+    if has("conceal")
+      setl cole<
+    en
   en
 
   if b:wrap_mode == s:WRAP_MODE_SOFT
