@@ -229,10 +229,11 @@ this behavior.
 let g:pencil#conceallevel = 2     " 0=disable, 1=onechar, 2=hide (def)
 ```
 
-Note that to display the _italic_ and **bold** styles in Vim, you may need
-both a font (such as [Cousine][co]) with those style variants as well as
-a colorscheme (such as [reedes/vim-colors-pencil][cp]) which supports the
-Markdown-specific highlight groups.
+Note that to display the _italic_, **bold**, and ***bold italic*** styles
+in Vim, you will need both a font (such as [Cousine][co]) featuring those
+style variants as well as a colorscheme (such as
+[reedes/vim-colors-pencil][cp]) which supports the Markdown-specific
+highlight groups.
 
 For more details on Vim’s Conceal feature, see:
 
