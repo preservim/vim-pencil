@@ -49,7 +49,7 @@ if !exists('g:pencil#conceallevel')
 en
 if !exists('g:pencil#concealcursor')
   " n=normal, v=visual, i=insert, c=command
-  let g:pencil#concealcursor = 'nc'
+  let g:pencil#concealcursor = 'c'
 en
 
 if !exists('g:pencil#softDetectSample')

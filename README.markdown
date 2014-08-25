@@ -244,7 +244,7 @@ You can change _pencil’s_ default settings for conceal in your `.vimrc`:
 
 ```vim
 let g:pencil#conceallevel = 3     " 0=disable, 1=onechar, 2=hidechar, 3=hideall
-let g:pencil#concealcursor = 'nc' " n=normal, v=visual, i=insert, c=command
+let g:pencil#concealcursor = 'c'  " n=normal, v=visual, i=insert, c=command
 ```
 
 Terminal users: consult your terminal’s documentation to configure your
