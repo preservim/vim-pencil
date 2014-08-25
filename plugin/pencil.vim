@@ -30,6 +30,20 @@ if !exists('g:pencil#autoformat')
   let g:pencil#autoformat = 1
 en
 
+if !exists('g:pencil#autoformat_exclude')
+  " by default, pencil does NOT start autoformat if inside any of
+  " the following syntax groups
+  let g:pencil#autoformat_exclude = [
+        \ 'markdownCode',
+        \ 'markdownHighlight[A-Za-z0-9]+',
+        \ 'mkdCode',
+        \ 'mkdIndentCode',
+        \ 'txtCode',
+        \ ]
+en
+let g:pencil#autoformat_exclude_re =
+  \ '(' . join(g:pencil#autoformat_exclude, '|') . ')'
+
 if !exists('g:pencil#joinspaces')
   " by default, only one space after full stop (.)
   let g:pencil#joinspaces = 0

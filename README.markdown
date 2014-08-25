@@ -122,20 +122,23 @@ to set the behavior for the current buffer:
 
 _This ‘autoformat’ feature affects *HardPencil* mode only._
 
-When in *HardPencil* mode, Vim’s autoformat feature will be enabled by
-default while in Insert mode and can offer many of the same benefits as
-soft line wrap. But autoformat will cause havoc when editing anything but
-paragraphs of words, such as a code block or table. In these cases you
-will need to disable it, at least temporarily, via a command:
+When you are inserting text in *HardPencil* mode, Vim’s autoformat feature
+will be enabled by default and can offer many of the same benefits as soft
+line wrap.
+
+_Pencil_ will disable autoformat if inside a code block. If it doesn’t, or
+in other cases where you need to disable autoformat, you can do so with
+a command:
 
 * `AutoPencil` - enables autoformat
 * `ManualPencil` - disables autoformat
 * `ShiftPencil` - toggle to enable if disabled, etc.
 
-Or optionally map the toggle to a key in your `.vimrc`:
+Or optionally map the toggle command to a key of your choice in your
+`.vimrc`:
 
 ```vim
-nnoremap <silent> <leader>pp :ShiftPencil<cr>
+nnoremap <silent> <leader>p :ShiftPencil<cr>
 ```
 
 To set the default behavior, add to your `.vimrc`:
@@ -156,6 +159,9 @@ augroup END
 
 ...where by default, files of type `text` will use hard line endings, but
 with autoformat disabled.
+
+Advanced users will want to check out `g:pencil#autoformat_exclude` to set
+highlight groups for which autoformat will not be enabled.
 
 ### Manual formatting
 

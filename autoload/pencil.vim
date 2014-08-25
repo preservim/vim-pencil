@@ -53,6 +53,27 @@ fun! s:imap(preserve_completion, key, icmd)
   en
 endf
 
+fun! s:enable_autoformat(mode)
+  " mode=1  InsertEnter
+  " mode=0  InsertLeave
+  if a:mode
+    " don't enable autoformat if in a code block (or table)
+    let l:okay_to_enable = 1
+    for l:sid in synstack(line('.'), col('.'))
+      if match(synIDattr(l:sid, 'name'),
+             \ g:pencil#autoformat_exclude_re) == -1
+        let l:okay_to_enable = 0
+        break
+      en
+    endfo
+    if l:okay_to_enable
+      set formatoptions+=a
+    en
+  el
+    set formatoptions-=a
+  en
+endf
+
 fun! pencil#setAutoFormat(mode)
   " 1=auto, 0=manual, -1=toggle
   if !exists('b:last_autoformat')
@@ -61,8 +82,8 @@ fun! pencil#setAutoFormat(mode)
   let b:last_autoformat = a:mode == -1 ? !b:last_autoformat : a:mode
   if b:last_autoformat
     aug pencil_autoformat
-      au InsertEnter <buffer> set formatoptions+=a
-      au InsertLeave <buffer> set formatoptions-=a
+      au InsertEnter <buffer> call s:enable_autoformat(1)
+      au InsertLeave <buffer> call s:enable_autoformat(0)
     aug END
   el
     sil! au! pencil_autoformat * <buffer>
