@@ -61,7 +61,7 @@ fun! s:enable_autoformat(mode)
     let l:okay_to_enable = 1
     for l:sid in synstack(line('.'), col('.'))
       if match(synIDattr(l:sid, 'name'),
-             \ g:pencil#autoformat_exclude_re) == -1
+             \ g:pencil#autoformat_exclude_re) >= 0
         let l:okay_to_enable = 0
         break
       en

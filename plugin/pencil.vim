@@ -42,7 +42,7 @@ if !exists('g:pencil#autoformat_exclude')
         \ ]
 en
 let g:pencil#autoformat_exclude_re =
-  \ '(' . join(g:pencil#autoformat_exclude, '|') . ')'
+  \ '\v(' . join(g:pencil#autoformat_exclude, '|') . ')'
 
 if !exists('g:pencil#joinspaces')
   " by default, only one space after full stop (.)
