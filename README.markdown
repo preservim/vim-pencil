@@ -126,9 +126,9 @@ When you are inserting text in *HardPencil* mode, Vim’s autoformat feature
 will be enabled by default and can offer many of the same benefits as soft
 line wrap.
 
-_Pencil_ will disable autoformat if inside a code block. If it doesn’t, or
-in other cases where you need to disable autoformat, you can do so with
-a command:
+_Pencil_ will disable autoformat if you enter Insert mode from inside a 
+code block. In other cases where you need to disable autoformat, you can 
+do so with a command:
 
 * `AutoPencil` - enables autoformat
 * `ManualPencil` - disables autoformat
