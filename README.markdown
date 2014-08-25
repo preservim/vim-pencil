@@ -19,8 +19,8 @@ smooth the path to writing prose.
 * Agnostic on soft line wrap _versus_ hard line breaks, supporting both
 * Auto-detects wrap mode via modeline and sampling
 * Adjusts navigation key mappings to suit the wrap mode
-* Creates undo points on common punctuation during insert, incl. deletion
-  via line `<C-U>` and word `<C-W>`
+* Creates undo points on common punctuation during insert, including
+  deletion via line `<C-U>` and word `<C-W>`
 * When using hard line breaks, enables autoformat while inserting text
 * Buffer-scoped configuration (with a few minor exceptions, _pencil_
   preserves your global settings)
@@ -118,15 +118,6 @@ to set the behavior for the current buffer:
 * `NoPencil` - removes navigation mappings and restores buffer to global settings
 * `TogglePencil` - if on, turns off; if off, enables with detection
 
-Optionally, you can map to keys in your `.vimrc`:
-
-```vim
-nnoremap <silent> <leader>ps :SoftPencil<cr>
-nnoremap <silent> <leader>ph :HardPencil<cr>
-nnoremap <silent> <leader>pn :NoPencil<cr>
-nnoremap <silent> <leader>pt :TogglePencil<cr>
-```
-
 ### Automatic formatting
 
 _This ‘autoformat’ feature affects *HardPencil* mode only._
@@ -141,11 +132,9 @@ will need to disable it, at least temporarily, via a command:
 * `ManualPencil` - disables autoformat
 * `ShiftPencil` - toggle to enable if disabled, etc.
 
-Or optionally map to keys in your `.vimrc`:
+Or optionally map the toggle to a key in your `.vimrc`:
 
 ```vim
-nnoremap <silent> <leader>pa :AutoPencil<cr>
-nnoremap <silent> <leader>pm :ManualPencil<cr>
 nnoremap <silent> <leader>pp :ShiftPencil<cr>
 ```
 
@@ -184,8 +173,6 @@ Optionally, you can map these operations to underutilized keys in your
 ```vim
 nnoremap <silent> Q gwip
 nnoremap <silent> K vipJ
-nnoremap <silent> <leader>Q ggVGgq
-nnoremap <silent> <leader>K :%norm vipJ<cr>
 ```
 
 ### Default textwidth
@@ -231,14 +218,14 @@ To use Vim’s Conceal feature with Markdown, you will need to install:
 1. [tpope/vim-markdown][tm] as it’s currently the only Markdown syntax
    plugin that supports conceal.
 
-2. a font (such as [Cousine][co]) featuring the _italic_, **bold**,
-   and ***bold italic*** style variants
+2. a monospaced font (such as [Cousine][co]) featuring the _italic_,
+   **bold**, and ***bold italic*** style variant for styled text.
 
-3. a colorscheme (such as [reedes/vim-colors-pencil][cp]) which
-   supports the Markdown-specific highlight groups.
+3. a colorscheme (such as [reedes/vim-colors-pencil][cp]) which supports
+   the Markdown-specific highlight groups for styled text.
 
-You should then only see the `_` and `*` markup when in visual or insert
-mode. The markup will be concealed in normal and command mode.
+You should then only see the `_` and `*` markup for the cursor line and in
+visual selections.
 
 You can change _pencil’s_ default settings for conceal in your `.vimrc`:
 
