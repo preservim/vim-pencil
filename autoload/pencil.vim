@@ -187,8 +187,9 @@ fun! pencil#init(...) abort
     setl formatoptions-=r   " don't insert comment leader
     setl formatoptions-=o   " don't insert comment leader
 
-    if has("conceal")
-      exe ":setl cole=" . g:pencil#conceallevel
+    if has('conceal')
+      exe ':setl conceallevel=' . g:pencil#conceallevel
+      exe ':setl concealcursor=' . g:pencil#concealcursor
     en
   el
     setl smartindent< nosmartindent<
@@ -196,8 +197,9 @@ fun! pencil#init(...) abort
     setl list< nolist<
     setl wrapmargin<
     setl formatoptions<
-    if has("conceal")
-      setl cole<
+    if has('conceal')
+      setl conceallevel<
+      setl concealcursor<
     en
   en
 

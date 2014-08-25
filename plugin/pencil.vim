@@ -44,8 +44,12 @@ en
 if !exists('g:pencil#conceallevel')
   " by default, concealing capability in your syntax plugin
   " will be enabled. See tpope/vim-markdown for example.
-  "   0=disable (def), 1=onechar, 2=autohide
-  let g:pencil#conceallevel = 0
+  " 0=disable, 1=onechar, 2=hidecust, 3=hideall
+  let g:pencil#conceallevel = 3
+en
+if !exists('g:pencil#concealcursor')
+  " n=normal, v=visual, i=insert, c=command
+  let g:pencil#concealcursor = 'nc'
 en
 
 if !exists('g:pencil#softDetectSample')

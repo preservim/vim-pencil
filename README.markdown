@@ -25,9 +25,8 @@ smooth the path to writing prose.
 * Buffer-scoped configuration (with a few minor exceptions, _pencil_
   preserves your global settings)
 * Pure Vimscript with no dependencies
-* Support for Vim’s Conceal feature to hide `_` and `*` characters when
-  displaying \_*italic*\_, \*\*__bold__\*\* and \*\*\*___bold
-  italic___\*\*\* styled text in Markdown
+* Support for Vim’s Conceal feature to hide `_` and `*` markup for
+  \_*italic*\_, \*\*__bold__\*\* and \*\*\*___bold italic___\*\*\* styled text in Markdown
 
 Need spell-check and other features? Vim is about customization. To
 complete your editing environment, learn to configure Vim and draw upon
@@ -220,34 +219,42 @@ a hard break. If you wish to retain the default Vim behavior, set the
 let g:pencil#cursorwrap = 1     " 0=disable, 1=enable (def)
 ```
 
-### Concealing markup in Markdown
+### Concealing \_\_styling markup\_\_ in Markdown
 
-Syntaxes such as [tpope/vim-markdown][tm] support Vim’s Conceal feature,
-where the `_` and `*` characters will be hidden automatically when
+Syntax plugins such as [tpope/vim-markdown][tm] support Vim’s Conceal
+feature, where the `_` and `*` characters can be hidden automatically when
 displaying \_*italic*\_, \*\*__bold__\*\* and \*\*\*___bold
-italic___\*\*\* styled text. To enable, set the following to `2` in your
-`.vimrc`:
+italic___\*\*\* styled text.
 
-```vim
-let g:pencil#conceallevel = 2     " 0=disable (def), 1=onechar, 2=autohide
-```
+To use Vim’s Conceal feature with Markdown, you will need to install:
 
-A couple of things you will need:
+1. [tpope/vim-markdown][tm] as it’s currently the only Markdown syntax
+   plugin that supports conceal.
 
-1. a font (such as [Cousine][co]) featuring the _italic_, **bold**,
+2. a font (such as [Cousine][co]) featuring the _italic_, **bold**,
    and ***bold italic*** style variants
 
-2. a colorscheme (such as [reedes/vim-colors-pencil][cp]) which
+3. a colorscheme (such as [reedes/vim-colors-pencil][cp]) which
    supports the Markdown-specific highlight groups.
 
-Terminal users: sadly, the ***bold italic*** style won’t be available.
-Consult your terminal’s documentation to configure your terminal to
-support **bold** and _italic_ styles.
+You should then only see the `_` and `*` markup when in visual or insert
+mode. The markup will be concealed in normal and command mode.
+
+You can change _pencil’s_ default settings for conceal in your `.vimrc`:
+
+```vim
+let g:pencil#conceallevel = 3     " 0=disable, 1=onechar, 2=hidechar, 3=hideall
+let g:pencil#concealcursor = 'nc' " n=normal, v=visual, i=insert, c=command
+```
+
+Terminal users: consult your terminal’s documentation to configure your
+terminal to support **bold** and _italic_ styles.
 
 For more details on Vim’s Conceal feature, see:
 
 ```vim
 :help conceallevel
+:help concealcursor
 ```
 
 [co]: http://www.google.com/fonts/specimen/Cousine
