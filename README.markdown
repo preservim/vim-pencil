@@ -23,9 +23,9 @@ smooth the path to writing prose.
 * When using hard line breaks, enables autoformat while inserting text
 * Buffer-scoped configuration (with a few minor exceptions, _pencil_
   preserves your global settings)
-* Pure Vimscript with no dependencies
 * Support for Vim’s Conceal feature to hide markup defined by Syntax 
   plugins (e.g., `_` and `*` markup for styled text in \_*Markdown\_*)
+* Pure Vimscript with no dependencies
 
 Need spell-check and other features? Vim is about customization. To
 complete your editing environment, learn to configure Vim and draw upon
@@ -119,15 +119,15 @@ to set the behavior for the current buffer:
 
 ### Automatic formatting
 
-_This ‘autoformat’ feature affects *HardPencil* mode only._
+_This ‘autoformat’ feature affects *HardPencil* (hard line break) mode only._
 
-When you are inserting text in *HardPencil* mode, Vim’s autoformat feature
-will be enabled by default and can offer many of the same benefits as soft
-line wrap.
+When inserting text while in *HardPencil* mode, Vim’s autoformat feature will be 
+enabled by default and can offer many of the same benefits as soft line wrap.
 
-If used with popular syntax modules\*, _pencil_ will disable autoformat when 
-you enter Insert mode from inside a code block. In other cases where you 
-need to disable autoformat, you can do so with a command:
+An exception: if used with popular syntax modules\*, _pencil_ will **disable** 
+autoformat when you enter Insert mode from inside a code block. 
+
+Where you need to manually enable/disable autoformat, you can do so with a command:
 
 * `AutoPencil` - enables autoformat
 * `ManualPencil` - disables autoformat
@@ -192,9 +192,9 @@ let g:pencil#textwidth = 74
 
 ### Sentence spacing
 
-By default, when formatting only one space will be inserted after
-a period(`.`), exclamation point(`!`), or question mark(`?`). You can
-change this default:
+By default, when formatting text (through `gwip`, e.g.) only one space 
+will be inserted after a period(`.`), exclamation point(`!`), or question 
+mark(`?`). You can change this default:
 
 ```vim
 let g:pencil#joinspaces = 0     " 0=one_space (def), 1=two_spaces
@@ -219,8 +219,8 @@ Syntax and Colorscheme plugins is currently spotty.
 You can change _pencil’s_ default settings for conceal in your `.vimrc`:
 
 ```vim
-let g:pencil#conceallevel = 3     " 0=disable, 1=onechar, 2=hidechar, 3=hideall
-let g:pencil#concealcursor = 'c'  " n=normal, v=visual, i=insert, c=command
+let g:pencil#conceallevel = 3     " 0=disable, 1=onechar, 2=hidechar, 3=hideall (def)
+let g:pencil#concealcursor = 'c'  " n=normal, v=visual, i=insert, c=command (def)
 ```
 
 For more details on Vim’s Conceal feature, see:
@@ -250,13 +250,15 @@ To use Vim’s Conceal feature with Markdown, you will need to install:
 You should then only see the `_` and `*` markup for the cursor line and in
 visual selections.
 
-Terminal users: consult your terminal’s documentation to configure your
+**Terminal users:** consult your terminal’s documentation to configure your
 terminal to support **bold** and _italic_ styles.
 
 [co]: http://www.google.com/fonts/specimen/Cousine
 [tm]: http://github.com/tpope/vim-markdown
 
 ## Auto-detecting wrap mode
+
+(For advanced users looking to tweak _pencil's_ behavior.)
 
 If you didn't explicitly specify a wrap mode during initialization,
 _pencil_ will attempt to detect it.
