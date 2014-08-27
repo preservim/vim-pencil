@@ -53,24 +53,18 @@ fun! s:imap(preserve_completion, key, icmd)
   en
 endf
 
-fun! s:enable_autoformat(mode)
-  " mode=1  InsertEnter
-  " mode=0  InsertLeave
-  if a:mode
-    " don't enable autoformat if in a code block (or table)
-    let l:okay_to_enable = 1
-    for l:sid in synstack(line('.'), col('.'))
-      if match(synIDattr(l:sid, 'name'),
-             \ g:pencil#autoformat_exclude_re) >= 0
-        let l:okay_to_enable = 0
-        break
-      en
-    endfo
-    if l:okay_to_enable
-      set formatoptions+=a
+fun! s:enable_autoformat()
+  " don't enable autoformat if in a code block (TODO or table)
+  let l:okay_to_enable = 1
+  for l:sid in synstack(line('.'), col('.'))
+    if match(synIDattr(l:sid, 'name'),
+            \ g:pencil#autoformat_blacklist_re) >= 0
+      let l:okay_to_enable = 0
+      break
     en
-  el
-    set formatoptions-=a
+  endfo
+  if l:okay_to_enable
+    set formatoptions+=a
   en
 endf
 
@@ -82,8 +76,8 @@ fun! pencil#setAutoFormat(mode)
   let b:last_autoformat = a:mode == -1 ? !b:last_autoformat : a:mode
   if b:last_autoformat
     aug pencil_autoformat
-      au InsertEnter <buffer> call s:enable_autoformat(1)
-      au InsertLeave <buffer> call s:enable_autoformat(0)
+      au InsertEnter <buffer> call s:enable_autoformat()
+      au InsertLeave <buffer> set formatoptions-=a
     aug END
   el
     sil! au! pencil_autoformat * <buffer>
@@ -151,11 +145,15 @@ fun! pencil#init(...) abort
     setl textwidth=0
     setl wrap
     setl linebreak
+    " TODO breakat not working yet with n and m-dash
+    setl breakat-=*         " avoid breaking footnote*
+    setl breakat-=@         " avoid breaking at email addresses
     setl colorcolumn=0      " doesn't align as expected
   el
     setl textwidth<
     setl wrap< nowrap<
     setl linebreak< nolinebreak<
+    setl breakat<
     setl colorcolumn<
   en
 
@@ -171,7 +169,6 @@ fun! pencil#init(...) abort
 
     "if b:wrap_mode == s:WRAP_MODE_SOFT
     "  " augment with additional chars
-    "  " TODO not working yet with n and m-dash
     "  set breakat=\ !@*-+;:,./?([{
     "en
   en
@@ -198,17 +195,20 @@ fun! pencil#init(...) abort
     setl formatoptions+=n   " recognize numbered lists
     setl formatoptions+=1   " don't break line before 1 letter word
     setl formatoptions+=t   " autoformat of text (vim default)
-    setl formatoptions+=c   " autoformat of comments (vim default)
 
     " clean out stuff we likely don't want
     setl formatoptions-=2   " use indent of 2nd line for rest of paragraph
     setl formatoptions-=v   " only break line at blank entered during insert
     setl formatoptions-=w   " avoid erratic behavior if mixed spaces
     setl formatoptions-=a   " autoformat will turn on with Insert in HardPencil mode
-    setl formatoptions-=r   " don't insert comment leader
     setl formatoptions-=o   " don't insert comment leader
 
-    if has('conceal')
+    " plasticboy/vim-markdown sets these to handle bullet points
+    " as comments. Not changing for now.
+    "setl formatoptions-=c   " no autoformat of comments
+    "setl formatoptions+=r   " don't insert comment leader
+
+    if has('conceal') && v:version >= 703
       exe ':setl conceallevel=' . g:pencil#conceallevel
       exe ':setl concealcursor=' . g:pencil#concealcursor
     en

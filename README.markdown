@@ -23,8 +23,8 @@ smooth the path to writing prose.
 * When using hard line breaks, enables autoformat while inserting text
 * Buffer-scoped configuration (with a few minor exceptions, _pencil_
   preserves your global settings)
-* Support for Vim’s Conceal feature to hide markup defined by Syntax 
-  plugins (e.g., `_` and `*` markup for styled text in \_*Markdown\_*)
+* Support for Vim’s Conceal feature to hide markup defined by Syntax
+  plugins (e.g., `_` and `*` markup for styled text in \_*Markdown*\_)
 * Pure Vimscript with no dependencies
 
 Need spell-check and other features? Vim is about customization. To
@@ -121,11 +121,11 @@ to set the behavior for the current buffer:
 
 _This ‘autoformat’ feature affects *HardPencil* (hard line break) mode only._
 
-When inserting text while in *HardPencil* mode, Vim’s autoformat feature will be 
+When inserting text while in *HardPencil* mode, Vim’s autoformat feature will be
 enabled by default and can offer many of the same benefits as soft line wrap.
 
-An exception: if used with popular syntax modules\*, _pencil_ will **disable** 
-autoformat when you enter Insert mode from inside a code block. 
+An exception: if used with popular syntax modules\*, _pencil_ will **disable**
+autoformat when you enter Insert mode from inside a code block.
 
 Where you need to manually enable/disable autoformat, you can do so with a command:
 
@@ -159,8 +159,8 @@ augroup END
 ...where by default, files of type `text` will use hard line endings, but
 with autoformat disabled.
 
-(*) Advanced users will want to check out `g:pencil#autoformat_exclude` to set
-highlight groups for which autoformat will not be enabled.
+(\*) Advanced users will want to check out `g:pencil#autoformat_blacklist`
+to set highlight groups for which autoformat will not be enabled.
 
 ### Manual formatting
 
@@ -192,8 +192,8 @@ let g:pencil#textwidth = 74
 
 ### Sentence spacing
 
-By default, when formatting text (through `gwip`, e.g.) only one space 
-will be inserted after a period(`.`), exclamation point(`!`), or question 
+By default, when formatting text (through `gwip`, e.g.) only one space
+will be inserted after a period(`.`), exclamation point(`!`), or question
 mark(`?`). You can change this default:
 
 ```vim
@@ -232,8 +232,8 @@ For more details on Vim’s Conceal feature, see:
 
 #### Concealing styled text in Markdown
 
-Syntax plugins such as [tpope/vim-markdown][tm] support concealing the 
-`_` and `*` characters when displaying \_*italic*\_, \*\*__bold__\*\*, and 
+Syntax plugins such as [tpope/vim-markdown][tm] support concealing the
+markup characters when displaying \_*italic*\_, \*\*__bold__\*\*, and
 \*\*\*___bold italic___\*\*\* styled text.
 
 To use Vim’s Conceal feature with Markdown, you will need to install:
@@ -258,7 +258,7 @@ terminal to support **bold** and _italic_ styles.
 
 ## Auto-detecting wrap mode
 
-(For advanced users looking to tweak _pencil's_ behavior.)
+**(For advanced users looking to tweak _pencil's_ behavior.)**
 
 If you didn't explicitly specify a wrap mode during initialization,
 _pencil_ will attempt to detect it.
@@ -273,7 +273,7 @@ chances by giving _pencil_ an explicit hint.
 
 At the bottom of this document is a odd-looking code:
 
-```
+```html
 <!-- vim: set tw=74 :-->
 ```
 
@@ -289,7 +289,7 @@ not soft line wrap is the default editing mode for files of type ‘markdown’.
 
 You explicitly specify soft wrap mode by specifying a textwidth of `0`:
 
-```
+```html
 <!-- vim: set tw=0 :-->
 ```
 

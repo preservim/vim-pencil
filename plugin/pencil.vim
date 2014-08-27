@@ -30,7 +30,7 @@ if !exists('g:pencil#autoformat')
   let g:pencil#autoformat = 1
 en
 
-if !exists('g:pencil#autoformat_exclude')
+if !exists('g:pencil#autoformat_blacklist')
   " by default, pencil does NOT start autoformat if inside any of
   " the following syntax groups
   "
@@ -38,7 +38,7 @@ if !exists('g:pencil#autoformat_exclude')
   "'mkdCode', 'mkdIndentCode' (plasticboy/vim-markdown)
   "'markdownFencedCodeBlock', 'markdownInlineCode' (gabrielelana/vim-markdown)
   "'txtCode' (timcharper/textile.vim)
-  let g:pencil#autoformat_exclude = [
+  let g:pencil#autoformat_blacklist = [
         \ 'markdownCode',
         \ 'markdownHighlight[A-Za-z0-9]+',
         \ 'mkdCode',
@@ -48,8 +48,8 @@ if !exists('g:pencil#autoformat_exclude')
         \ 'txtCode',
         \ ]
 en
-let g:pencil#autoformat_exclude_re =
-  \ '\v(' . join(g:pencil#autoformat_exclude, '|') . ')'
+let g:pencil#autoformat_blacklist_re =
+  \ '\v(' . join(g:pencil#autoformat_blacklist, '|') . ')'
 
 if !exists('g:pencil#joinspaces')
   " by default, only one space after full stop (.)
