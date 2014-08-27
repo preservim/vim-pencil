@@ -14,8 +14,7 @@ The _pencil_ plugin aspires to make Vim as powerful a tool for writers as
 it is for coders by focusing narrowly on the handful of tweaks needed to
 smooth the path to writing prose.
 
-* For editing files in _text_, _markdown_, _textile_, and other
-  prose-oriented file types
+* For editing prose-oriented file types such as _text_, _markdown_, and _textile_
 * Agnostic on soft line wrap _versus_ hard line breaks, supporting both
 * Auto-detects wrap mode via modeline and sampling
 * Adjusts navigation key mappings to suit the wrap mode
@@ -343,6 +342,8 @@ If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
 * [vim-wheel][wh] - screen-anchored cursor movement for Vim
 * [vim-wordy][wo] - uncovering usage problems in writing
 
+Unimpressed by _pencil_? [vim-pandoc][vp] offers prose-oriented features with its own Markdown variant
+
 [ab]: http://github.com/tpope/vim-abolish
 [cp]: http://github.com/reedes/vim-colors-pencil
 [ex]: http://github.com/tommcdo/vim-exchange
@@ -359,6 +360,7 @@ If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
 [vw]: http://therandymon.com/woodnotes/vim-for-writers/vimforwriters.html
 [wh]: http://github.com/reedes/vim-wheel
 [wo]: http://github.com/reedes/vim-wordy
+[vp]: http://github.com/vim-pandoc/vim-pandoc
 
 ## Future development
 
