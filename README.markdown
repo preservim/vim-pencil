@@ -334,9 +334,8 @@ Other plugins of specific interest to writers:
 
 * [tpope/vim-markdown][tvm] - Markdown syntax plugin
 * [plasticboy/vim-markdown][pvm] - Markdown syntax plugin
-* [mattly/vim-markdown-enhancements][mvme] - additional highlighting for tables and footnotes
-
-* [tpope/vim-abolish][ab] - easily search for, substitute, and abbreviate multiple variants of a word
+* [mattly/vim-markdown-enhancements][mvme] - highlighting for tables and footnotes
+* [tpope/vim-abolish][ab] - search for, substitute, and abbr. multiple variants of a word
 * [tommcdo/vim-exchange][ex] - easy text exchange operator for Vim
 * [junegunn/limelight.vim][jl] - focus mode that brightens current paragraph
 
