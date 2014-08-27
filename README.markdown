@@ -332,8 +332,7 @@ let g:pencil#wrapModeDefault = 'hard'   " or 'soft'
 
 Other plugins of specific interest to writers:
 
-* [tpope/vim-markdown][tvm] - Markdown syntax plugin
-* [plasticboy/vim-markdown][pvm] - Markdown syntax plugin
+* [tpope/vim-markdown][tvm], [plasticboy/vim-markdown][pvm] - Markdown syntax plugins (choose one)
 * [mattly/vim-markdown-enhancements][mvme] - highlighting for tables and footnotes
 * [tpope/vim-abolish][ab] - search for, substitute, and abbr. multiple variants of a word
 * [tommcdo/vim-exchange][ex] - easy text exchange operator for Vim
