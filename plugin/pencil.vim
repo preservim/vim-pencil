@@ -34,13 +34,17 @@ if !exists('g:pencil#autoformat_blacklist')
   " by default, pencil does NOT start autoformat if inside any of
   " the following syntax groups
   "
-  "'markdownCode', 'markdownHighlight[A-Za-z0-9]+' (tpope/vim-markdown)
+  "'markdownCode', 'markdownUrl', 'markdownIdDeclaration',
+  "'markdownLinkDelimiter', 'markdownHighlight[A-Za-z0-9]+' (tpope/vim-markdown)
   "'mkdCode', 'mkdIndentCode' (plasticboy/vim-markdown)
   "'markdownFencedCodeBlock', 'markdownInlineCode' (gabrielelana/vim-markdown)
   "'mmdTable[A-Za-z0-9]*' (mattly/vim-markdown-enhancements)
   "'txtCode' (timcharper/textile.vim)
   let g:pencil#autoformat_blacklist = [
         \ 'markdownCode',
+        \ 'markdownUrl',
+        \ 'markdownIdDeclaration',
+        \ 'markdownLinkDelimiter',
         \ 'markdownHighlight[A-Za-z0-9]+',
         \ 'mkdCode',
         \ 'mkdIndentCode',

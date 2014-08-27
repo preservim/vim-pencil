@@ -125,7 +125,7 @@ When inserting text while in *HardPencil* mode, Vim’s autoformat feature will 
 enabled by default and can offer many of the same benefits as soft line wrap.
 
 An exception: if used with popular syntax modules\*, _pencil_ will **disable**
-autoformat when you enter Insert mode from inside a code block.
+autoformat when you enter Insert mode from inside a code block or table.
 
 Where you need to manually enable/disable autoformat, you can do so with a command:
 
@@ -332,9 +332,20 @@ let g:pencil#wrapModeDefault = 'hard'   " or 'soft'
 
 Other plugins of specific interest to writers:
 
+* [tpope/vim-markdown][tvm] - Markdown syntax plugin
+* [plasticboy/vim-markdown][pvm] - Markdown syntax plugin
+* [mattly/vim-markdown-enhancements][mvme] - additional highlighting for tables and footnotes
+
 * [tpope/vim-abolish][ab] - easily search for, substitute, and abbreviate multiple variants of a word
 * [tommcdo/vim-exchange][ex] - easy text exchange operator for Vim
 * [junegunn/limelight.vim][jl] - focus mode that brightens current paragraph
+
+[ab]: http://github.com/tpope/vim-abolish
+[ex]: http://github.com/tommcdo/vim-exchange
+[jl]: http://github.com/junegunn/limelight.vim
+[tvm]: http://github.com/tpope/vim-markdown
+[pvm]: http://github.com/plasticboy/vim-markdown
+[mvme]: http://github.com/mattly/vim-markdown-enhancements
 
 If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
 
@@ -350,10 +361,7 @@ If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
 
 Unimpressed by _pencil_? [vim-pandoc][vp] offers prose-oriented features with its own Markdown variant
 
-[ab]: http://github.com/tpope/vim-abolish
 [cp]: http://github.com/reedes/vim-colors-pencil
-[ex]: http://github.com/tommcdo/vim-exchange
-[jl]: http://github.com/junegunn/limelight.vim
 [lc]: http://github.com/reedes/vim-litecorrect
 [lx]: http://github.com/reedes/vim-lexical
 [qu]: http://github.com/reedes/vim-textobj-quote
