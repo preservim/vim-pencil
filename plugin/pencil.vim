@@ -37,6 +37,7 @@ if !exists('g:pencil#autoformat_blacklist')
   "'markdownCode', 'markdownHighlight[A-Za-z0-9]+' (tpope/vim-markdown)
   "'mkdCode', 'mkdIndentCode' (plasticboy/vim-markdown)
   "'markdownFencedCodeBlock', 'markdownInlineCode' (gabrielelana/vim-markdown)
+  "'mmdTable[A-Za-z0-9]*' (mattly/vim-markdown-enhancements)
   "'txtCode' (timcharper/textile.vim)
   let g:pencil#autoformat_blacklist = [
         \ 'markdownCode',
@@ -45,6 +46,7 @@ if !exists('g:pencil#autoformat_blacklist')
         \ 'mkdIndentCode',
         \ 'markdownFencedCodeBlock',
         \ 'markdownInlineCode',
+        \ 'mmdTable[A-Za-z0-9]*',
         \ 'txtCode',
         \ ]
 en

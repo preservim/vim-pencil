@@ -54,7 +54,7 @@ fun! s:imap(preserve_completion, key, icmd)
 endf
 
 fun! s:enable_autoformat()
-  " don't enable autoformat if in a code block (TODO or table)
+  " don't enable autoformat if in a code block or table
   let l:okay_to_enable = 1
   for l:sid in synstack(line('.'), col('.'))
     if match(synIDattr(l:sid, 'name'),
