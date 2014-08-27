@@ -24,8 +24,8 @@ smooth the path to writing prose.
 * Buffer-scoped configuration (with a few minor exceptions, _pencil_
   preserves your global settings)
 * Pure Vimscript with no dependencies
-* Support for Vim’s Conceal feature to hide `_` and `*` markup for
-  \_*italic*\_, \*\*__bold__\*\* and \*\*\*___bold italic___\*\*\* styled text in Markdown
+* Support for Vim’s Conceal feature to hide markup defined by Syntax 
+  plugins (e.g., `_` and `*` markup for styled text in \_*Markdown\_*)
 
 Need spell-check and other features? Vim is about customization. To
 complete your editing environment, learn to configure Vim and draw upon
@@ -211,12 +211,30 @@ a hard break. If you wish to retain the default Vim behavior, set the
 let g:pencil#cursorwrap = 1     " 0=disable, 1=enable (def)
 ```
 
-### Concealing \_\_styling markup\_\_ in Markdown
+### Concealing \_\_markup\_\_
 
-Syntax plugins such as [tpope/vim-markdown][tm] support Vim’s Conceal
-feature, where the `_` and `*` characters can be hidden automatically when
-displaying \_*italic*\_, \*\*__bold__\*\* and \*\*\*___bold
-italic___\*\*\* styled text.
+_pencil_ enables Vim's powerful Conceal feature, although support among
+Syntax and Colorscheme plugins is currently spotty.
+
+You can change _pencil’s_ default settings for conceal in your `.vimrc`:
+
+```vim
+let g:pencil#conceallevel = 3     " 0=disable, 1=onechar, 2=hidechar, 3=hideall
+let g:pencil#concealcursor = 'c'  " n=normal, v=visual, i=insert, c=command
+```
+
+For more details on Vim’s Conceal feature, see:
+
+```vim
+:help conceallevel
+:help concealcursor
+```
+
+#### Concealing styled text in Markdown
+
+Syntax plugins such as [tpope/vim-markdown][tm] support concealing the 
+`_` and `*` characters when displaying \_*italic*\_, \*\*__bold__\*\*, and 
+\*\*\*___bold italic___\*\*\* styled text.
 
 To use Vim’s Conceal feature with Markdown, you will need to install:
 
@@ -232,22 +250,8 @@ To use Vim’s Conceal feature with Markdown, you will need to install:
 You should then only see the `_` and `*` markup for the cursor line and in
 visual selections.
 
-You can change _pencil’s_ default settings for conceal in your `.vimrc`:
-
-```vim
-let g:pencil#conceallevel = 3     " 0=disable, 1=onechar, 2=hidechar, 3=hideall
-let g:pencil#concealcursor = 'c'  " n=normal, v=visual, i=insert, c=command
-```
-
 Terminal users: consult your terminal’s documentation to configure your
 terminal to support **bold** and _italic_ styles.
-
-For more details on Vim’s Conceal feature, see:
-
-```vim
-:help conceallevel
-:help concealcursor
-```
 
 [co]: http://www.google.com/fonts/specimen/Cousine
 [tm]: http://github.com/tpope/vim-markdown
