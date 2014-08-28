@@ -56,7 +56,16 @@ endf
 fun! s:enable_autoformat()
   " don't enable autoformat if in a code block or table
   let l:okay_to_enable = 1
-  for l:sid in synstack(line('.'), col('.'))
+  let l:col = col('.')
+  " at end of line there may be no synstack, so scan back
+  while l:col > 0
+    let l:stack = synstack(line('.'), l:col)
+    if l:stack != []
+      break
+    en
+    let l:col -= 1
+  endw
+  for l:sid in l:stack
     if match(synIDattr(l:sid, 'name'),
             \ g:pencil#autoformat_blacklist_re) >= 0
       let l:okay_to_enable = 0
