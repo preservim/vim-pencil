@@ -107,6 +107,10 @@ plugin will auto-detect the line wrap approach, with `hard` as the
 default. But for files of type `text`, it will *always* initialize with
 hard line break mode.
 
+Configurable options for `pencil#init()` include: `autoformat`,
+`concealcursor`, `conceallevel`, `cursorwrap`, `joinspaces`, `textwidth`,
+and `wrap`.
+
 ### Commands
 
 Because auto-detect might not work as intended, you can invoke a command

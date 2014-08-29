@@ -145,7 +145,8 @@ fun! pencil#init(...) abort
       " Compensate for disabled modeline
       exe 'setl textwidth=' . b:max_textwidth
     elsei &textwidth == 0
-      exe 'setl textwidth=' . g:pencil#textwidth
+      exe 'setl textwidth=' .
+        \ get(l:args, 'textwidth', g:pencil#textwidth)
     el
       setl textwidth<
     en
@@ -170,7 +171,7 @@ fun! pencil#init(...) abort
   if b:wrap_mode
     set display+=lastline
     set backspace=indent,eol,start
-    if g:pencil#joinspaces
+    if get(l:args, 'joinspaces', g:pencil#joinspaces)
       set joinspaces         " two spaces after .!?
     el
       set nojoinspaces       " only one space after a .!? (default)
@@ -185,7 +186,7 @@ fun! pencil#init(...) abort
   " because ve=onemore is relatively rare and could break
   " other plugins, restrict its presence to buffer
   " Better: restore ve to original setting
-  if b:wrap_mode && g:pencil#cursorwrap
+  if b:wrap_mode && get(l:args, 'cursorwrap', g:pencil#cursorwrap)
     set whichwrap+=<,>,b,s,h,l,[,]
     aug pencil_cursorwrap
       au BufEnter <buffer> set virtualedit+=onemore
@@ -218,8 +219,10 @@ fun! pencil#init(...) abort
     "setl formatoptions+=r   " don't insert comment leader
 
     if has('conceal') && v:version >= 703
-      exe ':setl conceallevel=' . g:pencil#conceallevel
-      exe ':setl concealcursor=' . g:pencil#concealcursor
+      exe ':setl conceallevel=' .
+        \ get(l:args, 'conceallevel',  g:pencil#conceallevel)
+      exe ':setl concealcursor=' .
+        \ get(l:args, 'concealcursor', g:pencil#concealcursor)
     en
   el
     setl smartindent< nosmartindent<
