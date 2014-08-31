@@ -13,6 +13,33 @@ let g:loaded_pencil = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
+let s:WRAP_MODE_DEFAULT = -1
+let s:WRAP_MODE_OFF     = 0
+let s:WRAP_MODE_HARD    = 1
+let s:WRAP_MODE_SOFT    = 2
+
+fun! s:unicode_enabled()
+  retu &encoding ==# 'utf-8'
+endf
+
+" helper for statusline
+"
+" Note that it shouldn't be dependent on init(), which
+" won't have been called for non-prose modules.
+fun! PencilMode()
+  if exists('b:pencil_wrap_mode')
+    if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
+      return get(g:pencil#mode_indicators, 'soft', 'sp')
+    elsei b:pencil_wrap_mode ==# s:WRAP_MODE_HARD
+      return get(g:pencil#mode_indicators, 'hard', 'hp')
+    el
+      return get(g:pencil#mode_indicators, 'off', '')
+    en
+  else
+    return ''
+  en
+endf
+
 if !exists('g:pencil#wrapModeDefault')
   " user-overridable default, if detection fails
   " should be 'soft' or 'hard' or 'off'
@@ -90,6 +117,15 @@ if !exists('g:pencil#softDetectThreshold')
   " if the byte count of at least one sampled line exceeds
   " this number, then pencil assumes soft line wrapping
   let g:pencil#softDetectThreshold = 130
+en
+
+if !exists('g:pencil#mode_indicators')
+  " used to set PencilMode() for statusline
+  if s:unicode_enabled()
+    let g:pencil#mode_indicators = {'hard': 'h✎ ', 'soft': 's✎ ', 'off': '×✎ ',}
+  el
+    let g:pencil#mode_indicators = {'hard': 'hp', 'soft': 'sp', 'off': '',}
+  en
 en
 
 " # coms

@@ -14,7 +14,8 @@ The _pencil_ plugin aspires to make Vim as powerful a tool for writers as
 it is for coders by focusing narrowly on the handful of tweaks needed to
 smooth the path to writing prose.
 
-* For editing prose-oriented file types such as _text_, _markdown_, and _textile_
+* For editing prose-oriented file types such as _text_, _markdown_, and
+  _textile_
 * Agnostic on soft line wrap _versus_ hard line breaks, supporting both
 * Auto-detects wrap mode via modeline and sampling
 * Adjusts navigation key mappings to suit the wrap mode
@@ -25,6 +26,7 @@ smooth the path to writing prose.
   preserves your global settings)
 * Support for Vim’s Conceal feature to hide markup defined by Syntax
   plugins (e.g., `_` and `*` markup for styled text in \_*Markdown*\_)
+* Support for display of mode indicator (`h✎`, e.g.) in the status line
 * Pure Vimscript with no dependencies
 
 Need spell-check and other features? Vim is about customization. To
@@ -53,9 +55,9 @@ You can find that reason in Vim's mysterious command sequences. Take `cas`
 for instance. You might see it as a mnemonic for _Change Around Sentence_
 to replace an existing sentence. But dig a bit deeper to discover that
 such commands have a grammar of their own, comprised of nouns, verbs, and
-modifiers. Think of them as the composable building blocks of a _domain specific
-language_ for manipulating text, one that can become a powerful tool in
-expressing yourself. For more details on vi-style editing, see...
+modifiers. Think of them as the composable building blocks of a _domain
+specific language_ for manipulating text, one that can become a powerful
+tool in expressing yourself. For more details on vi-style editing, see...
 
 * [Learn to speak vim – verbs, nouns, and modifiers!][ls] (December 2011)
 * [Your problem with Vim is that you don't grok vi][gv] (December 2011)
@@ -164,7 +166,8 @@ augroup END
 with autoformat disabled.
 
 (\*) Advanced users will want to check out `g:pencil#autoformat_blacklist`
-to set highlight groups for which autoformat will not be enabled.
+to set highlight groups for which autoformat will not be enabled when
+entering Insert mode.
 
 ### Manual formatting
 
@@ -260,6 +263,34 @@ terminal to support **bold** and _italic_ styles.
 [co]: http://www.google.com/fonts/specimen/Cousine
 [tm]: http://github.com/tpope/vim-markdown
 
+### Status line indicator
+
+Your status line can reflect the wrap mode for _pencil_ buffers. For
+example, `h✎` to represent `HardPencil` (hard line break) mode.
+
+To configure your status line, add to your `.vimrc`:
+
+```vim
+set statusline=%<%f\ %{PencilMode()}\ %P
+```
+
+or if using [bling/vim-airline][va]:
+
+```vim
+let g:airline_section_x = '%{PencilMode()}'
+```
+
+If you don’t like the default indicators, you can specify different ones:
+
+```vim
+let g:pencil#mode_indicators = {'hard': 'h✎ ', 'soft': 's✎ ', 'off': '×✎ '}
+```
+
+Note that `PencilMode()` will return blank for buffers in which _pencil_
+has not been initialized.
+
+[va]: http://github.com/bling/vim-airline
+
 ## Auto-detecting wrap mode
 
 **(For advanced users looking to tweak _pencil's_ behavior.)**
@@ -322,11 +353,7 @@ then _pencil_ assumes soft line wrap.
 let g:pencil#softDetectThreshold = 130
 ```
 
-If no such lines found, _pencil_ falls back to the default mentioned earlier:
-
-```vim
-let g:pencil#wrapModeDefault = 'hard'   " or 'soft'
-```
+If no such lines found, _pencil_ falls back to the default wrap mode.
 
 ## See also
 

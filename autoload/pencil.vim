@@ -27,7 +27,7 @@ fun! s:detect_wrap_mode() abort
     return s:WRAP_MODE_HARD
   en
 
-  if b:max_textwidth == 0 || g:pencil#wrapModeDefault ==# 'soft'
+  if b:max_textwidth ==# 0 || g:pencil#wrapModeDefault ==# 'soft'
     " modeline(s) found only with zero textwidth, so it's soft line wrap
     " or, the user wants to default to soft line wrap
     return s:WRAP_MODE_SOFT
@@ -53,7 +53,7 @@ fun! s:imap(preserve_completion, key, icmd)
   en
 endf
 
-fun! s:enable_autoformat()
+fun! s:maybe_enable_autoformat()
   " don't enable autoformat if in a code block or table
   let l:okay_to_enable = 1
   let l:col = col('.')
@@ -82,10 +82,10 @@ fun! pencil#setAutoFormat(mode)
   if !exists('b:last_autoformat')
     let b:last_autoformat = 0
   en
-  let b:last_autoformat = a:mode == -1 ? !b:last_autoformat : a:mode
+  let b:last_autoformat = a:mode ==# -1 ? !b:last_autoformat : a:mode
   if b:last_autoformat
     aug pencil_autoformat
-      au InsertEnter <buffer> call s:enable_autoformat()
+      au InsertEnter <buffer> call s:maybe_enable_autoformat()
       au InsertLeave <buffer> set formatoptions-=a
     aug END
   el
@@ -99,8 +99,8 @@ endf
 fun! pencil#init(...) abort
   let l:args = a:0 ? a:1 : {}
 
-  if !exists('b:wrap_mode')
-    let b:wrap_mode = s:WRAP_MODE_OFF
+  if !exists('b:pencil_wrap_mode')
+    let b:pencil_wrap_mode = s:WRAP_MODE_OFF
   en
   if !exists("b:max_textwidth")
     let b:max_textwidth = -1
@@ -109,49 +109,49 @@ fun! pencil#init(...) abort
   " If user explicitly requested wrap_mode thru args, go with that.
   let l:wrap_arg = get(l:args, 'wrap', 'detect')
 
-  if (b:wrap_mode && l:wrap_arg ==# 'toggle') ||
+  if (b:pencil_wrap_mode && l:wrap_arg ==# 'toggle') ||
    \ l:wrap_arg =~# '^\(0\|off\|disable\|false\)$'
-    let b:wrap_mode = s:WRAP_MODE_OFF
+    let b:pencil_wrap_mode = s:WRAP_MODE_OFF
   elsei l:wrap_arg ==# 'hard'
-    let b:wrap_mode = s:WRAP_MODE_HARD
+    let b:pencil_wrap_mode = s:WRAP_MODE_HARD
   elsei l:wrap_arg ==# 'soft'
-    let b:wrap_mode = s:WRAP_MODE_SOFT
+    let b:pencil_wrap_mode = s:WRAP_MODE_SOFT
   elsei l:wrap_arg ==# 'default'
-    let b:wrap_mode = s:WRAP_MODE_DEFAULT
+    let b:pencil_wrap_mode = s:WRAP_MODE_DEFAULT
   el
     " this can return s:WRAP_MODE_ for soft, hard or default
-    let b:wrap_mode = s:detect_wrap_mode()
+    let b:pencil_wrap_mode = s:detect_wrap_mode()
   en
 
   " translate default(-1) to soft(1) or hard(2) or off(0)
-  if b:wrap_mode == s:WRAP_MODE_DEFAULT
+  if b:pencil_wrap_mode ==# s:WRAP_MODE_DEFAULT
     if g:pencil#wrapModeDefault =~# '^\(0\|off\|disable\|false\)$'
-      let b:wrap_mode = s:WRAP_MODE_OFF
+      let b:pencil_wrap_mode = s:WRAP_MODE_OFF
     elsei g:pencil#wrapModeDefault ==# 'soft'
-      let b:wrap_mode = s:WRAP_MODE_SOFT
+      let b:pencil_wrap_mode = s:WRAP_MODE_SOFT
     el
-      let b:wrap_mode = s:WRAP_MODE_HARD
+      let b:pencil_wrap_mode = s:WRAP_MODE_HARD
     en
   en
 
   " autoformat is only used in Hard mode, and then only during
   " Insert mode
   call pencil#setAutoFormat(
-        \ b:wrap_mode == s:WRAP_MODE_HARD &&
+        \ b:pencil_wrap_mode ==# s:WRAP_MODE_HARD &&
         \ get(l:args, 'autoformat', g:pencil#autoformat))
 
-  if b:wrap_mode == s:WRAP_MODE_HARD
-    if &modeline == 0 && b:max_textwidth > 0
+  if b:pencil_wrap_mode ==# s:WRAP_MODE_HARD
+    if &modeline ==# 0 && b:max_textwidth > 0
       " Compensate for disabled modeline
       exe 'setl textwidth=' . b:max_textwidth
-    elsei &textwidth == 0
+    elsei &textwidth ==# 0
       exe 'setl textwidth=' .
         \ get(l:args, 'textwidth', g:pencil#textwidth)
     el
       setl textwidth<
     en
     setl nowrap
-  elsei b:wrap_mode == s:WRAP_MODE_SOFT
+  elsei b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
     setl textwidth=0
     setl wrap
     setl linebreak
@@ -168,7 +168,7 @@ fun! pencil#init(...) abort
   en
 
   " global settings
-  if b:wrap_mode
+  if b:pencil_wrap_mode
     set display+=lastline
     set backspace=indent,eol,start
     if get(l:args, 'joinspaces', g:pencil#joinspaces)
@@ -177,7 +177,7 @@ fun! pencil#init(...) abort
       set nojoinspaces       " only one space after a .!? (default)
     en
 
-    "if b:wrap_mode == s:WRAP_MODE_SOFT
+    "if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
     "  " augment with additional chars
     "  set breakat=\ !@*-+;:,./?([{
     "en
@@ -186,7 +186,7 @@ fun! pencil#init(...) abort
   " because ve=onemore is relatively rare and could break
   " other plugins, restrict its presence to buffer
   " Better: restore ve to original setting
-  if b:wrap_mode && get(l:args, 'cursorwrap', g:pencil#cursorwrap)
+  if b:pencil_wrap_mode && get(l:args, 'cursorwrap', g:pencil#cursorwrap)
     set whichwrap+=<,>,b,s,h,l,[,]
     aug pencil_cursorwrap
       au BufEnter <buffer> set virtualedit+=onemore
@@ -197,7 +197,7 @@ fun! pencil#init(...) abort
   en
 
   " window/buffer settings
-  if b:wrap_mode
+  if b:pencil_wrap_mode
     setl nolist
     setl wrapmargin=0
     setl autoindent         " needed by formatoptions=n
@@ -236,7 +236,7 @@ fun! pencil#init(...) abort
     en
   en
 
-  if b:wrap_mode == s:WRAP_MODE_SOFT
+  if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
     nn <buffer> <silent> $ g$
     nn <buffer> <silent> 0 g0
     vn <buffer> <silent> $ g$
@@ -258,7 +258,7 @@ fun! pencil#init(...) abort
     sil! iu  <buffer> <End>
   en
 
-  if b:wrap_mode
+  if b:pencil_wrap_mode
     nn <buffer> <silent> j gj
     nn <buffer> <silent> k gk
     vn <buffer> <silent> j gj
@@ -283,7 +283,7 @@ fun! pencil#init(...) abort
 
   " set undo points around common punctuation,
   " line <c-u> and word <c-w> deletions
-  if b:wrap_mode
+  if b:pencil_wrap_mode
     ino <buffer> . .<c-g>u
     ino <buffer> ! !<c-g>u
     ino <buffer> ? ?<c-g>u
