@@ -26,7 +26,7 @@ smooth the path to writing prose.
   preserves your global settings)
 * Support for Vim’s Conceal feature to hide markup defined by Syntax
   plugins (e.g., `_` and `*` markup for styled text in \_*Markdown*\_)
-* Support for display of mode indicator (`h✎`, e.g.) in the status line
+* Support for display of mode indicator (`✎ h`, e.g.) in the status line
 * Pure Vimscript with no dependencies
 
 Need spell-check and other features? Vim is about customization. To
@@ -266,7 +266,7 @@ terminal to support **bold** and _italic_ styles.
 ### Status line indicator
 
 Your status line can reflect the wrap mode for _pencil_ buffers. For
-example, `h✎` to represent `HardPencil` (hard line break) mode.
+example, `✎ h` to represent `HardPencil` (hard line break) mode.
 
 To configure your status line, add to your `.vimrc`:
 
@@ -363,7 +363,7 @@ If no such lines found, _pencil_ falls back to the default wrap mode.
 
 Other plugins of specific interest to writers:
 
-* [tpope/vim-markdown][tvm], [plasticboy/vim-markdown][pvm] - Markdown syntax plugins (choose one)
+* [tpope/vim-markdown][tvm], [plasticboy/vim-markdown][pvm] - Markdown syntax plugins
 * [mattly/vim-markdown-enhancements][mvme] - highlighting for tables and footnotes
 * [tpope/vim-abolish][ab] - search for, substitute, and abbr. multiple variants of a word
 * [tommcdo/vim-exchange][ex] - easy text exchange operator for Vim
