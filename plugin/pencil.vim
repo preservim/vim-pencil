@@ -29,14 +29,14 @@ endf
 fun! PencilMode()
   if exists('b:pencil_wrap_mode')
     if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
-      return get(g:pencil#mode_indicators, 'soft', 'sp')
+      return get(g:pencil#mode_indicators, 'soft', 'soft')
     elsei b:pencil_wrap_mode ==# s:WRAP_MODE_HARD
-      return get(g:pencil#mode_indicators, 'hard', 'hp')
+      return get(g:pencil#mode_indicators, 'hard', 'hard')
     el
-      return get(g:pencil#mode_indicators, 'off', '')
+      return get(g:pencil#mode_indicators, 'off', 'off')
     en
   else
-    return ''
+    return ''   " should be blank for non-prose modes
   en
 endf
 
@@ -122,9 +122,9 @@ en
 if !exists('g:pencil#mode_indicators')
   " used to set PencilMode() for statusline
   if s:unicode_enabled()
-    let g:pencil#mode_indicators = {'hard': '✎ h', 'soft': '✎ s', 'off': '✎ ×',}
+    let g:pencil#mode_indicators = {'hard': '✐ hard', 'soft': '✎ soft', 'off': '✎ off',}
   el
-    let g:pencil#mode_indicators = {'hard': 'ph', 'soft': 'ps', 'off': 'px',}
+    let g:pencil#mode_indicators = {'hard': 'hard', 'soft': 'soft', 'off': 'off',}
   en
 en
 

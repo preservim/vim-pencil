@@ -283,7 +283,7 @@ let g:airline_section_x = '%{PencilMode()}'
 If you don’t like the default indicators, you can specify different ones:
 
 ```vim
-let g:pencil#mode_indicators = {'hard': '✎ h', 'soft': '✎ s', 'off': '✎ ×',}
+let g:pencil#mode_indicators = {'hard': '✐ hard', 'soft': '✎ soft', 'off': '✎ off',}
 ```
 
 Note that `PencilMode()` will return blank for buffers in which _pencil_
