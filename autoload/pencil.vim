@@ -234,7 +234,6 @@ fun! pencil#init(...) abort
       setl conceallevel<
       setl concealcursor<
     en
-    setl iskeyword<
   en
 
   if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
