@@ -205,9 +205,9 @@ fun! pencil#init(...) abort
     setl formatoptions+=n   " recognize numbered lists
     setl formatoptions+=1   " don't break line before 1 letter word
     setl formatoptions+=t   " autoformat of text (vim default)
+    setl formatoptions+=2   " use indent of based on 2nd line for rest of paragraph
 
     " clean out stuff we likely don't want
-    setl formatoptions-=2   " use indent of 2nd line for rest of paragraph
     setl formatoptions-=v   " only break line at blank entered during insert
     setl formatoptions-=w   " avoid erratic behavior if mixed spaces
     setl formatoptions-=a   " autoformat will turn on with Insert in HardPencil mode
@@ -234,6 +234,7 @@ fun! pencil#init(...) abort
       setl conceallevel<
       setl concealcursor<
     en
+    setl iskeyword<
   en
 
   if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
