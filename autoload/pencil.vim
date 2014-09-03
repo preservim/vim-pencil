@@ -196,6 +196,18 @@ fun! pencil#init(...) abort
     sil! au! pencil_cursorwrap * <buffer>
   en
 
+  " Because syntax for fenced code blocks will mess with the
+  " definition of a word (via iskeyword) we'll impose a prose-
+  " oriented definition.
+  " e.g., let g:markdown_fenced_languages = ['sh',]  " adds '.'
+  if b:pencil_wrap_mode
+    aug pencil_iskeyword
+      au BufEnter <buffer> setl isk& | setl isk-=_
+    aug END
+  el
+    sil! au! pencil_iskeyword * <buffer>
+  en
+
   " window/buffer settings
   if b:pencil_wrap_mode
     setl nolist
