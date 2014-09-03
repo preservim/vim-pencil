@@ -200,9 +200,12 @@ fun! pencil#init(...) abort
   " definition of a word (via iskeyword) we'll impose a prose-
   " oriented definition.
   " e.g., let g:markdown_fenced_languages = ['sh',]  " adds '.'
+  "
+  " Support $20 30% D&D #40 highest-rated O'Toole Mary's
+  " TODO how to separate quote from apostrophe use?
   if b:pencil_wrap_mode
     aug pencil_iskeyword
-      au BufEnter <buffer> setl isk& | setl isk-=_
+      au BufEnter <buffer> setl isk& | setl isk-=_ | setl isk+=$,%,&,#,-,'
     aug END
   el
     sil! au! pencil_iskeyword * <buffer>
