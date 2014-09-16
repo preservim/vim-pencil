@@ -110,7 +110,8 @@ auto-detect the line wrap approach, with hard line breaks as the default.
 For files of type `text`, it will initialize with hard line breaks, even
 if auto-detect might suggest soft line wrap.
 
-For more details, see “Advanced initialization” below.
+For more details, see [Advanced initialization](#advanced-initialization)
+below.
 
 ### Commands
 
