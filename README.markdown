@@ -308,7 +308,7 @@ augroup pencil
                               \ call textobj#quote#init() |
                               \ call textobj#sentence#init() |
                               \ setlocal ruler nonumber |
-                              \ nnoremap <silent> Q gwip
+                              \ nnoremap <buffer> <silent> Q gwip
 augroup END
 ```
 
