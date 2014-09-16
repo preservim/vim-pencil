@@ -14,8 +14,8 @@ The _pencil_ plugin aspires to make Vim as powerful a tool for writers as
 it is for coders by focusing narrowly on the handful of tweaks needed to
 smooth the path to writing prose.
 
-* For editing prose-oriented file types such as _text_, _markdown_, and
-  _textile_
+* For editing prose-oriented file types such as _text_, _markdown_,
+  _mail_, _rst_, and _textile_.
 * Agnostic on soft line wrap _versus_ hard line breaks, supporting both
 * Auto-detects wrap mode via modeline and sampling
 * Adjusts navigation key mappings to suit the wrap mode
@@ -100,19 +100,17 @@ let g:pencil#wrapModeDefault = 'hard'   " or 'soft'
 augroup pencil
   autocmd!
   autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType textile call pencil#init()
   autocmd FileType text call pencil#init({'wrap': 'hard'})
 augroup END
 ```
 
-In the example above, for files of type `markdown` and `textile`, this
-plugin will auto-detect the line wrap approach, with `hard` as the
-default. But for files of type `text`, it will *always* initialize with
-hard line break mode.
+In the example above, for files of type `markdown` this plugin will
+auto-detect the line wrap approach, with hard line breaks as the default.
 
-Configurable options for `pencil#init()` include: `autoformat`,
-`concealcursor`, `conceallevel`, `cursorwrap`, `joinspaces`, `textwidth`,
-and `wrap`.
+For files of type `text`, it will initialize with hard line breaks, even
+if auto-detect might suggest soft line wrap.
+
+For more details, see “Advanced initialization” below.
 
 ### Commands
 
@@ -290,6 +288,51 @@ Note that `PencilMode()` will return blank for buffers in which _pencil_
 has not been initialized.
 
 [va]: http://github.com/bling/vim-airline
+
+### Advanced initialization
+
+Configurable options for `pencil#init()` include: `autoformat`,
+`concealcursor`, `conceallevel`, `cursorwrap`, `joinspaces`, `textwidth`,
+and `wrap`. These are detailed above.
+
+You can set additional options in your `autocmd` statements, such as to
+initialize other prose-oriented plugins, tweak settings and add key
+mappings:
+
+```vim
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init() |
+                              \ call lexical#init() |
+                              \ call litecorrect#init() |
+                              \ call textobj#quote#init() |
+                              \ call textobj#sentence#init() |
+                              \ setlocal ruler nonumber |
+                              \ nnoremap <silent> Q gwip
+augroup END
+```
+
+A more advanced example:
+
+```vim
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init() |
+                              \ call litecorrect#init() |
+                              \ setl spell spl=en_us fdl=4 noru nonu nornu |
+                              \ setl fdo+=search
+  autocmd Filetype git,gitsendemail,*commit*,*COMMIT* |
+                              \ call pencil#init({'wrap': 'hard', 'textwidth': 72}) |
+                              \ call litecorrect#init() |
+                              \ setl spell spl=en_us et sw=2 ts=2 noai
+  autocmd Filetype mail         call pencil#init({'wrap': 'hard', 'textwidth': 60}) |
+                              \ call litecorrect#init() |
+                              \ setl spell spl=en_us et sw=2 ts=2 noai nonu nornu
+  autocmd Filetype html,xml     call pencil#init({'wrap': 'soft'}) |
+                              \ call litecorrect#init() |
+                              \ setl spell spl=en_us et sw=2 ts=2
+augroup END
+```
 
 ## Auto-detecting wrap mode
 
