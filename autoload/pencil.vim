@@ -155,17 +155,29 @@ fun! pencil#init(...) abort
   elsei b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
     setl textwidth=0
     setl wrap
-    setl linebreak
-    " TODO breakat not working yet with n and m-dash
-    setl breakat-=*         " avoid breaking footnote*
-    setl breakat-=@         " avoid breaking at email addresses
-    setl colorcolumn=0      " doesn't align as expected
+
+    if has('linebreak')
+      setl linebreak
+      " TODO breakat not working yet with n and m-dash
+      setl breakat-=*         " avoid breaking footnote*
+      setl breakat-=@         " avoid breaking at email addresses
+    en
+
+    if has('syntax')
+      setl colorcolumn=0      " doesn't align as expected
+    en
   el
     setl textwidth<
     setl wrap< nowrap<
-    setl linebreak< nolinebreak<
-    setl breakat<
-    setl colorcolumn<
+
+    if has('linebreak')
+      setl linebreak< nolinebreak<
+      setl breakat<
+    en
+
+    if has('syntax')
+      setl colorcolumn<
+    en
   en
 
   if (  v:version > 704 ||
@@ -191,14 +203,16 @@ fun! pencil#init(...) abort
   " because ve=onemore is relatively rare and could break
   " other plugins, restrict its presence to buffer
   " Better: restore ve to original setting
-  if b:pencil_wrap_mode && get(l:args, 'cursorwrap', g:pencil#cursorwrap)
-    set whichwrap+=<,>,b,s,h,l,[,]
-    aug pencil_cursorwrap
-      au BufEnter <buffer> set virtualedit+=onemore
-      au BufLeave <buffer> set virtualedit-=onemore
-    aug END
-  el
-    sil! au! pencil_cursorwrap * <buffer>
+  if has('virtualedit')
+    if b:pencil_wrap_mode && get(l:args, 'cursorwrap', g:pencil#cursorwrap)
+      set whichwrap+=<,>,b,s,h,l,[,]
+      aug pencil_cursorwrap
+        au BufEnter <buffer> set virtualedit+=onemore
+        au BufLeave <buffer> set virtualedit-=onemore
+      aug END
+    el
+      sil! au! pencil_cursorwrap * <buffer>
+    en
   en
 
   " Because syntax for fenced code blocks will mess with the
@@ -221,7 +235,11 @@ fun! pencil#init(...) abort
     setl nolist
     setl wrapmargin=0
     setl autoindent         " needed by formatoptions=n
-    setl nosmartindent      " avoid c-style indents in prose
+
+    if has('smartindent')
+      setl nosmartindent      " avoid c-style indents in prose
+    en
+
     setl formatoptions+=n   " recognize numbered lists
     setl formatoptions+=1   " don't break line before 1 letter word
     setl formatoptions+=t   " autoformat of text (vim default)
@@ -245,15 +263,18 @@ fun! pencil#init(...) abort
         \ get(l:args, 'concealcursor', g:pencil#concealcursor)
     en
   el
-    setl smartindent< nosmartindent<
-    setl autoindent< noautoindent<
-    setl list< nolist<
-    setl wrapmargin<
-    setl formatoptions<
+    if has('smartindent')
+      setl smartindent< nosmartindent<
+    en
     if has('conceal')
       setl conceallevel<
       setl concealcursor<
     en
+
+    setl autoindent< noautoindent<
+    setl list< nolist<
+    setl wrapmargin<
+    setl formatoptions<
   en
 
   if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
