@@ -83,6 +83,8 @@ tutorials available._
 
 ### Basic configuration
 
+Add to your `.vimrc`:
+
 ```vim
 set nocompatible
 filetype plugin on       " may already be in your .vimrc
@@ -319,8 +321,7 @@ Configurable options for `pencil#init()` include: `autoformat`,
 `concealcursor`, `conceallevel`, `cursorwrap`, `joinspaces`, `textwidth`,
 and `wrap`. These are detailed above.
 
-Comprehensive initialization is possible without having to populate
-`after/ftplugin` modules:
+You can override _pencil_ and other configuration settings when initializing:
 
 ```vim
 augroup pencil
@@ -342,8 +343,8 @@ augroup pencil
 augroup END
 ```
 
-Alternatives to initialize include `after/ftplugin` modules as well as
-refactoring statements into a function.
+Alternatives include `after/ftplugin` modules as well as refactoring initialization 
+statements into a function.
 
 ## Auto-detecting wrap mode
 
