@@ -168,6 +168,15 @@ fun! pencil#init(...) abort
     setl colorcolumn<
   en
 
+  if (  v:version > 704 ||
+   \   (v:version ==# 704 && has('patch-7.4.338')))
+    if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
+      setl breakindent
+    el
+      setl breakindent<
+    en
+  en
+
   " global settings
   if b:pencil_wrap_mode
     set display+=lastline
@@ -177,11 +186,6 @@ fun! pencil#init(...) abort
     el
       set nojoinspaces       " only one space after a .!? (default)
     en
-
-    "if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
-    "  " augment with additional chars
-    "  set breakat=\ !@*-+;:,./?([{
-    "en
   en
 
   " because ve=onemore is relatively rare and could break
