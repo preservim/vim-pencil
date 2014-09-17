@@ -83,7 +83,7 @@ tutorials available._
 
 ### Basic configuration
 
-Add to your `.vimrc`:
+Add support for your desired filetypes to your `.vimrc`:
 
 ```vim
 set nocompatible
