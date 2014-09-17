@@ -81,6 +81,35 @@ tutorials available._
 
 ## Configuration
 
+### Basic configuration
+
+```vim
+set nocompatible
+filetype plugin on       " may already be in your .vimrc
+
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init()
+augroup END
+```
+
+You can initialize several prose-oriented plugins together:
+
+```vim
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init() |
+                              \ call lexical#init() |
+                              \ call litecorrect#init() |
+                              \ call textobj#quote#init() |
+                              \ call textobj#sentence#init()
+augroup END
+```
+
+For more details, see [Advanced initialization](#advanced-initialization)
+below.
+
 ### Hard line breaks or soft line wrap?
 
 Coders will have the most experience with the former, and writers the
@@ -89,29 +118,23 @@ with both conventions. This plugin doesn't force you to choose a side—you
 can configure each buffer independently.
 
 In most cases you can set a default to suit your preference and let
-auto-detection figure out what to do. Add to your `.vimrc`:
+auto-detection figure out what to do.
 
 ```vim
-set nocompatible
-filetype plugin on       " may already be in your .vimrc
-
-let g:pencil#wrapModeDefault = 'hard'   " or 'soft'
+let g:pencil#wrapModeDefault = 'soft'   " or 'hard'
 
 augroup pencil
   autocmd!
   autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType text call pencil#init({'wrap': 'hard'})
+  autocmd FileType text         call pencil#init({'wrap': 'hard'})
 augroup END
 ```
 
 In the example above, for files of type `markdown` this plugin will
-auto-detect the line wrap approach, with hard line breaks as the default.
+auto-detect the line wrap approach, with soft line wrap as the default.
 
 For files of type `text`, it will initialize with hard line breaks, even
 if auto-detect might suggest soft line wrap.
-
-For more details, see [Advanced initialization](#advanced-initialization)
-below.
 
 ### Commands
 
@@ -296,24 +319,8 @@ Configurable options for `pencil#init()` include: `autoformat`,
 `concealcursor`, `conceallevel`, `cursorwrap`, `joinspaces`, `textwidth`,
 and `wrap`. These are detailed above.
 
-You can set additional options in your `autocmd` statements, such as to
-initialize other prose-oriented plugins, tweak settings and add key
-mappings:
-
-```vim
-augroup pencil
-  autocmd!
-  autocmd FileType markdown,mkd call pencil#init() |
-                              \ call lexical#init() |
-                              \ call litecorrect#init() |
-                              \ call textobj#quote#init() |
-                              \ call textobj#sentence#init() |
-                              \ setlocal ruler nonumber |
-                              \ nnoremap <buffer> <silent> Q gwip
-augroup END
-```
-
-A more advanced example:
+Comprehensive initialization is possible without having to populate
+`after/ftplugin` modules:
 
 ```vim
 augroup pencil
@@ -334,6 +341,9 @@ augroup pencil
                               \ setl spell spl=en_us et sw=2 ts=2
 augroup END
 ```
+
+Alternatives to initialize include `after/ftplugin` modules as well as
+refactoring statements into a function.
 
 ## Auto-detecting wrap mode
 
