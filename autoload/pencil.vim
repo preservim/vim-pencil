@@ -56,10 +56,11 @@ endf
 fun! s:maybe_enable_autoformat()
   " don't enable autoformat if in a code block or table
   let l:okay_to_enable = 1
+  let l:line = line('.')
   let l:col = col('.')
   " at end of line there may be no synstack, so scan back
   while l:col > 0
-    let l:stack = synstack(line('.'), l:col)
+    let l:stack = synstack(l:line, l:col)
     if l:stack != []
       break
     en
