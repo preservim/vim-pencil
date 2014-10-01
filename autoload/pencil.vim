@@ -58,6 +58,7 @@ fun! s:maybe_enable_autoformat()
   let l:okay_to_enable = 1
   let l:line = line('.')
   let l:col = col('.')
+  let l:stack = []
   " at end of line there may be no synstack, so scan back
   while l:col > 0
     let l:stack = synstack(l:line, l:col)
@@ -66,6 +67,19 @@ fun! s:maybe_enable_autoformat()
     en
     let l:col -= 1
   endw
+  " if needed, scan towards end of line looking for highlight groups
+  if l:stack == []
+    let l:col = col('.') + 1
+    let l:last_col = col('$')
+    while l:col <= l:last_col
+      let l:stack = synstack(l:line, l:col)
+      if l:stack != []
+        break
+      en
+      let l:col += 1
+    endw
+  en
+  " scan for matches to blacklist
   for l:sid in l:stack
     if match(synIDattr(l:sid, 'name'),
             \ g:pencil#autoformat_blacklist_re) >= 0

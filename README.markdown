@@ -15,13 +15,14 @@ it is for coders by focusing narrowly on the handful of tweaks needed to
 smooth the path to writing prose.
 
 * For editing prose-oriented file types such as _text_, _markdown_,
-  _mail_, _rst_, and _textile_.
+  _mail_, _rst_, _tex_, and _textile_.
 * Agnostic on soft line wrap _versus_ hard line breaks, supporting both
 * Auto-detects wrap mode via modeline and sampling
 * Adjusts navigation key mappings to suit the wrap mode
 * Creates undo points on common punctuation during insert, including
   deletion via line `<C-U>` and word `<C-W>`
-* When using hard line breaks, enables autoformat while inserting text
+* When using hard line breaks, enables autoformat while inserting text...
+* ...except for tables and code blocks where you won’t want it
 * Buffer-scoped configuration (with a few minor exceptions, _pencil_
   preserves your global settings)
 * Support for Vim’s Conceal feature to hide markup defined by Syntax
@@ -34,7 +35,7 @@ Need spell-check and other features? Vim is about customization. To
 complete your editing environment, learn to configure Vim and draw upon
 its rich ecosystem of plugins.
 
-## Why use Vim for writing?
+# Why use Vim for writing?
 
 With plenty of word processing applications available, including those
 that specifically cater to writers, why use a modal editor like Vim?
@@ -70,7 +71,7 @@ tool in expressing yourself. For more details on vi-style editing, see...
 [ig]: http://takac.github.io/2013/01/30/vim-grammar/
 [wa]: https://medium.com/p/433852f4b4d1
 
-## Installation
+# Installation
 
 Install using Pathogen, Vundle, Neobundle, or your favorite Vim package
 manager.
@@ -79,9 +80,9 @@ _For those new to Vim: before installing this plugin, consider getting
 comfortable with the basics of Vim by working through one of the many
 tutorials available._
 
-## Configuration
+# Configuration
 
-### Basic configuration
+## Basic configuration
 
 Add to your `.vimrc`:
 
@@ -109,10 +110,9 @@ augroup pencil
 augroup END
 ```
 
-For more details, see [Advanced initialization](#advanced-initialization)
-below.
+For more details, see the advanced initialization section below.
 
-### Hard line breaks or soft line wrap?
+## Hard line breaks or soft line wrap?
 
 Coders will have the most experience with the former, and writers the
 latter. But whatever your background, chances are that you must contend
@@ -138,7 +138,7 @@ auto-detect the line wrap approach, with soft line wrap as the default.
 For files of type `text`, it will initialize with hard line breaks, even
 if auto-detect might suggest soft line wrap.
 
-### Commands
+## Commands
 
 Because auto-detect might not work as intended, you can invoke a command
 to set the behavior for the current buffer:
@@ -148,15 +148,17 @@ to set the behavior for the current buffer:
 * `NoPencil` - removes navigation mappings and restores buffer to global settings
 * `TogglePencil` - if on, turns off; if off, enables with detection
 
-### Automatic formatting
+## Automatic formatting
 
-_This ‘autoformat’ feature affects *HardPencil* (hard line break) mode only._
+_The ‘autoformat’ feature affects *HardPencil* (hard line break) mode
+only._
 
 When inserting text while in *HardPencil* mode, Vim’s autoformat feature will be
 enabled by default and can offer many of the same benefits as soft line wrap.
 
-An exception: if used with popular syntax modules\*, _pencil_ will **disable**
-autoformat when you enter Insert mode from inside a code block or table.
+A useful exception: if used with popular syntax modules\*, _pencil_ will
+**disable** autoformat when you enter Insert mode from inside a code block
+or table. (See the advanced section below for more details.)
 
 Where you need to manually enable/disable autoformat, you can do so with a command:
 
@@ -190,11 +192,7 @@ augroup END
 ...where by default, files of type `text` will use hard line endings, but
 with autoformat disabled.
 
-(\*) Advanced users will want to check out `g:pencil#autoformat_blacklist`
-to set highlight groups for which autoformat will not be enabled when
-entering Insert mode.
-
-### Manual formatting
+## Manual formatting
 
 Note that you need not rely on autoformat exclusively and can manually
 reformat paragraphs with standard Vim commands:
@@ -209,10 +207,9 @@ Optionally, you can map these operations to underutilized keys in your
 
 ```vim
 nnoremap <silent> Q gwip
-nnoremap <silent> K vipJ
 ```
 
-### Default textwidth
+## Default textwidth
 
 You can configure the textwidth to be used in **HardPencil** mode when no
 textwidth is set globally, locally, or available via modeline. It defaults
@@ -222,7 +219,7 @@ to `74`, but you can change that value in your `.vimrc`:
 let g:pencil#textwidth = 74
 ```
 
-### Sentence spacing
+## Sentence spacing
 
 By default, when formatting text (through `gwip`, e.g.) only one space
 will be inserted after a period(`.`), exclamation point(`!`), or question
@@ -232,7 +229,7 @@ mark(`?`). You can change this default:
 let g:pencil#joinspaces = 0     " 0=one_space (def), 1=two_spaces
 ```
 
-### Cursor wrap
+## Cursor wrap
 
 By default, `h`/`l` and the left/right cursor keys will move to the
 previous/next line after reaching first/last character in a line with
@@ -243,7 +240,7 @@ a hard break. If you wish to retain the default Vim behavior, set the
 let g:pencil#cursorwrap = 1     " 0=disable, 1=enable (def)
 ```
 
-### Concealing \_\_markup\_\_
+## Concealing \_\_markup\_\_
 
 _pencil_ enables Vim's powerful Conceal feature, although support among
 Syntax and Colorscheme plugins is currently spotty.
@@ -262,7 +259,7 @@ For more details on Vim’s Conceal feature, see:
 :help concealcursor
 ```
 
-#### Concealing styled text in Markdown
+### Concealing styled text in Markdown
 
 Syntax plugins such as [tpope/vim-markdown][tm] support concealing the
 markup characters when displaying \_*italic*\_, \*\*__bold__\*\*, and
@@ -288,7 +285,7 @@ terminal to support **bold** and _italic_ styles.
 [co]: http://www.google.com/fonts/specimen/Cousine
 [tm]: http://github.com/tpope/vim-markdown
 
-### Status line indicator
+## Status line indicator
 
 Your status line can reflect the wrap mode for _pencil_ buffers. For
 example, `✐ hard` to represent `HardPencil` (hard line break) mode.  To
@@ -314,6 +311,8 @@ Note that `PencilMode()` will return blank for buffers in which _pencil_
 has not been initialized.
 
 [va]: http://github.com/bling/vim-airline
+
+## Advanced _pencil_
 
 ### Advanced initialization
 
@@ -343,12 +342,54 @@ augroup pencil
 augroup END
 ```
 
-Alternatives include `after/ftplugin` modules as well as refactoring initialization 
+Alternatives include `after/ftplugin` modules as well as refactoring initialization
 statements into a function.
 
-## Auto-detecting wrap mode
+### Autoformat blacklisting
 
-**(For advanced users looking to tweak _pencil's_ behavior.)**
+_The ‘autoformat’ feature affects *HardPencil* (hard line break) mode
+only._
+
+When editing formatted text, such as a table or code block, you won’t want
+autoformat to be enabled.
+
+_pencil_ relies on highlight groups from the syntax definitions for the
+buffer’s filetype to determine the proper context for autoformat.
+
+If autoformat is on, it will not be enabled when you enter insert mode on
+a line containing a blacklisted highlight group. The current blacklist is:
+
+```vim
+let g:pencil#autoformat_blacklist = [
+      \ 'markdownCode',
+      \ 'markdownUrl',
+      \ 'markdownIdDeclaration',
+      \ 'markdownLinkDelimiter',
+      \ 'markdownHighlight[A-Za-z0-9]+',
+      \ 'mkdCode',
+      \ 'mkdIndentCode',
+      \ 'markdownFencedCodeBlock',
+      \ 'markdownInlineCode',
+      \ 'mmdTable[A-Za-z0-9]*',
+      \ 'txtCode',
+      \ 'rstCodeBlock',
+      \ 'rstDirective',
+      \ 'rstLiteralBlock',
+      \ 'rstSections',
+      \ 'texBeginEndName',
+      \ 'texDelimiter',
+      \ 'texDocType',
+      \ 'texInputFile',
+      \ 'texMath',
+      \ 'texRefZone',
+      \ 'texSection$',
+      \ 'texTitle',
+      \ ]
+```
+
+You can override this in your `.vimrc`. Additions to defaults are welcome.
+
+### Auto-detecting wrap mode
 
 If you didn't explicitly specify a wrap mode during initialization,
 _pencil_ will attempt to detect it.
@@ -356,7 +397,7 @@ _pencil_ will attempt to detect it.
 It will first look for a `textwidth` (or `tw`) specified in a modeline.
 Failing that, _pencil_ will then sample lines from the start of the file.
 
-### Detect via modeline
+#### Detect via modeline
 
 Will the wrap mode be detected accurately? Maybe. But you can improve its
 chances by giving _pencil_ an explicit hint.
@@ -386,7 +427,7 @@ You explicitly specify soft wrap mode by specifying a textwidth of `0`:
 Note that if the modelines feature is disabled (such as for security
 reasons) the textwidth will still be set by this plugin.
 
-### Detect via sampling
+#### Detect via sampling
 
 If no modeline with a textwidth is found, _pencil_ will sample the initial
 lines from the file, looking for those excessively-long.
@@ -410,7 +451,7 @@ let g:pencil#softDetectThreshold = 130
 
 If no such lines found, _pencil_ falls back to the default wrap mode.
 
-## See also
+# See also
 
 * [To Vim][tv] - Writer and psychologist Ian Hocking on using Vim for writing
 * [Vim Training Class - Basic motions and commands][tc] - video tutorial by Shawn Biddle
@@ -460,7 +501,7 @@ Unimpressed by _pencil_? [vim-pandoc][vp] offers prose-oriented features with it
 [wo]: http://github.com/reedes/vim-wordy
 [vp]: http://github.com/vim-pandoc/vim-pandoc
 
-## Future development
+# Future development
 
 If you’ve spotted a problem or have an idea on improving this plugin,
 please post it to the github project issue page.
