@@ -84,7 +84,7 @@ tutorials available._
 
 ## Basic configuration
 
-Add to your `.vimrc`:
+Add support for your desired filetypes to your `.vimrc`:
 
 ```vim
 set nocompatible
@@ -109,6 +109,9 @@ augroup pencil
                               \ call textobj#sentence#init()
 augroup END
 ```
+
+For other prose-oriented plugins, consult the [See also](#see-also)
+section below.
 
 For more details, see the advanced initialization section below.
 
@@ -198,7 +201,7 @@ Note that you need not rely on autoformat exclusively and can manually
 reformat paragraphs with standard Vim commands:
 
 * `gqip` or `gwip` - format current paragraph
-* `vipJ` - unformat current paragraph
+* `vipJ` - unformat (i.e., join all lines with hard line breaks) in current paragraph
 * `ggVGgq` or `:g/^/norm gqq` - format all paragraphs in buffer
 * `:%norm vipJ` - unformat all paragraphs in buffer
 
