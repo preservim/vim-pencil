@@ -315,7 +315,7 @@ has not been initialized.
 
 [va]: http://github.com/bling/vim-airline
 
-## Advanced _pencil_
+## Advanced pencil
 
 ### Advanced initialization
 
@@ -353,14 +353,18 @@ statements into a function.
 _The ‘autoformat’ feature affects *HardPencil* (hard line break) mode
 only._
 
-When editing formatted text, such as a table or code block, you won’t want
-autoformat to be enabled.
+When editing formatted text, such as a table or code block, autoformat
+will wreak havoc with the formatting. In these cases you will want to
+temporarily deactivate autoformat, such as with the `ManualPencil` or
+`ShiftPencil` commands described above. However, in most cases, you won’t
+need to do this.
 
-_pencil_ relies on highlight groups from the syntax definitions for the
-buffer’s filetype to determine the proper context for autoformat.
+_pencil_ will detect the syntax highlight group at the cursor position to
+determine whether or not autoformat should be activated.
 
-If autoformat is on, it will not be enabled when you enter insert mode on
-a line containing a blacklisted highlight group. The current blacklist is:
+If autoformat is on, it will be activated at the time you enter Insert
+mode provided that the syntax highlighting group at the cursor position is
+_not_ in the blacklist. The current blacklist is:
 
 ```vim
 let g:pencil#autoformat_blacklist = [
@@ -390,7 +394,8 @@ let g:pencil#autoformat_blacklist = [
       \ ]
 ```
 
-You can override this in your `.vimrc`. Additions to defaults are welcome.
+You can override this in your `.vimrc`. Additions to defaults with good
+use cases are welcome.
 
 ### Auto-detecting wrap mode
 
