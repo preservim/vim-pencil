@@ -47,9 +47,9 @@ endf
 
 fun! s:imap(preserve_completion, key, icmd)
   if a:preserve_completion
-    exe ":ino <silent> <expr> " . a:key . " pumvisible() ? \"" . a:key . "\" : \"" . a:icmd . "\""
+    exe ":ino <buffer> <silent> <expr> " . a:key . " pumvisible() ? \"" . a:key . "\" : \"" . a:icmd . "\""
   el
-    exe ":ino <silent> " . a:key . " " . a:icmd
+    exe ":ino <buffer> <silent> " . a:key . " " . a:icmd
   en
 endf
 
