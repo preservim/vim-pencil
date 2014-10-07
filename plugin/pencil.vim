@@ -136,9 +136,10 @@ en
 if !exists('g:pencil#mode_indicators')
   " used to set PencilMode() for statusline
   if s:unicode_enabled()
-    let g:pencil#mode_indicators = {'hard': '✐ hard', 'soft': '✎ soft', 'off': '✎ off',}
+    let g:pencil#mode_indicators = {'hard': '␍', 'soft': '⤸', 'off': '',}
+    "let g:pencil#mode_indicators = {'hard': '✐ hard', 'soft': '✎ soft', 'off': '✎ off',}
   el
-    let g:pencil#mode_indicators = {'hard': 'hard', 'soft': 'soft', 'off': 'off',}
+    let g:pencil#mode_indicators = {'hard': 'hard', 'soft': 'soft', 'off': '',}
   en
 en
 
