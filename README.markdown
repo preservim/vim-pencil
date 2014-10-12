@@ -292,10 +292,11 @@ terminal to support **bold** and _italic_ styles.
 
 Your status line can reflect the wrap mode for _pencil_ buffers. For
 example, `␍` to represent `HardPencil` (hard line break) mode.  To
-configure your status line, add to your `.vimrc`:
+configure your status line and ruler, add to your `.vimrc`:
 
 ```vim
-set statusline=%<%f\ %{PencilMode()}\ %P
+set statusline=%<%f\ %h%m%r%w\ \ %{PencilMode()}\ %=\ col\ %c%V\ \ line\ %l\,%L\ %P
+set rulerformat=%-12.(%l,%c%V%)%{PencilMode()}\ %P
 ```
 
 or if using [bling/vim-airline][va]:
@@ -515,5 +516,5 @@ If you’ve spotted a problem or have an idea on improving this plugin,
 please post it to the github project issue page.
 
 ```
-<!-- vim: set tw=74 :-->
+<!-- vim: set tw=73 :-->
 ```
