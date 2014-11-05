@@ -384,6 +384,8 @@ let g:pencil#autoformat_blacklist = [
       \ 'markdownRule',
       \ 'markdownHighlight[A-Za-z0-9]+',
       \ 'mkdCode',
+      \ 'mkdRule',
+      \ 'htmlH[0-9]',
       \ 'mkdIndentCode',
       \ 'markdownFencedCodeBlock',
       \ 'markdownInlineCode',
@@ -477,7 +479,7 @@ If no such lines found, _pencil_ falls back to the default wrap mode.
 
 Other plugins of specific interest to writers:
 
-* [tpope/vim-markdown][tvm], [plasticboy/vim-markdown][pvm] - Markdown syntax plugins
+* [tpope/vim-markdown][tvm], [plasticboy/vim-markdown][pvm], [gabrielelana/vim-markdown][gvm] - Markdown syntax plugins
 * [mattly/vim-markdown-enhancements][mvme] - highlighting for tables and footnotes
 * [tpope/vim-abolish][ab] - search for, substitute, and abbr. multiple variants of a word
 * [tommcdo/vim-exchange][ex] - easy text exchange operator for Vim
@@ -490,6 +492,7 @@ Other plugins of specific interest to writers:
 [jg]: http://github.com/junegunn/goyo.vim
 [tvm]: http://github.com/tpope/vim-markdown
 [pvm]: http://github.com/plasticboy/vim-markdown
+[gvm]: http://github.com/gabrielelana/vim-markdown
 [mvme]: http://github.com/mattly/vim-markdown-enhancements
 
 If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
