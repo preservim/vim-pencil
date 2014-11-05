@@ -29,11 +29,11 @@ endf
 fun! PencilMode()
   if exists('b:pencil_wrap_mode')
     if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
-      return get(g:pencil#mode_indicators, 'soft', 'soft')
+      return get(g:pencil#mode_indicators, 'soft', 'S')
     elsei b:pencil_wrap_mode ==# s:WRAP_MODE_HARD
-      return get(g:pencil#mode_indicators, 'hard', 'hard')
+      return get(g:pencil#mode_indicators, 'hard', 'H')
     el
-      return get(g:pencil#mode_indicators, 'off', 'off')
+      return get(g:pencil#mode_indicators, 'off', '')
     en
   else
     return ''   " should be blank for non-prose modes
@@ -61,8 +61,7 @@ if !exists('g:pencil#autoformat_blacklist')
   " by default, pencil does NOT start autoformat if inside any of
   " the following syntax groups
   "
-  "'markdownCode', 'markdownUrl', 'markdownIdDeclaration',
-  "'markdownLinkDelimiter', 'markdownHighlight[A-Za-z0-9]+' (tpope/vim-markdown)
+  "'markdown*' (tpope/vim-markdown)
   "'mkdCode', 'mkdIndentCode' (plasticboy/vim-markdown)
   "'markdownFencedCodeBlock', 'markdownInlineCode' (gabrielelana/vim-markdown)
   "'mmdTable[A-Za-z0-9]*' (mattly/vim-markdown-enhancements)
@@ -71,9 +70,11 @@ if !exists('g:pencil#autoformat_blacklist')
   "'tex*' (syntax file shipped with vim)
   let g:pencil#autoformat_blacklist = [
         \ 'markdownCode',
+        \ 'markdownH[0-9]',
         \ 'markdownUrl',
         \ 'markdownIdDeclaration',
-        \ 'markdownLinkDelimiter',
+        \ 'markdownLink',
+        \ 'markdownRule',
         \ 'markdownHighlight[A-Za-z0-9]+',
         \ 'mkdCode',
         \ 'mkdIndentCode',
@@ -97,6 +98,19 @@ if !exists('g:pencil#autoformat_blacklist')
 en
 let g:pencil#autoformat_blacklist_re =
   \ '\v(' . join(g:pencil#autoformat_blacklist, '|') . ')'
+
+if !exists('g:pencil#autoformat_inline_whitelist')
+  " grant autoformat a reprieve (allow enabling) if any of
+  " following syntax groups doesn't dominate the whole line
+  "
+  "'markdownCode' (tpope/vim-markdown)
+  let g:pencil#autoformat_inline_whitelist = [
+        \ 'markdownCode',
+        \ 'markdownLink',
+        \ ]
+en
+let g:pencil#autoformat_inline_whitelist_re =
+  \ '\v(' . join(g:pencil#autoformat_inline_whitelist, '|') . ')'
 
 if !exists('g:pencil#joinspaces')
   " by default, only one space after full stop (.)
@@ -137,22 +151,36 @@ if !exists('g:pencil#mode_indicators')
   " used to set PencilMode() for statusline
   if s:unicode_enabled()
     let g:pencil#mode_indicators = {'hard': '␍', 'soft': '⤸', 'off': '',}
-    "let g:pencil#mode_indicators = {'hard': '✐ hard', 'soft': '✎ soft', 'off': '✎ off',}
   el
-    let g:pencil#mode_indicators = {'hard': 'hard', 'soft': 'soft', 'off': '',}
+    let g:pencil#mode_indicators = {'hard': 'H', 'soft': 'S', 'off': '',}
   en
 en
 
-" # coms
-com -nargs=0 HardPencil    call pencil#init({'wrap': 'hard'})
-com -nargs=0 SoftPencil    call pencil#init({'wrap': 'soft'})
-com -nargs=0 DropPencil    call pencil#init({'wrap': 'off' })
-com -nargs=0 NoPencil      call pencil#init({'wrap': 'off' })
-com -nargs=0 TogglePencil  call pencil#init({'wrap': 'toggle'})
+" Commands
 
-com -nargs=0 AutoPencil    call pencil#setAutoFormat(1)
-com -nargs=0 ManualPencil  call pencil#setAutoFormat(0)
-com -nargs=0 ShiftPencil   call pencil#setAutoFormat(-1)
+com -nargs=0 Pencil         call pencil#init({'wrap': 'on' })
+com -nargs=0 PencilOff      call pencil#init({'wrap': 'off' })
+com -nargs=0 PencilHard     call pencil#init({'wrap': 'hard'})
+com -nargs=0 PencilSoft     call pencil#init({'wrap': 'soft'})
+com -nargs=0 PencilToggle   call pencil#init({'wrap': 'toggle'})
+com -nargs=0 PFormat        call pencil#setAutoFormat(1)
+com -nargs=0 PFormatOff     call pencil#setAutoFormat(0)
+com -nargs=0 PFormatToggle  call pencil#setAutoFormat(-1)
+
+" NOTE: legacy commands will be disabled by default at some point
+if !exists('g:pencil#legacyCommands')
+  let g:pencil#legacyCommands = 1
+en
+if g:pencil#legacyCommands
+  com -nargs=0 HardPencil    call pencil#init({'wrap': 'hard'})
+  com -nargs=0 SoftPencil    call pencil#init({'wrap': 'soft'})
+  com -nargs=0 DropPencil    call pencil#init({'wrap': 'off' })
+  com -nargs=0 NoPencil      call pencil#init({'wrap': 'off' })
+  com -nargs=0 TogglePencil  call pencil#init({'wrap': 'toggle'})
+  com -nargs=0 AutoPencil    call pencil#setAutoFormat(1)
+  com -nargs=0 ManualPencil  call pencil#setAutoFormat(0)
+  com -nargs=0 ShiftPencil   call pencil#setAutoFormat(-1)
+en
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

@@ -5,7 +5,6 @@
 " Created:     December 28, 2013
 " License:     The MIT License (MIT)
 " ============================================================================
-
 if exists("autoloaded_pencil") | fini | en
 let autoloaded_pencil = 1
 
@@ -58,28 +57,37 @@ fun! s:maybe_enable_autoformat()
   let l:okay_to_enable = 1
   let l:line = line('.')
   let l:col = col('.')
+  let l:last_col = col('$')
   let l:stack = []
+  let l:found_empty = 0
   " at end of line there may be no synstack, so scan back
   while l:col > 0
     let l:stack = synstack(l:line, l:col)
     if l:stack != []
       break
     en
+    " the last column will always be empty, so ignore it
+    if l:col < l:last_col
+      let l:found_empty = 1
+    en
     let l:col -= 1
   endw
   " if needed, scan towards end of line looking for highlight groups
   if l:stack == []
     let l:col = col('.') + 1
-    let l:last_col = col('$')
     while l:col <= l:last_col
       let l:stack = synstack(l:line, l:col)
       if l:stack != []
         break
       en
+      " the last column will always be empty, so ignore it
+      if l:col < l:last_col
+        let l:found_empty = 1
+      en
       let l:col += 1
     endw
   en
-  " scan for matches to blacklist
+  " enforce blacklist by scanning for syntax matches
   for l:sid in l:stack
     if match(synIDattr(l:sid, 'name'),
             \ g:pencil#autoformat_blacklist_re) >= 0
@@ -87,24 +95,53 @@ fun! s:maybe_enable_autoformat()
       break
     en
   endfo
+  " enforce whitelist by detecting inline `markup` for
+  " which we DO want autoformat to be enabled (e.g.,
+  " tpope's markdownCode)
+  if !l:okay_to_enable
+    " one final check for an empty stack at the start of the line
+    if !l:found_empty
+      if synstack(l:line, 1) == []
+        let l:found_empty = 1
+      en
+    en
+    if l:found_empty
+      for l:sid in l:stack
+        if match(synIDattr(l:sid, 'name'),
+                \ g:pencil#autoformat_inline_whitelist_re) >= 0
+          let l:okay_to_enable = 1
+        en
+      endfo
+    en
+  en
   if l:okay_to_enable
     set formatoptions+=a
   en
 endf
 
-fun! pencil#setAutoFormat(mode)
+fun! pencil#setAutoFormat(af)
   " 1=auto, 0=manual, -1=toggle
   if !exists('b:last_autoformat')
     let b:last_autoformat = 0
   en
-  let b:last_autoformat = a:mode ==# -1 ? !b:last_autoformat : a:mode
-  if b:last_autoformat
+  let l:nu_af = a:af ==# -1 ? !b:last_autoformat : a:af
+  let l:is_hard =
+     \ exists('b:pencil_wrap_mode') &&
+     \ b:pencil_wrap_mode ==# s:WRAP_MODE_HARD
+  if l:nu_af && l:is_hard
     aug pencil_autoformat
       au InsertEnter <buffer> call s:maybe_enable_autoformat()
       au InsertLeave <buffer> set formatoptions-=a
     aug END
+    let b:last_autoformat = l:nu_af
   el
     sil! au! pencil_autoformat * <buffer>
+    if l:nu_af && !l:is_hard
+      echohl WarningMsg
+      echo "autoformat can only be enabled in hard break line mode"
+      echohl NONE
+      return
+    en
   en
 endf
 

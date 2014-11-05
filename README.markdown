@@ -8,32 +8,34 @@
 ![demo](http://i.imgur.com/0KYl5vU.gif)
 - - -
 
+[Note: demo will be updated soon with the _newly_ renamed commands (see
+below), but the legacy ones still work.]
+
 # Features
 
 The _pencil_ plugin aspires to make Vim as powerful a tool for writers as
 it is for coders by focusing narrowly on the handful of tweaks needed to
 smooth the path to writing prose.
 
-* For editing prose-oriented file types such as _text_, _markdown_,
-  _mail_, _rst_, _tex_, and _textile_.
+* For editing prose-oriented file types such as _text_, _markdown_, _mail_,
+  _rst_, _tex_, and _textile_.
 * Agnostic on soft line wrap _versus_ hard line breaks, supporting both
 * Auto-detects wrap mode via modeline and sampling
 * Adjusts navigation key mappings to suit the wrap mode
-* Creates undo points on common punctuation during insert, including
+* Creates undo points on common punctuation during Insert mode, including
   deletion via line `<C-U>` and word `<C-W>`
-* When using hard line breaks, enables autoformat while inserting text...
-* ...except for tables and code blocks where you won’t want it
-* Buffer-scoped configuration (with a few minor exceptions, _pencil_
-  preserves your global settings)
-* Support for Vim’s Conceal feature to hide markup defined by Syntax
-  plugins (e.g., `_` and `*` markup for styled text in \_*Markdown*\_)
-* Support for display of mode indicator (`␍` and `⤸`, e.g.) in the status
-  line
+* When using hard line breaks, enables autoformat while inserting text, except
+  for tables and code blocks where you won’t want it
+* Buffer-scoped configuration (with a few minor exceptions, _pencil_ preserves
+  your global settings)
+* Support for Vim’s Conceal feature to hide markup defined by Syntax plugins
+  (e.g., `_` and `*` markup for styled text in \_*Markdown*\_)
+* Support for display of mode indicator (`␍` and `⤸`, e.g.) in the status line
 * Pure Vimscript with no dependencies
 
-Need spell-check and other features? Vim is about customization. To
-complete your editing environment, learn to configure Vim and draw upon
-its rich ecosystem of plugins.
+Need spell-check, distraction-free editing, and other features? Vim is about
+customization. To complete your editing environment, learn to configure Vim and
+draw upon its rich ecosystem of plugins.
 
 # Why use Vim for writing?
 
@@ -143,21 +145,26 @@ if auto-detect might suggest soft line wrap.
 
 ## Commands
 
+You can enable, disable, and toggle _pencil_ as a command:
+
+* `Pencil` - enable pencil with auto-detection
+* `PencilOff` - removes navigation mappings and restores buffer to global settings
+* `PencilToggle` - if on, turns off; if off, enables with detection
+
 Because auto-detect might not work as intended, you can invoke a command
 to set the behavior for the current buffer:
 
-* `SoftPencil` - enable soft line wrap mode
-* `HardPencil` - enable hard line break mode
-* `NoPencil` - removes navigation mappings and restores buffer to global settings
-* `TogglePencil` - if on, turns off; if off, enables with detection
+* `PencilSoft` - enable soft line wrap mode
+* `PencilHard` - enable hard line break mode
 
 ## Automatic formatting
 
-_The ‘autoformat’ feature affects *HardPencil* (hard line break) mode
+_The ‘autoformat’ feature affects *PencilHard* (hard line break) mode
 only._
 
-When inserting text while in *HardPencil* mode, Vim’s autoformat feature will be
-enabled by default and can offer many of the same benefits as soft line wrap.
+When inserting text while in *PencilHard* mode, Vim’s autoformat feature
+will be enabled by default and can offer many of the same benefits as
+soft line wrap.
 
 A useful exception: if used with popular syntax modules\*, _pencil_ will
 **disable** autoformat when you enter Insert mode from inside a code block
@@ -165,15 +172,15 @@ or table. (See the advanced section below for more details.)
 
 Where you need to manually enable/disable autoformat, you can do so with a command:
 
-* `AutoPencil` - enables autoformat
-* `ManualPencil` - disables autoformat
-* `ShiftPencil` - toggle to enable if disabled, etc.
+* `PFormat` - enables autoformat
+* `PFormatOff` - disables autoformat
+* `PFormatToggle` - toggle to enable if disabled, etc.
 
 Or optionally map the toggle command to a key of your choice in your
 `.vimrc`:
 
 ```vim
-nnoremap <silent> <leader>p :ShiftPencil<cr>
+nnoremap <silent> <leader>p :PFormatToggle<cr>
 ```
 
 To set the default behavior, add to your `.vimrc`:
@@ -214,9 +221,9 @@ nnoremap <silent> Q gwip
 
 ## Default textwidth
 
-You can configure the textwidth to be used in **HardPencil** mode when no
-textwidth is set globally, locally, or available via modeline. It defaults
-to `74`, but you can change that value in your `.vimrc`:
+You can configure the textwidth to be used in **PencilHard** mode when no
+textwidth is set globally, locally, or available via modeline. It
+defaults to `74`, but you can change that value in your `.vimrc`:
 
 ```vim
 let g:pencil#textwidth = 74
@@ -291,7 +298,7 @@ terminal to support **bold** and _italic_ styles.
 ## Status line indicator
 
 Your status line can reflect the wrap mode for _pencil_ buffers. For
-example, `␍` to represent `HardPencil` (hard line break) mode.  To
+example, `␍` to represent `PencilHard` (hard line break) mode.  To
 configure your status line and ruler, add to your `.vimrc`:
 
 ```vim
@@ -351,13 +358,13 @@ statements into a function.
 
 ### Autoformat blacklisting
 
-_The ‘autoformat’ feature affects *HardPencil* (hard line break) mode
+_The ‘autoformat’ feature affects *PencilHard* (hard line break) mode
 only._
 
 When editing formatted text, such as a table or code block, autoformat
 will wreak havoc with the formatting. In these cases you will want to
-temporarily deactivate autoformat, such as with the `ManualPencil` or
-`ShiftPencil` commands described above. However, in most cases, you won’t
+temporarily deactivate autoformat, such as with the `PFormatOff` or
+`PFormatToggle` commands described above. However, in most cases, you won’t
 need to do this.
 
 _pencil_ will detect the syntax highlight group at the cursor position to
@@ -370,9 +377,11 @@ _not_ in the blacklist. The current blacklist is:
 ```vim
 let g:pencil#autoformat_blacklist = [
       \ 'markdownCode',
+      \ 'markdownH[0-9]',
       \ 'markdownUrl',
       \ 'markdownIdDeclaration',
-      \ 'markdownLinkDelimiter',
+      \ 'markdownLink',
+      \ 'markdownRule',
       \ 'markdownHighlight[A-Za-z0-9]+',
       \ 'mkdCode',
       \ 'mkdIndentCode',
@@ -473,10 +482,12 @@ Other plugins of specific interest to writers:
 * [tpope/vim-abolish][ab] - search for, substitute, and abbr. multiple variants of a word
 * [tommcdo/vim-exchange][ex] - easy text exchange operator for Vim
 * [junegunn/limelight.vim][jl] - focus mode that brightens current paragraph
+* [junegunn/goyo.vim][jg] - distraction-free editing mode
 
 [ab]: http://github.com/tpope/vim-abolish
 [ex]: http://github.com/tommcdo/vim-exchange
 [jl]: http://github.com/junegunn/limelight.vim
+[jg]: http://github.com/junegunn/goyo.vim
 [tvm]: http://github.com/tpope/vim-markdown
 [pvm]: http://github.com/plasticboy/vim-markdown
 [mvme]: http://github.com/mattly/vim-markdown-enhancements
@@ -493,7 +504,8 @@ If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
 * [vim-wheel][wh] - screen-anchored cursor movement for Vim
 * [vim-wordy][wo] - uncovering usage problems in writing
 
-Unimpressed by _pencil_? [vim-pandoc][vp] offers prose-oriented features with its own Markdown variant
+Unimpressed by _pencil_? [vim-pandoc][vp] offers prose-oriented features
+with its own Markdown variant.
 
 [cp]: http://github.com/reedes/vim-colors-pencil
 [lc]: http://github.com/reedes/vim-litecorrect
