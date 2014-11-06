@@ -75,12 +75,68 @@ tool in expressing yourself. For more details on vi-style editing, see...
 
 # Installation
 
-Install using Pathogen, Vundle, Neobundle, or your favorite Vim package
-manager.
+Install using Vundle, vim-plug, NeoBundle, Pathogen, or your favorite Vim
+package manager.
 
 _For those new to Vim: before installing this plugin, consider getting
 comfortable with the basics of Vim by working through one of the many
 tutorials available._
+
+## Vundle
+
+Add to your `.vimrc:`
+
+```vim
+Plugin 'reedes/vim-pencil'
+```
+
+…then run the following in Vim:
+
+```vim
+:source %
+:PluginInstall
+```
+
+For Vundle version < 0.10.2, replace `Plugin` with `Bundle` above.
+
+## vim-plug
+
+Add to your `.vimrc:`
+
+```vim
+Plug 'reedes/vim-pencil'
+```
+
+…then run the following in Vim:
+
+```vim
+:source %
+:PlugInstall
+```
+
+## NeoBundle
+
+Add to your `.vimrc:`
+
+```vim
+NeoBundle 'reedes/vim-pencil'
+```
+
+…then run the following in Vim:
+
+```vim
+:source %
+:NeoBundleInstall
+```
+
+## Pathogen
+
+Run the following in a terminal:
+
+```vim
+cd ~/.vim/bundle
+git clone https://github.com/reedes/vim-pencil
+```
 
 # Configuration
 
@@ -479,8 +535,6 @@ If no such lines found, _pencil_ falls back to the default wrap mode.
 
 Other plugins of specific interest to writers:
 
-* [tpope/vim-markdown][tvm], [plasticboy/vim-markdown][pvm], [gabrielelana/vim-markdown][gvm] - Markdown syntax plugins
-* [mattly/vim-markdown-enhancements][mvme] - highlighting for tables and footnotes
 * [tpope/vim-abolish][ab] - search for, substitute, and abbr. multiple variants of a word
 * [tommcdo/vim-exchange][ex] - easy text exchange operator for Vim
 * [junegunn/limelight.vim][jl] - focus mode that brightens current paragraph
@@ -490,6 +544,14 @@ Other plugins of specific interest to writers:
 [ex]: http://github.com/tommcdo/vim-exchange
 [jl]: http://github.com/junegunn/limelight.vim
 [jg]: http://github.com/junegunn/goyo.vim
+
+Markdown syntax plugins
+
+* [tpope/vim-markdown][tvm] - the latest version of the syntax plugin that ships with Vim
+* [plasticboy/vim-markdown][pvm]
+* [gabrielelana/vim-markdown][gvm]
+* [mattly/vim-markdown-enhancements][mvme] - highlighting for tables and footnotes
+
 [tvm]: http://github.com/tpope/vim-markdown
 [pvm]: http://github.com/plasticboy/vim-markdown
 [gvm]: http://github.com/gabrielelana/vim-markdown
