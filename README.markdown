@@ -84,7 +84,7 @@ tutorials available._
 
 ## Vundle
 
-Add to your `.vimrc:`
+Add to your `.vimrc`:
 
 ```vim
 Plugin 'reedes/vim-pencil'
@@ -101,7 +101,7 @@ For Vundle version < 0.10.2, replace `Plugin` with `Bundle` above.
 
 ## vim-plug
 
-Add to your `.vimrc:`
+Add to your `.vimrc`:
 
 ```vim
 Plug 'reedes/vim-pencil'
@@ -116,7 +116,7 @@ Plug 'reedes/vim-pencil'
 
 ## NeoBundle
 
-Add to your `.vimrc:`
+Add to your `.vimrc`:
 
 ```vim
 NeoBundle 'reedes/vim-pencil'
