@@ -222,7 +222,7 @@ When inserting text while in *PencilHard* mode, Vim’s autoformat feature
 will be enabled by default and can offer many of the same benefits as
 soft line wrap.
 
-A useful exception: if used with popular prose-oriented syntax modules,
+A useful exception: if used with popular prose-oriented syntax plugins,
 _pencil_ will **disable** autoformat when you enter Insert mode from
 inside a code block or table. (See the advanced section below for more
 details.)
