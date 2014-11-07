@@ -90,7 +90,7 @@ Add to your `.vimrc`:
 Plugin 'reedes/vim-pencil'
 ```
 
-…then run the following in Vim:
+…save and then run the following in Vim:
 
 ```vim
 :source %
@@ -107,7 +107,7 @@ Add to your `.vimrc`:
 Plug 'reedes/vim-pencil'
 ```
 
-…then run the following in Vim:
+…save and then run the following in Vim:
 
 ```vim
 :source %
@@ -122,7 +122,7 @@ Add to your `.vimrc`:
 NeoBundle 'reedes/vim-pencil'
 ```
 
-…then run the following in Vim:
+…save and then run the following in Vim:
 
 ```vim
 :source %
