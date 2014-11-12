@@ -110,6 +110,7 @@ fun! s:maybe_enable_autoformat()
         if match(synIDattr(l:sid, 'name'),
                 \ g:pencil#autoformat_inline_whitelist_re) >= 0
           let l:okay_to_enable = 1
+          break
         en
       endfo
     en

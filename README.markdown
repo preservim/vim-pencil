@@ -84,13 +84,13 @@ tutorials available._
 
 ## Vundle
 
-Add to your `.vimrc`:
+Add to your `.vimrc` and save:
 
 ```vim
 Plugin 'reedes/vim-pencil'
 ```
 
-…save and then run the following in Vim:
+…then run the following in Vim:
 
 ```vim
 :source %
@@ -101,13 +101,13 @@ For Vundle version < 0.10.2, replace `Plugin` with `Bundle` above.
 
 ## vim-plug
 
-Add to your `.vimrc`:
+Add to your `.vimrc` and save:
 
 ```vim
 Plug 'reedes/vim-pencil'
 ```
 
-…save and then run the following in Vim:
+…then run the following in Vim:
 
 ```vim
 :source %
@@ -116,13 +116,13 @@ Plug 'reedes/vim-pencil'
 
 ## NeoBundle
 
-Add to your `.vimrc`:
+Add to your `.vimrc` and save:
 
 ```vim
 NeoBundle 'reedes/vim-pencil'
 ```
 
-…save and then run the following in Vim:
+…then run the following in Vim:
 
 ```vim
 :source %
