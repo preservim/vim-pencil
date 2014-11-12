@@ -275,7 +275,7 @@ fun! pencil#init(...) abort
   " TODO how to separate quote from apostrophe use?
   if b:pencil_wrap_mode
     aug pencil_iskeyword
-      au BufEnter <buffer> setl isk& | setl isk-=_ | setl isk+=$,%,&,#,-,'
+      au BufEnter <buffer> setl isk& | setl isk-=_ | setl isk+=$,%,&,#,-,',:,+
     aug END
   el
     sil! au! pencil_iskeyword * <buffer>
@@ -286,24 +286,28 @@ fun! pencil#init(...) abort
     setl nolist
     setl wrapmargin=0
     setl autoindent         " needed by formatoptions=n
-
+    setl indentexpr=
     if has('smartindent')
       setl nosmartindent      " avoid c-style indents in prose
+    en
+    if has('cindent')
+      setl nocindent          " avoid c-style indents in prose
     en
 
     setl formatoptions+=n   " recognize numbered lists
     setl formatoptions+=1   " don't break line before 1 letter word
     setl formatoptions+=t   " autoformat of text (vim default)
-    setl formatoptions+=2   " preserve indent based on 2nd line for rest of paragraph
+    "setl formatoptions+=2   " preserve indent based on 2nd line for rest of paragraph
 
     " clean out stuff we likely don't want
     setl formatoptions-=v   " only break line at blank entered during insert
     setl formatoptions-=w   " avoid erratic behavior if mixed spaces
     setl formatoptions-=a   " autoformat will turn on with Insert in HardPencil mode
-    setl formatoptions-=o   " don't insert comment leader
+    setl formatoptions-=2   " doesn't work with with fo+=n, says docs
 
     " plasticboy/vim-markdown sets these to handle bullet points
     " as comments. Not changing for now.
+    "setl formatoptions-=o   " don't insert comment leader
     "setl formatoptions-=c   " no autoformat of comments
     "setl formatoptions+=r   " don't insert comment leader
 
@@ -317,11 +321,15 @@ fun! pencil#init(...) abort
     if has('smartindent')
       setl smartindent< nosmartindent<
     en
+    if has('cindent')
+      setl cindent< nocindent<
+    en
     if has('conceal')
       setl conceallevel<
       setl concealcursor<
     en
 
+    setl indentexpr<
     setl autoindent< noautoindent<
     setl list< nolist<
     setl wrapmargin<
