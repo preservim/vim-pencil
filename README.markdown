@@ -133,7 +133,7 @@ NeoBundle 'reedes/vim-pencil'
 
 Run the following in a terminal:
 
-```vim
+```bash
 cd ~/.vim/bundle
 git clone https://github.com/reedes/vim-pencil
 ```
