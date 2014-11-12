@@ -275,7 +275,7 @@ fun! pencil#init(...) abort
   " TODO how to separate quote from apostrophe use?
   if b:pencil_wrap_mode
     aug pencil_iskeyword
-      au BufEnter <buffer> setl isk& | setl isk-=_ | setl isk+=$,%,&,#,-,',:,+
+      au BufEnter <buffer> setl isk& | setl isk-=_ | setl isk+=$,%,&,#,-,',+
     aug END
   el
     sil! au! pencil_iskeyword * <buffer>
