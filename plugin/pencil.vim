@@ -66,8 +66,7 @@ if !exists('g:pencil#autoformat_blacklist')
   " markdownFencedCodeBlock, markdownInlineCode, markdownRule, markdownH[0-9] (gabrielelana/vim-markdown)
   " mmdTable[A-Za-z0-9]* (mattly/vim-markdown-enhancements)
   " txtCode (timcharper/textile.vim)
-  " rst* (syntax file shipped with vim)
-  " tex* (syntax file shipped with vim)
+  " rst*,tex*,asciidoc* (syntax file shipped with vim)
   let g:pencil#autoformat_blacklist = [
         \ 'markdownCode',
         \ 'markdownH[0-9]',
@@ -96,6 +95,12 @@ if !exists('g:pencil#autoformat_blacklist')
         \ 'texRefZone',
         \ 'texSection$',
         \ 'texTitle',
+        \ 'asciidocAttribute',
+        \ 'asciidocList',
+        \ 'asciidocLiteral',
+        \ 'asciidoc[A-Za-z]*Block',
+        \ 'asciidoc[A-Za-z]*Macro',
+        \ 'asciidoc[A-Za-z]*Title',
         \ ]
 en
 let g:pencil#autoformat_blacklist_re =
@@ -109,6 +114,8 @@ if !exists('g:pencil#autoformat_inline_whitelist')
   let g:pencil#autoformat_inline_whitelist = [
         \ 'markdownCode',
         \ 'markdownLink',
+        \ 'asciidocMacro',
+        \ 'asciidocQuotedMonospaced',
         \ ]
 en
 let g:pencil#autoformat_inline_whitelist_re =

@@ -8,8 +8,8 @@
 ![demo](http://i.imgur.com/0KYl5vU.gif)
 - - -
 
-[Note: demo will be updated soon with the _newly_ renamed commands (see
-below), but the legacy ones still work.]
+[Note: demo above needs to be updated with the _recently_ renamed
+commands (see below), but the legacy ones shown still work.]
 
 # Features
 
@@ -17,15 +17,16 @@ The _pencil_ plugin aspires to make Vim as powerful a tool for writers as
 it is for coders by focusing narrowly on the handful of tweaks needed to
 smooth the path to writing prose.
 
-* For editing prose-oriented file types such as _text_, _markdown_, _mail_,
-  _rst_, _tex_, and _textile_.
+* For editing prose-oriented file types such as _text_, _markdown_,
+  _mail_, _rst_, _tex_, _textile_, and _asciidoc_.
 * Agnostic on soft line wrap _versus_ hard line breaks, supporting both
-* Auto-detects wrap mode via modeline and sampling
+* Auto-detects wrap mode via `modeline` and sampling
 * Adjusts navigation key mappings to suit the wrap mode
 * Creates undo points on common punctuation during Insert mode, including
   deletion via line `<C-U>` and word `<C-W>`
-* When using hard line breaks, enables autoformat while inserting text, except
-  for tables and code blocks where you won’t want it
+* When using hard line breaks, _pencil_ enables Vim’s autoformat while
+  inserting text, except for tables and code blocks where you won’t want
+  it
 * Buffer-scoped configuration (with a few minor exceptions, _pencil_ preserves
   your global settings)
 * Support for Vim’s Conceal feature to hide markup defined by Syntax plugins
@@ -75,14 +76,14 @@ tool in expressing yourself. For more details on vi-style editing, see...
 
 # Installation
 
-Install using Vundle, vim-plug, NeoBundle, Pathogen, or your favorite Vim
-package manager.
+_pencil_ is best installed using a Vim package manager, such as Vundle,
+Plug, NeoBundle, or Pathogen.
 
 _For those new to Vim: before installing this plugin, consider getting
 comfortable with the basics of Vim by working through one of the many
 tutorials available._
 
-## Vundle
+#### Vundle
 
 Add to your `.vimrc` and save:
 
@@ -99,7 +100,7 @@ Plugin 'reedes/vim-pencil'
 
 For Vundle version < 0.10.2, replace `Plugin` with `Bundle` above.
 
-## vim-plug
+#### Plug
 
 Add to your `.vimrc` and save:
 
@@ -114,7 +115,7 @@ Plug 'reedes/vim-pencil'
 :PlugInstall
 ```
 
-## NeoBundle
+#### NeoBundle
 
 Add to your `.vimrc` and save:
 
@@ -129,7 +130,7 @@ NeoBundle 'reedes/vim-pencil'
 :NeoBundleInstall
 ```
 
-## Pathogen
+#### Pathogen
 
 Run the following in a terminal:
 
@@ -140,7 +141,10 @@ git clone https://github.com/reedes/vim-pencil
 
 # Configuration
 
-## Basic configuration
+## Basic initialization
+
+Though optional, initializing _pencil_ by `FileType` will automatically
+set up your buffers for editing prose.
 
 Add support for your desired filetypes to your `.vimrc`:
 
@@ -160,11 +164,11 @@ You can initialize several prose-oriented plugins together:
 ```vim
 augroup pencil
   autocmd!
-  autocmd FileType markdown,mkd call pencil#init() |
-                              \ call lexical#init() |
-                              \ call litecorrect#init() |
-                              \ call textobj#quote#init() |
-                              \ call textobj#sentence#init()
+  autocmd FileType markdown,mkd call pencil#init()
+                            \ | call lexical#init()
+                            \ | call litecorrect#init()
+                            \ | call textobj#quote#init()
+                            \ | call textobj#sentence#init()
 augroup END
 ```
 
@@ -184,7 +188,7 @@ In most cases you can set a default to suit your preference and let
 auto-detection figure out what to do.
 
 ```vim
-let g:pencil#wrapModeDefault = 'soft'   " or 'hard'
+let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
 
 augroup pencil
   autocmd!
@@ -203,15 +207,15 @@ if auto-detect might suggest soft line wrap.
 
 You can enable, disable, and toggle _pencil_ as a command:
 
-* `Pencil` - enable pencil with auto-detection
+* `Pencil` - initialize _pencil_ with auto-detect for the current buffer
 * `PencilOff` - removes navigation mappings and restores buffer to global settings
-* `PencilToggle` - if on, turns off; if off, enables with detection
+* `PencilToggle` - if on, turns off; if off, initializes with auto-detect
 
 Because auto-detect might not work as intended, you can invoke a command
 to set the behavior for the current buffer:
 
-* `PencilSoft` - enable soft line wrap mode
-* `PencilHard` - enable hard line break mode
+* `PencilSoft` - initialize _pencil_ with soft line wrap mode
+* `PencilHard` - initialize _pencil_ with hard line break mode (and autoformat)
 
 ## Automatic formatting
 
@@ -232,13 +236,6 @@ Where you need to manually enable/disable autoformat, you can do so with a comma
 * `PFormat` - enables autoformat
 * `PFormatOff` - disables autoformat
 * `PFormatToggle` - toggle to enable if disabled, etc.
-
-Or optionally map the toggle command to a key of your choice in your
-`.vimrc`:
-
-```vim
-nnoremap <silent> <leader>p :PFormatToggle<cr>
-```
 
 To set the default behavior, add to your `.vimrc`:
 
@@ -460,6 +457,12 @@ let g:pencil#autoformat_blacklist = [
       \ 'texRefZone',
       \ 'texSection$',
       \ 'texTitle',
+      \ 'asciidocAttribute',
+      \ 'asciidocList',
+      \ 'asciidocLiteral',
+      \ 'asciidoc[A-Za-z]*Block',
+      \ 'asciidoc[A-Za-z]*Macro',
+      \ 'asciidoc[A-Za-z]*Title',
       \ ]
 ```
 
@@ -482,14 +485,14 @@ chances by giving _pencil_ an explicit hint.
 At the bottom of this document is a odd-looking code:
 
 ```html
-<!-- vim: set tw=74 :-->
+<!-- vim: set tw=73 :-->
 ```
 
 This is an **optional** ‘modeline’ that tells Vim to run the following
 command upon loading the file into a buffer:
 
 ```vim
-:set textwidth=74
+:set textwidth=73
 ```
 
 It tells _pencil_ to assume hard line breaks, regardless of whether or
@@ -591,7 +594,7 @@ with its own Markdown variant.
 # Future development
 
 If you’ve spotted a problem or have an idea on improving this plugin,
-please post it to the github project issue page.
+please post it to the github project issue page or submit a pull request.
 
 ```
 <!-- vim: set tw=73 :-->

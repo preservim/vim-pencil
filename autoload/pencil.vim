@@ -99,9 +99,11 @@ fun! s:maybe_enable_autoformat()
   " which we DO want autoformat to be enabled (e.g.,
   " tpope's markdownCode)
   if !l:okay_to_enable
-    " one final check for an empty stack at the start of the line
+    " one final check for an empty stack at the start and end of line,
+    " either of which greenlights a whitelist check
     if !l:found_empty
-      if synstack(l:line, 1) == []
+      if synstack(l:line, 1) == [] ||
+        \ (l:last_col > 2 && synstack(l:line, l:last_col-1) == [])
         let l:found_empty = 1
       en
     en
@@ -139,7 +141,7 @@ fun! pencil#setAutoFormat(af)
     sil! au! pencil_autoformat * <buffer>
     if l:nu_af && !l:is_hard
       echohl WarningMsg
-      echo "autoformat can only be enabled in hard break line mode"
+      echo "autoformat can only be enabled in hard line break mode"
       echohl NONE
       return
     en
