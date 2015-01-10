@@ -215,7 +215,7 @@ Because auto-detect might not work as intended, you can invoke a command
 to set the behavior for the current buffer:
 
 * `PencilSoft` - initialize _pencil_ with soft line wrap mode
-* `PencilHard` - initialize _pencil_ with hard line break mode (and autoformat)
+* `PencilHard` - initialize _pencil_ with hard line break mode (and Vim’s autoformat)
 
 ## Automatic formatting
 
@@ -226,16 +226,17 @@ When inserting text while in *PencilHard* mode, Vim’s autoformat feature
 will be enabled by default and can offer many of the same benefits as
 soft line wrap.
 
-A useful exception: if used with popular prose-oriented syntax plugins,
+One useful exception: if used with popular prose-oriented syntax plugins,
 _pencil_ will **disable** autoformat when you enter Insert mode from
 inside a code block or table. (See the advanced section below for more
-details.)
+details on the blacklisting feature.)
 
-Where you need to manually enable/disable autoformat, you can do so with a command:
+Where you need to manually enable/disable autoformat for the current
+buffer, you can do so with a command:
 
-* `PFormat` - enables autoformat
-* `PFormatOff` - disables autoformat
-* `PFormatToggle` - toggle to enable if disabled, etc.
+* `PFormat` - allows autoformat to be enabled (if not blacklisted)
+* `PFormatOff` - prevents autoformat from enabling (blacklist all)
+* `PFormatToggle` - toggle to allow if off, etc.
 
 To set the default behavior, add to your `.vimrc`:
 
@@ -465,6 +466,11 @@ let g:pencil#autoformat_blacklist = [
       \ 'asciidoc[A-Za-z]*Title',
       \ ]
 ```
+
+_WARNING: the implementation of this blacklist may be changing in the
+future._
+
+There’s also a whitelist to override the blacklist. See code for details.
 
 You can override this in your `.vimrc`. Additions to defaults with good
 use cases are welcome.

@@ -103,7 +103,7 @@ fun! s:maybe_enable_autoformat()
     " either of which greenlights a whitelist check
     if !l:found_empty
       if synstack(l:line, 1) == [] ||
-        \ (l:last_col > 2 && synstack(l:line, l:last_col-1) == [])
+        \ (l:last_col > 1 && synstack(l:line, l:last_col-1) == [])
         let l:found_empty = 1
       en
     en
