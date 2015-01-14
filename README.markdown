@@ -18,7 +18,7 @@ it is for coders by focusing narrowly on the handful of tweaks needed to
 smooth the path to writing prose.
 
 * For editing prose-oriented file types such as _text_, _markdown_,
-  _mail_, _rst_, _tex_, _textile_, and _asciidoc_.
+  _mail_, _rst_, _tex_, _textile_, and _asciidoc_
 * Agnostic on soft line wrap _versus_ hard line breaks, supporting both
 * Auto-detects wrap mode via `modeline` and sampling
 * Adjusts navigation key mappings to suit the wrap mode
@@ -226,10 +226,10 @@ When inserting text while in *PencilHard* mode, Vim’s autoformat feature
 will be enabled by default and can offer many of the same benefits as
 soft line wrap.
 
-One useful exception: if used with popular prose-oriented syntax plugins,
-_pencil_ will **disable** autoformat when you enter Insert mode from
-inside a code block or table. (See the advanced section below for more
-details on the blacklisting feature.)
+One useful exception (aka 'blacklisting'): if used with popular 
+prose-oriented syntax plugins, _pencil_ will **not** enable autoformat when 
+you enter Insert mode from inside a code block or table. (See the 
+advanced section below for more details on the blacklisting feature.)
 
 Where you need to manually enable/disable autoformat for the current
 buffer, you can do so with a command:
