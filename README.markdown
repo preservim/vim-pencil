@@ -143,8 +143,8 @@ git clone https://github.com/reedes/vim-pencil
 
 ## Basic initialization
 
-Though optional, initializing _pencil_ by `FileType` will automatically
-set up your buffers for editing prose.
+Initializing _pencil_ by `FileType` is optional, though doing so will
+automatically set up your buffers for editing prose.
 
 Add support for your desired filetypes to your `.vimrc`:
 
@@ -226,9 +226,9 @@ When inserting text while in *PencilHard* mode, Vim’s autoformat feature
 will be enabled by default and can offer many of the same benefits as
 soft line wrap.
 
-One useful exception (aka 'blacklisting'): if used with popular 
-prose-oriented syntax plugins, _pencil_ will **not** enable autoformat when 
-you enter Insert mode from inside a code block or table. (See the 
+One useful exception (aka 'blacklisting'): if used with popular
+prose-oriented syntax plugins, _pencil_ will **not** enable autoformat when
+you enter Insert mode from inside a code block or table. (See the
 advanced section below for more details on the blacklisting feature.)
 
 Where you need to manually enable/disable autoformat for the current
@@ -391,20 +391,20 @@ You can override _pencil_ and other configuration settings when initializing:
 ```vim
 augroup pencil
   autocmd!
-  autocmd FileType markdown,mkd call pencil#init() |
-                              \ call litecorrect#init() |
-                              \ setl spell spl=en_us fdl=4 noru nonu nornu |
-                              \ setl fdo+=search
-  autocmd Filetype git,gitsendemail,*commit*,*COMMIT* |
-                              \ call pencil#init({'wrap': 'hard', 'textwidth': 72}) |
-                              \ call litecorrect#init() |
-                              \ setl spell spl=en_us et sw=2 ts=2 noai
-  autocmd Filetype mail         call pencil#init({'wrap': 'hard', 'textwidth': 60}) |
-                              \ call litecorrect#init() |
-                              \ setl spell spl=en_us et sw=2 ts=2 noai nonu nornu
-  autocmd Filetype html,xml     call pencil#init({'wrap': 'soft'}) |
-                              \ call litecorrect#init() |
-                              \ setl spell spl=en_us et sw=2 ts=2
+  autocmd FileType markdown,mkd call pencil#init()
+                            \ | call litecorrect#init()
+                            \ | setl spell spl=en_us fdl=4 noru nonu nornu
+                            \ | setl fdo+=search
+  autocmd Filetype git,gitsendemail,*commit*,*COMMIT*
+                            \   call pencil#init({'wrap': 'hard', 'textwidth': 72})
+                            \ | call litecorrect#init()
+                            \ | setl spell spl=en_us et sw=2 ts=2 noai
+  autocmd Filetype mail         call pencil#init({'wrap': 'hard', 'textwidth': 60})
+                            \ | call litecorrect#init()
+                            \ | setl spell spl=en_us et sw=2 ts=2 noai nonu nornu
+  autocmd Filetype html,xml     call pencil#init({'wrap': 'soft'})
+                            \ | call litecorrect#init()
+                            \ | setl spell spl=en_us et sw=2 ts=2
 augroup END
 ```
 
