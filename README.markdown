@@ -8,9 +8,6 @@
 ![demo](http://i.imgur.com/0KYl5vU.gif)
 - - -
 
-[Note: demo above needs to be updated with the _recently_ renamed
-commands (see below), but the legacy ones shown still work.]
-
 # Features
 
 The _pencil_ plugin aspires to make Vim as powerful a tool for writers as
@@ -76,12 +73,17 @@ tool in expressing yourself. For more details on vi-style editing, see...
 
 # Installation
 
-_pencil_ is best installed using a Vim package manager, such as Vundle,
-Plug, NeoBundle, or Pathogen.
+_pencil_ is best installed using a Vim package manager, such as
+[Vundle][vnd], [Plug][plg], [NeoBundle][nbn], or [Pathogen][pth].
 
 _For those new to Vim: before installing this plugin, consider getting
 comfortable with the basics of Vim by working through one of the many
 tutorials available._
+
+[vnd]: https://github.com/gmarik/Vundle.vim
+[plg]: https://github.com/junegunn/vim-plug
+[nbn]: https://github.com/Shougo/neobundle.vim
+[pth]: https://github.com/tpope/vim-pathogen
 
 #### Vundle
 
@@ -143,7 +145,7 @@ git clone https://github.com/reedes/vim-pencil
 
 ## Basic initialization
 
-Initializing _pencil_ by `FileType` is optional, though doing so will
+Initializing _pencil_ by `FileType` is _optional_, though doing so will
 automatically set up your buffers for editing prose.
 
 Add support for your desired filetypes to your `.vimrc`:
@@ -208,21 +210,21 @@ if auto-detect might suggest soft line wrap.
 You can enable, disable, and toggle _pencil_ as a command:
 
 * `Pencil` - initialize _pencil_ with auto-detect for the current buffer
-* `PencilOff` - removes navigation mappings and restores buffer to global settings
-* `PencilToggle` - if on, turns off; if off, initializes with auto-detect
+* `PencilOff` (or `NoPencil`) - removes navigation mappings and restores buffer to global settings
+* `PencilToggle` (or `TogglePencil`) - if on, turns off; if off, initializes with auto-detect
 
 Because auto-detect might not work as intended, you can invoke a command
 to set the behavior for the current buffer:
 
-* `PencilSoft` - initialize _pencil_ with soft line wrap mode
-* `PencilHard` - initialize _pencil_ with hard line break mode (and Vim’s autoformat)
+* `SoftPencil` (or `PencilSoft`) - initialize _pencil_ with soft line wrap mode
+* `HardPencil` (or `PencilHard`) - initialize _pencil_ with hard line break mode (and Vim’s autoformat)
 
 ## Automatic formatting
 
-_The ‘autoformat’ feature affects *PencilHard* (hard line break) mode
+_The ‘autoformat’ feature affects *HardPencil* (hard line break) mode
 only._
 
-When inserting text while in *PencilHard* mode, Vim’s autoformat feature
+When inserting text while in *HardPencil* mode, Vim’s autoformat feature
 will be enabled by default and can offer many of the same benefits as
 soft line wrap.
 
@@ -276,7 +278,7 @@ nnoremap <silent> Q gwip
 
 ## Default textwidth
 
-You can configure the textwidth to be used in **PencilHard** mode when no
+You can configure the textwidth to be used in **HardPencil** mode when no
 textwidth is set globally, locally, or available via modeline. It
 defaults to `74`, but you can change that value in your `.vimrc`:
 
@@ -353,7 +355,7 @@ terminal to support **bold** and _italic_ styles.
 ## Status line indicator
 
 Your status line can reflect the wrap mode for _pencil_ buffers. For
-example, `␍` to represent `PencilHard` (hard line break) mode.  To
+example, `␍` to represent `HardPencil` (hard line break) mode.  To
 configure your status line and ruler, add to your `.vimrc`:
 
 ```vim
@@ -413,7 +415,7 @@ statements into a function.
 
 ### Autoformat blacklisting
 
-_The ‘autoformat’ feature affects *PencilHard* (hard line break) mode
+_The ‘autoformat’ feature affects *HardPencil* (hard line break) mode
 only._
 
 When editing formatted text, such as a table or code block, autoformat
@@ -442,7 +444,6 @@ let g:pencil#autoformat_blacklist = [
       \ 'mkdRule',
       \ 'mkdDelimiter',
       \ 'mkdLink',
-      \ 'mkdNonListItemBlock',
       \ 'mkdIndentCode',
       \ 'htmlH[0-9]',
       \ 'markdownFencedCodeBlock',
