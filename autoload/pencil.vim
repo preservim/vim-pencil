@@ -44,7 +44,7 @@ fun! s:detect_wrap_mode() abort
   return s:WRAP_MODE_DEFAULT
 endf
 
-fun! s:imap(preserve_completion, key, icmd)
+fun! s:imap(preserve_completion, key, icmd) abort
   if a:preserve_completion
     exe ":ino <buffer> <silent> <expr> " . a:key . " pumvisible() ? \"" . a:key . "\" : \"" . a:icmd . "\""
   el
@@ -52,7 +52,7 @@ fun! s:imap(preserve_completion, key, icmd)
   en
 endf
 
-fun! s:maybe_enable_autoformat()
+fun! s:maybe_enable_autoformat() abort
   " don't enable autoformat if in a code block or table
   let l:okay_to_enable = 1
   let l:line = line('.')
@@ -92,6 +92,10 @@ fun! s:maybe_enable_autoformat()
     if match(synIDattr(l:sid, 'name'),
             \ g:pencil#autoformat_blacklist_re) >= 0
       let l:okay_to_enable = 0
+      "echohl WarningMsg
+      "echo 'hit blacklist line=' . l:line . ' col=' . l:col .
+      "      \ ' name=' . synIDattr(l:sid, 'name')
+      "echohl NONE
       break
     en
   endfo
@@ -117,12 +121,24 @@ fun! s:maybe_enable_autoformat()
       endfo
     en
   en
+  " disallow enable if start of previous line is in blacklist
+  if l:line > 1
+    let l:prev_stack = synstack(l:line - 1, 1)
+    for l:sid in l:prev_stack
+      if len(l:sid) > 0 &&
+              \ match(synIDattr(l:sid, 'name'),
+              \       g:pencil#autoformat_blacklist_re) >= 0
+        let l:okay_to_enable = 0
+        break
+      en
+    endfo
+  en
   if l:okay_to_enable
     set formatoptions+=a
   en
 endf
 
-fun! pencil#setAutoFormat(af)
+fun! pencil#setAutoFormat(af) abort
   " 1=auto, 0=manual, -1=toggle
   if !exists('b:last_autoformat')
     let b:last_autoformat = 0

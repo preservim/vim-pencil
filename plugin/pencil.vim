@@ -98,9 +98,12 @@ if !exists('g:pencil#autoformat_blacklist')
         \ 'texRefZone',
         \ 'texSection$',
         \ 'texTitle',
-        \ 'asciidocAttribute',
-        \ 'asciidocList',
+        \ 'asciidocAttributeList',
+        \ 'asciidocListLabel',
         \ 'asciidocLiteral',
+        \ 'asciidocSidebar',
+        \ 'asciidocSource',
+        \ 'asciidocSect[0-9]',
         \ 'asciidoc[A-Za-z]*Block',
         \ 'asciidoc[A-Za-z]*Macro',
         \ 'asciidoc[A-Za-z]*Title',
@@ -117,8 +120,8 @@ if !exists('g:pencil#autoformat_inline_whitelist')
   let g:pencil#autoformat_inline_whitelist = [
         \ 'markdownCode',
         \ 'markdownLink',
+        \ 'asciidocAttributeRef',
         \ 'asciidocMacro',
-        \ 'asciidocQuotedMonospaced',
         \ ]
 en
 let g:pencil#autoformat_inline_whitelist_re =

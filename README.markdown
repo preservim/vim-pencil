@@ -45,7 +45,8 @@ Several reasons have been offered:
   to reach for mouse, track pad, or arrow keys
 * Minimal chording, with many mnemonic-friendly commands
 * Sophisticated capabilities for navigating and manipulating text
-* Highly configurable to suit your needs, with many great plugins available
+* Highly configurable, enabling you to build a workflow that suits your
+  needs, with many great plugins available
 * No proprietary format lock-in
 
 But while such reasons might be sound, they remain scant justification to
@@ -174,10 +175,8 @@ augroup pencil
 augroup END
 ```
 
-For other prose-oriented plugins, consult the [See also](#see-also)
-section below.
-
-For more details, see the advanced initialization section below.
+For a list of other prose-oriented plugins, consult the [See
+also](#see-also) section below.
 
 ## Hard line breaks or soft line wrap?
 
@@ -210,8 +209,8 @@ if auto-detect might suggest soft line wrap.
 You can enable, disable, and toggle _pencil_ as a command:
 
 * `Pencil` - initialize _pencil_ with auto-detect for the current buffer
-* `PencilOff` (or `NoPencil`) - removes navigation mappings and restores buffer to global settings
-* `PencilToggle` (or `TogglePencil`) - if on, turns off; if off, initializes with auto-detect
+* `NoPencil` (or `PencilOff`) - removes navigation mappings and restores buffer to global settings
+* `TogglePencil` (or `PencilToggle`) - if on, turns off; if off, initializes with auto-detect
 
 Because auto-detect might not work as intended, you can invoke a command
 to set the behavior for the current buffer:
@@ -261,8 +260,8 @@ with autoformat disabled.
 
 ## Manual formatting
 
-Note that you need not rely on autoformat exclusively and can manually
-reformat paragraphs with standard Vim commands:
+Note that you need not rely on Vim’s autoformat exclusively and can
+manually reformat paragraphs with standard Vim commands:
 
 * `gqip` or `gwip` - format current paragraph
 * `vipJ` - unformat (i.e., join all lines with hard line breaks) in current paragraph
@@ -418,11 +417,11 @@ statements into a function.
 _The ‘autoformat’ feature affects *HardPencil* (hard line break) mode
 only._
 
-When editing formatted text, such as a table or code block, autoformat
-will wreak havoc with the formatting. In these cases you will want to
-temporarily deactivate autoformat, such as with the `PFormatOff` or
-`PFormatToggle` commands described above. However, in most cases, you won’t
-need to do this.
+When editing formatted text, such as a table or code block, Vim’s
+autoformat will wreak havoc with the formatting. In these cases you will
+want to temporarily deactivate autoformat, such as with the `PFormatOff`
+or `PFormatToggle` commands described above. However, in most cases, you
+won’t need to do this.
 
 _pencil_ will detect the syntax highlight group at the cursor position to
 determine whether or not autoformat should be activated.
@@ -432,49 +431,51 @@ mode provided that the syntax highlighting group at the cursor position is
 _not_ in the blacklist. The current blacklist is:
 
 ```vim
-let g:pencil#autoformat_blacklist = [
-      \ 'markdownCode',
-      \ 'markdownH[0-9]',
-      \ 'markdownUrl',
-      \ 'markdownIdDeclaration',
-      \ 'markdownLink',
-      \ 'markdownRule',
-      \ 'markdownHighlight[A-Za-z0-9]+',
-      \ 'mkdCode',
-      \ 'mkdRule',
-      \ 'mkdDelimiter',
-      \ 'mkdLink',
-      \ 'mkdIndentCode',
-      \ 'htmlH[0-9]',
-      \ 'markdownFencedCodeBlock',
-      \ 'markdownInlineCode',
-      \ 'mmdTable[A-Za-z0-9]*',
-      \ 'txtCode',
-      \ 'rstCodeBlock',
-      \ 'rstDirective',
-      \ 'rstLiteralBlock',
-      \ 'rstSections',
-      \ 'texBeginEndName',
-      \ 'texDelimiter',
-      \ 'texDocType',
-      \ 'texInputFile',
-      \ 'texMath',
-      \ 'texRefZone',
-      \ 'texSection$',
-      \ 'texTitle',
-      \ 'asciidocAttribute',
-      \ 'asciidocList',
-      \ 'asciidocLiteral',
-      \ 'asciidoc[A-Za-z]*Block',
-      \ 'asciidoc[A-Za-z]*Macro',
-      \ 'asciidoc[A-Za-z]*Title',
-      \ ]
+  let g:pencil#autoformat_blacklist = [
+        \ 'markdownCode',
+        \ 'markdownH[0-9]',
+        \ 'markdownUrl',
+        \ 'markdownIdDeclaration',
+        \ 'markdownLink',
+        \ 'markdownRule',
+        \ 'markdownHighlight[A-Za-z0-9]+',
+        \ 'mkdCode',
+        \ 'mkdRule',
+        \ 'mkdDelimiter',
+        \ 'mkdLink',
+        \ 'mkdListItem',
+        \ 'mkdIndentCode',
+        \ 'htmlH[0-9]',
+        \ 'markdownFencedCodeBlock',
+        \ 'markdownInlineCode',
+        \ 'mmdTable[A-Za-z0-9]*',
+        \ 'txtCode',
+        \ 'rstCodeBlock',
+        \ 'rstDirective',
+        \ 'rstLiteralBlock',
+        \ 'rstSections',
+        \ 'texBeginEndName',
+        \ 'texDelimiter',
+        \ 'texDocType',
+        \ 'texInputFile',
+        \ 'texMath',
+        \ 'texRefZone',
+        \ 'texSection$',
+        \ 'texTitle',
+        \ 'asciidocAttributeList',
+        \ 'asciidocListLabel',
+        \ 'asciidocLiteral',
+        \ 'asciidocSidebar',
+        \ 'asciidocSource',
+        \ 'asciidocSect[0-9]',
+        \ 'asciidoc[A-Za-z]*Block',
+        \ 'asciidoc[A-Za-z]*Macro',
+        \ 'asciidoc[A-Za-z]*Title',
+        \ ]
 ```
 
-_WARNING: the implementation of this blacklist may be changing in the
+_WARNING: the implementation of this blacklist will be changing in the
 future._
-
-There’s also a whitelist to override the blacklist. See code for details.
 
 You can override this in your `.vimrc`. Additions to defaults with good
 use cases are welcome.
