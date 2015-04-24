@@ -75,6 +75,7 @@ if !exists('g:pencil#autoformat_blacklist')
         \ 'markdownLink',
         \ 'markdownRule',
         \ 'markdownHighlight[A-Za-z0-9]+',
+        \ 'markdownListMarker',
         \ 'mkdCode',
         \ 'mkdRule',
         \ 'mkdDelimiter',

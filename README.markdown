@@ -439,6 +439,7 @@ _not_ in the blacklist. The current blacklist is:
         \ 'markdownLink',
         \ 'markdownRule',
         \ 'markdownHighlight[A-Za-z0-9]+',
+        \ 'markdownListMarker',
         \ 'mkdCode',
         \ 'mkdRule',
         \ 'mkdDelimiter',
