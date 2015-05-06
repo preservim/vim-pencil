@@ -258,7 +258,7 @@ augroup END
 ...where by default, files of type `text` will use hard line endings, but
 with autoformat disabled.
 
-Optionally, you can map a toggle to control autoformat in your `.vimrc`:
+Optionally, you can map a key in your `.vimrc` to toggle Vim's autoformat:
 
 ```vim
 noremap <buffer> <silent> <F7> :<C-u>PFormatToggle<cr>
