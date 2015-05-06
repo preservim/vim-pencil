@@ -121,8 +121,10 @@ fun! s:maybe_enable_autoformat() abort
       endfo
     en
   en
-  " disallow enable if start of previous line is in blacklist
-  if l:line > 1
+  " disallow enable if start of previous line is in blacklist,
+  " (To avoid problem of autowrap screwing up adding a new item
+  " to a list.)
+  if l:okay_to_enable && l:line > 1
     let l:prev_stack = synstack(l:line - 1, 1)
     for l:sid in l:prev_stack
       if len(l:sid) > 0 &&
@@ -152,7 +154,6 @@ fun! pencil#setAutoFormat(af) abort
       au InsertEnter <buffer> call s:maybe_enable_autoformat()
       au InsertLeave <buffer> set formatoptions-=a
     aug END
-    let b:last_autoformat = l:nu_af
   el
     sil! au! pencil_autoformat * <buffer>
     if l:nu_af && !l:is_hard
@@ -162,6 +163,7 @@ fun! pencil#setAutoFormat(af) abort
       return
     en
   en
+  let b:last_autoformat = l:nu_af
 endf
 
 " Create mappings for word processing

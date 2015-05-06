@@ -258,6 +258,13 @@ augroup END
 ...where by default, files of type `text` will use hard line endings, but
 with autoformat disabled.
 
+Optionally, you can map a toggle to control autoformat in your `.vimrc`:
+
+```vim
+noremap <buffer> <silent> <F7> :<C-u>PFormatToggle<cr>
+inoremap <buffer> <silent> <F7> <C-o>:PFormatToggle<cr>
+```
+
 ## Manual formatting
 
 Note that you need not rely on Vim’s autoformat exclusively and can
@@ -432,46 +439,18 @@ _not_ in the blacklist. The current blacklist is:
 
 ```vim
   let g:pencil#autoformat_blacklist = [
-        \ 'markdownCode',
-        \ 'markdownH[0-9]',
-        \ 'markdownUrl',
-        \ 'markdownIdDeclaration',
-        \ 'markdownLink',
-        \ 'markdownRule',
-        \ 'markdownHighlight[A-Za-z0-9]+',
-        \ 'markdownListMarker',
-        \ 'mkdCode',
-        \ 'mkdRule',
-        \ 'mkdDelimiter',
-        \ 'mkdLink',
-        \ 'mkdListItem',
-        \ 'mkdIndentCode',
+        \ 'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
+        \ 'markdownOrderedListMarker',
+        \ 'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode)',
         \ 'htmlH[0-9]',
-        \ 'markdownFencedCodeBlock',
-        \ 'markdownInlineCode',
+        \ 'markdown(FencedCodeBlock|InlineCode)',
         \ 'mmdTable[A-Za-z0-9]*',
         \ 'txtCode',
-        \ 'rstCodeBlock',
-        \ 'rstDirective',
-        \ 'rstLiteralBlock',
-        \ 'rstSections',
-        \ 'texBeginEndName',
-        \ 'texDelimiter',
-        \ 'texDocType',
-        \ 'texInputFile',
-        \ 'texMath',
-        \ 'texRefZone',
+        \ 'rst(CodeBlock|Directive|LiteralBlock|Sections)',
+        \ 'tex(BeginEndName|Delimiter|DocType|InputFile|Math|RefZone|Title)',
         \ 'texSection$',
-        \ 'texTitle',
-        \ 'asciidocAttributeList',
-        \ 'asciidocListLabel',
-        \ 'asciidocLiteral',
-        \ 'asciidocSidebar',
-        \ 'asciidocSource',
-        \ 'asciidocSect[0-9]',
-        \ 'asciidoc[A-Za-z]*Block',
-        \ 'asciidoc[A-Za-z]*Macro',
-        \ 'asciidoc[A-Za-z]*Title',
+        \ 'asciidoc(AttributeList|ListLabel|Literal|SideBar|Source|Sect[0-9])',
+        \ 'asciidoc[A-Za-z]*(Block|Macro|Title)',
         \ ]
 ```
 

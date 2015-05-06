@@ -58,7 +58,7 @@ if !exists('g:pencil#autoformat')
 en
 
 if !exists('g:pencil#autoformat_blacklist')
-  " by default, pencil does NOT start autoformat if inside any of
+  " do not engage autoformat if cursor is inside any of
   " the following syntax groups
   "
   " markdown* (tpope/vim-markdown)
@@ -68,46 +68,18 @@ if !exists('g:pencil#autoformat_blacklist')
   " txtCode (timcharper/textile.vim)
   " rst*,tex*,asciidoc* (syntax file shipped with vim)
   let g:pencil#autoformat_blacklist = [
-        \ 'markdownCode',
-        \ 'markdownH[0-9]',
-        \ 'markdownUrl',
-        \ 'markdownIdDeclaration',
-        \ 'markdownLink',
-        \ 'markdownRule',
-        \ 'markdownHighlight[A-Za-z0-9]+',
-        \ 'markdownListMarker',
-        \ 'mkdCode',
-        \ 'mkdRule',
-        \ 'mkdDelimiter',
-        \ 'mkdLink',
-        \ 'mkdListItem',
-        \ 'mkdIndentCode',
+        \ 'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
+        \ 'markdownOrderedListMarker',
+        \ 'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode)',
         \ 'htmlH[0-9]',
-        \ 'markdownFencedCodeBlock',
-        \ 'markdownInlineCode',
+        \ 'markdown(FencedCodeBlock|InlineCode)',
         \ 'mmdTable[A-Za-z0-9]*',
         \ 'txtCode',
-        \ 'rstCodeBlock',
-        \ 'rstDirective',
-        \ 'rstLiteralBlock',
-        \ 'rstSections',
-        \ 'texBeginEndName',
-        \ 'texDelimiter',
-        \ 'texDocType',
-        \ 'texInputFile',
-        \ 'texMath',
-        \ 'texRefZone',
+        \ 'rst(CodeBlock|Directive|LiteralBlock|Sections)',
+        \ 'tex(BeginEndName|Delimiter|DocType|InputFile|Math|RefZone|Title)',
         \ 'texSection$',
-        \ 'texTitle',
-        \ 'asciidocAttributeList',
-        \ 'asciidocListLabel',
-        \ 'asciidocLiteral',
-        \ 'asciidocSidebar',
-        \ 'asciidocSource',
-        \ 'asciidocSect[0-9]',
-        \ 'asciidoc[A-Za-z]*Block',
-        \ 'asciidoc[A-Za-z]*Macro',
-        \ 'asciidoc[A-Za-z]*Title',
+        \ 'asciidoc(AttributeList|ListLabel|Literal|SideBar|Source|Sect[0-9])',
+        \ 'asciidoc[A-Za-z]*(Block|Macro|Title)',
         \ ]
 en
 let g:pencil#autoformat_blacklist_re =
@@ -119,10 +91,8 @@ if !exists('g:pencil#autoformat_inline_whitelist')
   "
   "'markdownCode' (tpope/vim-markdown)
   let g:pencil#autoformat_inline_whitelist = [
-        \ 'markdownCode',
-        \ 'markdownLink',
-        \ 'asciidocAttributeRef',
-        \ 'asciidocMacro',
+        \ 'markdown(Code|Link)',
+        \ 'asciidoc(AttributeRef|Macro)',
         \ ]
 en
 let g:pencil#autoformat_inline_whitelist_re =
