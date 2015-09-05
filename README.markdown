@@ -440,7 +440,6 @@ _not_ in the blacklist. The current blacklist is:
 ```vim
   let g:pencil#autoformat_blacklist = [
         \ 'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
-        \ 'markdownOrderedListMarker',
         \ 'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode)',
         \ 'htmlH[0-9]',
         \ 'markdown(FencedCodeBlock|InlineCode)',

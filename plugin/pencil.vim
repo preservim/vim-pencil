@@ -69,7 +69,6 @@ if !exists('g:pencil#autoformat_blacklist')
   " rst*,tex*,asciidoc* (syntax file shipped with vim)
   let g:pencil#autoformat_blacklist = [
         \ 'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
-        \ 'markdownOrderedListMarker',
         \ 'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode)',
         \ 'htmlH[0-9]',
         \ 'markdown(FencedCodeBlock|InlineCode)',
