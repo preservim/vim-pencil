@@ -53,7 +53,18 @@ fun! s:imap(preserve_completion, key, icmd) abort
 endf
 
 fun! s:maybe_enable_autoformat() abort
-  " don't enable autoformat if in a code block or table
+  " don't enable autoformat if in a blacklisted code block or table,
+  " allowing for reprieve via whitelist in certain cases
+
+  let l:af_cfg = get(g:pencil#autoformat_config, &ft, {})
+  let l:black = get(l:af_cfg, 'black', [])
+  let l:white = get(l:af_cfg, 'white', [])
+  let l:has_black_re = len(l:black) > 0
+  let l:has_white_re = len(l:white) > 0
+  let l:black_re = l:has_black_re ? '\v(' . join( l:black, '|') . ')' : ''
+  let l:white_re = l:has_white_re ? '\v(' . join( l:white, '|') . ')' : ''
+  let l:enforce_previous_line = get(l:af_cfg, 'enforce-previous-line', 0)
+
   let l:okay_to_enable = 1
   let l:line = line('.')
   let l:col = col('.')
@@ -88,21 +99,21 @@ fun! s:maybe_enable_autoformat() abort
     endw
   en
   " enforce blacklist by scanning for syntax matches
-  for l:sid in l:stack
-    if match(synIDattr(l:sid, 'name'),
-            \ g:pencil#autoformat_blacklist_re) >= 0
-      let l:okay_to_enable = 0
-      "echohl WarningMsg
-      "echo 'hit blacklist line=' . l:line . ' col=' . l:col .
-      "      \ ' name=' . synIDattr(l:sid, 'name')
-      "echohl NONE
-      break
-    en
-  endfo
-  " enforce whitelist by detecting inline `markup` for
-  " which we DO want autoformat to be enabled (e.g.,
-  " tpope's markdownCode)
-  if !l:okay_to_enable
+  if l:has_black_re
+    for l:sid in l:stack
+      if match(synIDattr(l:sid, 'name'), l:black_re) >= 0
+        let l:okay_to_enable = 0
+        "echohl WarningMsg
+        "echo 'hit blacklist line=' . l:line . ' col=' . l:col .
+        "      \ ' name=' . synIDattr(l:sid, 'name')
+        "echohl NONE
+        break
+      en
+    endfo
+  en
+  " enforce whitelist by detecting inline `markup` for which we DO want
+  " autoformat to be enabled (e.g., tpope's markdownCode)
+  if l:has_white_re && !l:okay_to_enable
     " one final check for an empty stack at the start and end of line,
     " either of which greenlights a whitelist check
     if !l:found_empty
@@ -113,8 +124,7 @@ fun! s:maybe_enable_autoformat() abort
     en
     if l:found_empty
       for l:sid in l:stack
-        if match(synIDattr(l:sid, 'name'),
-                \ g:pencil#autoformat_inline_whitelist_re) >= 0
+        if match(synIDattr(l:sid, 'name'), l:white_re) >= 0
           let l:okay_to_enable = 1
           break
         en
@@ -122,14 +132,11 @@ fun! s:maybe_enable_autoformat() abort
     en
   en
   " disallow enable if start of previous line is in blacklist,
-  " (To avoid problem of autowrap screwing up adding a new item
-  " to a list.)
-  if l:okay_to_enable && l:line > 1
+  if l:has_black_re && l:enforce_previous_line && l:okay_to_enable && l:line > 1
     let l:prev_stack = synstack(l:line - 1, 1)
     for l:sid in l:prev_stack
       if len(l:sid) > 0 &&
-              \ match(synIDattr(l:sid, 'name'),
-              \       g:pencil#autoformat_blacklist_re) >= 0
+              \ match(synIDattr(l:sid, 'name'), l:black_re) >= 0
         let l:okay_to_enable = 0
         break
       en

@@ -61,7 +61,7 @@ if !exists('g:pencil#autoformat')
   let g:pencil#autoformat = 1
 en
 
-if !exists('g:pencil#autoformat_blacklist')
+if !exists('g:pencil#autoformat_config')
   " do not engage autoformat if cursor is inside any of
   " the following syntax groups
   "
@@ -71,35 +71,54 @@ if !exists('g:pencil#autoformat_blacklist')
   " mmdTable[A-Za-z0-9]* (mattly/vim-markdown-enhancements)
   " txtCode (timcharper/textile.vim)
   " rst*,tex*,asciidoc* (syntax file shipped with vim)
-  let g:pencil#autoformat_blacklist = [
-        \ 'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
-        \ 'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode)',
-        \ 'htmlH[0-9]',
-        \ 'markdown(FencedCodeBlock|InlineCode)',
-        \ 'mmdTable[A-Za-z0-9]*',
-        \ 'txtCode',
-        \ 'rst(CodeBlock|Directive|LiteralBlock|Sections)',
-        \ 'tex(BeginEndName|Delimiter|DocType|InputFile|Math|RefZone|Title)',
-        \ 'texSection$',
-        \ 'asciidoc(AttributeList|ListLabel|Literal|SideBar|Source|Sect[0-9])',
-        \ 'asciidoc[A-Za-z]*(Block|Macro|Title)',
-        \ ]
+  let g:pencil#autoformat_config = {
+        \   'markdown': {
+        \     'black': [
+        \       'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
+        \       'htmlH[0-9]',
+        \       'markdown(FencedCodeBlock|InlineCode)',
+        \       'mmdTable[A-Za-z0-9]*',
+        \     ],
+        \     'white': [
+        \      'markdown(Code|Link)',
+        \     ],
+        \   },
+        \   'mkd': {
+        \     'black': [
+        \       'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode)',
+        \       'htmlH[0-9]',
+        \       'mmdTable[A-Za-z0-9]*',
+        \     ],
+        \   },
+        \   'tex': {
+        \     'black': [
+        \       'tex(BeginEndName|Delimiter|DocType|InputFile|Math|RefZone|Title)',
+        \       'texSection$',
+        \     ],
+        \     'enforce-previous-line': 1,
+        \   },
+        \   'asciidoc': {
+        \     'black': [
+        \       'asciidoc(AttributeList|AttributeEntry|ListLabel|Literal|SideBar|Source|Sect[0-9])',
+        \       'asciidoc[A-Za-z]*(Block|Macro|Title)',
+        \     ],
+        \     'white': [
+        \      'asciidoc(AttributeRef|Macro)',
+        \     ],
+        \     'enforce-previous-line': 1,
+        \   },
+        \   'rst': {
+        \     'black': [
+        \       'rst(CodeBlock|Directive|LiteralBlock|Sections)',
+        \     ],
+        \   },
+        \   'textile': {
+        \     'black': [
+        \       'txtCode',
+        \     ],
+        \   },
+        \ }
 en
-let g:pencil#autoformat_blacklist_re =
-  \ '\v(' . join(g:pencil#autoformat_blacklist, '|') . ')'
-
-if !exists('g:pencil#autoformat_inline_whitelist')
-  " grant autoformat a reprieve (allow enabling) if any of
-  " following syntax groups doesn't dominate the whole line
-  "
-  "'markdownCode' (tpope/vim-markdown)
-  let g:pencil#autoformat_inline_whitelist = [
-        \ 'markdown(Code|Link)',
-        \ 'asciidoc(AttributeRef|Macro)',
-        \ ]
-en
-let g:pencil#autoformat_inline_whitelist_re =
-  \ '\v(' . join(g:pencil#autoformat_inline_whitelist, '|') . ')'
 
 if !exists('g:pencil#joinspaces')
   " by default, only one space after full stop (.)

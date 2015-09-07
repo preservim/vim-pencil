@@ -23,7 +23,7 @@ smooth the path to writing prose.
   deletion via line `<C-U>` and word `<C-W>`
 * When using hard line breaks, _pencil_ enables Vim’s autoformat while
   inserting text, except for tables and code blocks where you won’t want
-  it
+  it (**NEW: blacklisting now based on filetype**)
 * Buffer-scoped configuration (with a few minor exceptions, _pencil_ preserves
   your global settings)
 * Support for Vim’s Conceal feature to hide markup defined by Syntax plugins
@@ -100,8 +100,6 @@ Plugin 'reedes/vim-pencil'
 :source %
 :PluginInstall
 ```
-
-For Vundle version < 0.10.2, replace `Plugin` with `Bundle` above.
 
 #### Plug
 
@@ -429,7 +427,7 @@ augroup END
 Alternatives include `after/ftplugin` modules as well as refactoring initialization
 statements into a function.
 
-### Autoformat blacklisting
+### Autoformat blacklisting (and whitelisting)
 
 _The ‘autoformat’ feature affects *HardPencil* (hard line break) mode
 only._
@@ -443,31 +441,39 @@ won’t need to do this.
 _pencil_ will detect the syntax highlight group at the cursor position to
 determine whether or not autoformat should be activated.
 
-If autoformat is on, it will be activated at the time you enter Insert
-mode provided that the syntax highlighting group at the cursor position is
-_not_ in the blacklist. The current blacklist is:
+If you haven’t explicitly disabled autoformat, it will be activated at
+the time you enter Insert mode provided that the syntax highlighting
+group at the cursor position is _not_ in the blacklist.
+
+Blacklists are now declared by file type. The default blacklists (and
+whitelists) are declared in the `plugin/pencil.vim` module. Here’s an
+excerpt showing the configuration for the ‘markdown’ file type:
 
 ```vim
-  let g:pencil#autoformat_blacklist = [
-        \ 'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
-        \ 'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode)',
-        \ 'htmlH[0-9]',
-        \ 'markdown(FencedCodeBlock|InlineCode)',
-        \ 'mmdTable[A-Za-z0-9]*',
-        \ 'txtCode',
-        \ 'rst(CodeBlock|Directive|LiteralBlock|Sections)',
-        \ 'tex(BeginEndName|Delimiter|DocType|InputFile|Math|RefZone|Title)',
-        \ 'texSection$',
-        \ 'asciidoc(AttributeList|ListLabel|Literal|SideBar|Source|Sect[0-9])',
-        \ 'asciidoc[A-Za-z]*(Block|Macro|Title)',
-        \ ]
+  let g:pencil#autoformat_config = {
+        \   'markdown': {
+        \     'black': [
+        \       'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
+        \       'htmlH[0-9]',
+        \       'markdown(FencedCodeBlock|InlineCode)',
+        \       'mmdTable[A-Za-z0-9]*',
+        \     ],
+        \     'white': [
+        \      'markdown(Code|Link)',
+        \     ],
+        \   },
+        [snip]
+        \ }
 ```
 
-_WARNING: the implementation of this blacklist will be changing in the
-future._
+For example, if editing a file of type ‘markdown’ and you enter Insert
+mode from inside a `markdownFencedCodeBlock` highlight group, then Vim’s
+autoformat will _not_ be enabled.
 
-You can override this in your `.vimrc`. Additions to defaults with good
-use cases are welcome.
+The whitelist can override the blacklist and allow Vim’s autoformat to be
+enabled if text that would normally be blacklisted doesn’t dominate the
+entire line. This allows autoformat to work with `inline` snippets of
+code or links.
 
 ### Auto-detecting wrap mode
 
