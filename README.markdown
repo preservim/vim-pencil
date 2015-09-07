@@ -375,11 +375,21 @@ or if using [bling/vim-airline][va]:
 let g:airline_section_x = '%{PencilMode()}'
 ```
 
-If you don’t like the default indicators, you can specify different ones:
+The default indicators now include ‘auto’ for when Vim’s autoformat is
+activated in hard line break mode.
 
 ```vim
-let g:pencil#mode_indicators = {'hard': '␍', 'soft': '⤸', 'off': '',}
+let g:pencil#mode_indicators = {'hard': 'H', 'auto': 'A', 'soft': 'S', 'off': '',}
 ```
+
+If Unicode is detected, the default indicators are:
+
+```vim
+let g:pencil#mode_indicators = {'hard': '␍', 'auto': 'ª', 'soft': '⤸', 'off': '',}
+```
+
+If you don’t like the default indicators, you can specify your own in
+your `.vimrc`.
 
 Note that `PencilMode()` will return blank for buffers in which _pencil_
 has not been initialized.

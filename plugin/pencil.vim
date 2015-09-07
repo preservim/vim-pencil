@@ -31,7 +31,11 @@ fun! PencilMode()
     if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
       return get(g:pencil#mode_indicators, 'soft', 'S')
     elsei b:pencil_wrap_mode ==# s:WRAP_MODE_HARD
-      return get(g:pencil#mode_indicators, 'hard', 'H')
+      if &fo =~ 'a'
+        return get(g:pencil#mode_indicators, 'auto', 'A')
+      el
+        return get(g:pencil#mode_indicators, 'hard', 'H')
+      en
     el
       return get(g:pencil#mode_indicators, 'off', '')
     en
@@ -135,9 +139,9 @@ en
 if !exists('g:pencil#mode_indicators')
   " used to set PencilMode() for statusline
   if s:unicode_enabled()
-    let g:pencil#mode_indicators = {'hard': '␍', 'soft': '⤸', 'off': '',}
+    let g:pencil#mode_indicators = {'hard': '␍', 'auto': 'ª', 'soft': '⤸', 'off': '',}
   el
-    let g:pencil#mode_indicators = {'hard': 'H', 'soft': 'S', 'off': '',}
+    let g:pencil#mode_indicators = {'hard': 'H', 'auto': 'A', 'soft': 'S', 'off': '',}
   en
 en
 
