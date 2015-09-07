@@ -62,8 +62,8 @@ if !exists('g:pencil#autoformat')
 en
 
 if !exists('g:pencil#autoformat_config')
-  " do not engage autoformat if cursor is inside any of
-  " the following syntax groups
+  " Do not activate autoformat if entering Insert mode when
+  " the cursor is inside any of the following syntax groups.
   "
   " markdown* (tpope/vim-markdown)
   " mkd*, htmlH[0-9] (plasticboy/vim-markdown)
@@ -74,28 +74,15 @@ if !exists('g:pencil#autoformat_config')
   let g:pencil#autoformat_config = {
         \   'markdown': {
         \     'black': [
-        \       'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
         \       'htmlH[0-9]',
+        \       'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
         \       'markdown(FencedCodeBlock|InlineCode)',
+        \       'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode)',
         \       'mmdTable[A-Za-z0-9]*',
         \     ],
         \     'white': [
         \      'markdown(Code|Link)',
         \     ],
-        \   },
-        \   'mkd': {
-        \     'black': [
-        \       'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode)',
-        \       'htmlH[0-9]',
-        \       'mmdTable[A-Za-z0-9]*',
-        \     ],
-        \   },
-        \   'tex': {
-        \     'black': [
-        \       'tex(BeginEndName|Delimiter|DocType|InputFile|Math|RefZone|Title)',
-        \       'texSection$',
-        \     ],
-        \     'enforce-previous-line': 1,
         \   },
         \   'asciidoc': {
         \     'black': [
@@ -112,12 +99,27 @@ if !exists('g:pencil#autoformat_config')
         \       'rst(CodeBlock|Directive|LiteralBlock|Sections)',
         \     ],
         \   },
+        \   'tex': {
+        \     'black': [
+        \       'tex(BeginEndName|Delimiter|DocType|InputFile|Math|RefZone|Title)',
+        \       'texSection$',
+        \     ],
+        \     'enforce-previous-line': 1,
+        \   },
         \   'textile': {
         \     'black': [
         \       'txtCode',
         \     ],
         \   },
         \ }
+en
+if !exists('g:pencil#autoformat_aliases')
+  " Aliases used exclusively for autoformat config.
+  " Pencil will NOT modify the filetype setting.
+  let g:pencil#autoformat_aliases = {
+        \    'md': 'markdown',
+        \    'mkd': 'markdown',
+        \  }
 en
 
 if !exists('g:pencil#joinspaces')

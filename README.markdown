@@ -453,9 +453,10 @@ excerpt showing the configuration for the ‘markdown’ file type:
   let g:pencil#autoformat_config = {
         \   'markdown': {
         \     'black': [
-        \       'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
         \       'htmlH[0-9]',
+        \       'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
         \       'markdown(FencedCodeBlock|InlineCode)',
+        \       'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode)',
         \       'mmdTable[A-Za-z0-9]*',
         \     ],
         \     'white': [
@@ -468,12 +469,12 @@ excerpt showing the configuration for the ‘markdown’ file type:
 
 For example, if editing a file of type ‘markdown’ and you enter Insert
 mode from inside a `markdownFencedCodeBlock` highlight group, then Vim’s
-autoformat will _not_ be enabled.
+autoformat will _not_ be activated.
 
-The whitelist can override the blacklist and allow Vim’s autoformat to be
-enabled if text that would normally be blacklisted doesn’t dominate the
-entire line. This allows autoformat to work with `inline` snippets of
-code or links.
+The whitelist will override the blacklist and allow Vim’s autoformat to
+be activated if text that would normally be blacklisted doesn’t dominate
+the entire line. This allows autoformat to work with `inline` code and
+links.
 
 ### Auto-detecting wrap mode
 

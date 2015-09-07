@@ -56,7 +56,8 @@ fun! s:maybe_enable_autoformat() abort
   " don't enable autoformat if in a blacklisted code block or table,
   " allowing for reprieve via whitelist in certain cases
 
-  let l:af_cfg = get(g:pencil#autoformat_config, &ft, {})
+  let l:ft = get(g:pencil#autoformat_aliases, &ft, &ft)
+  let l:af_cfg = get(g:pencil#autoformat_config, l:ft, {})
   let l:black = get(l:af_cfg, 'black', [])
   let l:white = get(l:af_cfg, 'white', [])
   let l:has_black_re = len(l:black) > 0
