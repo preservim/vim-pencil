@@ -544,6 +544,14 @@ If no such lines found, _pencil_ falls back to the default wrap mode.
 * [Vim Training Class - Basic motions and commands][tc] - video tutorial by Shawn Biddle
 * [Vim for Writers][vw] - guide to the basics geared to writers
 
+Bloggers discuss _pencil_ and its brethern:
+
+* [Reed Esau's growing list of Vim plugins for writers][regl] (2014) - Wynn Netherland
+* [Distraction Free Writing in Vim][dfwiv] (2014) - Thomas Lattimore on building a DF environment
+* [Safari Blog: Turning vim into an IDE through vim plugins][tviai] (2014) - Jamey DeOrio
+* [UseVim: Reed Esau's Writing Plugins][rewp] (2015) - Alex Young
+* [Tomasino Labs: Vim in Context][vic] (2015) - James Tomasino
+
 Other plugins of specific interest to writers:
 
 * [tpope/vim-abolish][ab] - search for, substitute, and abbr. multiple variants of a word
@@ -551,6 +559,11 @@ Other plugins of specific interest to writers:
 * [junegunn/limelight.vim][jl] - focus mode that brightens current paragraph
 * [junegunn/goyo.vim][jg] - distraction-free editing mode
 
+[vic]: https://labs.tomasino.org/vim-in-context.html
+[rewp]: http://usevim.com/2015/05/27/reedes/
+[tviai]: https://www.safaribooksonline.com/blog/2014/11/23/way-vim-ide/
+[regl]: http://wynnnetherland.com/journal/reed-esau-s-growing-list-of-vim-plugins-for-writers/
+[dfwiv]: http://tlattimore.com/blog/distraction-free-writing-in-vim/
 [ab]: http://github.com/tpope/vim-abolish
 [ex]: http://github.com/tommcdo/vim-exchange
 [jl]: http://github.com/junegunn/limelight.vim
