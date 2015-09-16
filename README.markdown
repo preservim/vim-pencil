@@ -551,6 +551,7 @@ Bloggers discuss _pencil_ and its brethern:
 * [Safari Blog: Turning vim into an IDE through vim plugins][tviai] (2014) - Jamey DeOrio
 * [UseVim: Reed Esau's Writing Plugins][rewp] (2015) - Alex Young
 * [Tomasino Labs: Vim in Context][vic] (2015) - James Tomasino
+* [Writing with Vim][wwv] (2015) - Pat Ambrosio 
 
 Other plugins of specific interest to writers:
 
@@ -559,6 +560,7 @@ Other plugins of specific interest to writers:
 * [junegunn/limelight.vim][jl] - focus mode that brightens current paragraph
 * [junegunn/goyo.vim][jg] - distraction-free editing mode
 
+[wwv]: https://lilii.co/aardvark/writing-with-vim
 [vic]: https://labs.tomasino.org/vim-in-context.html
 [rewp]: http://usevim.com/2015/05/27/reedes/
 [tviai]: https://www.safaribooksonline.com/blog/2014/11/23/way-vim-ide/
