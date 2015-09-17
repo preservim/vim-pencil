@@ -23,7 +23,7 @@ smooth the path to writing prose.
   deletion via line `<C-U>` and word `<C-W>`
 * When using hard line breaks, _pencil_ enables Vim’s autoformat while
   inserting text, except for tables and code blocks where you won’t want
-  it (**NEW: blacklisting now based on filetype**)
+  it
 * Buffer-scoped configuration (with a few minor exceptions, _pencil_ preserves
   your global settings)
 * Support for Vim’s Conceal feature to hide markup defined by Syntax plugins
@@ -544,14 +544,15 @@ If no such lines found, _pencil_ falls back to the default wrap mode.
 * [Vim Training Class - Basic motions and commands][tc] - video tutorial by Shawn Biddle
 * [Vim for Writers][vw] - guide to the basics geared to writers
 
-Bloggers discuss _pencil_ and its brethern:
+Bloggers and developers discuss _pencil_ and its brethern:
 
-* [Reed Esau's growing list of Vim plugins for writers][regl] (2014) - Wynn Netherland
-* [Distraction Free Writing in Vim][dfwiv] (2014) - Thomas Lattimore on building a DF environment
-* [Safari Blog: Turning vim into an IDE through vim plugins][tviai] (2014) - Jamey DeOrio
-* [UseVim: Reed Esau's Writing Plugins][rewp] (2015) - Alex Young
-* [Tomasino Labs: Vim in Context][vic] (2015) - James Tomasino
-* [Writing with Vim][wwv] (2015) - Pat Ambrosio 
+* [Reed Esau's growing list of Vim plugins for writers][regl] (2014) - by @pengwynn
+* [Distraction Free Writing in Vim][dfwiv] (2014) - by @tlattimore
+* [Safari Blog: Turning vim into an IDE through vim plugins][tviai] (2014) - by @jameydeorio
+* [Quick tops for writing prose with Vim][qtfwp] (2014) - by @benoliver999
+* [UseVim: Reed Esau's Writing Plugins][rewp] (2015) - by @alexyoung
+* [Tomasino Labs: Vim in Context][vic] (2015) - by @jamestomasino
+* [Writing with Vim][wwv] (2015) - by Pat Ambrosio 
 
 Other plugins of specific interest to writers:
 
@@ -560,6 +561,7 @@ Other plugins of specific interest to writers:
 * [junegunn/limelight.vim][jl] - focus mode that brightens current paragraph
 * [junegunn/goyo.vim][jg] - distraction-free editing mode
 
+[qtfwp]: http://benoliver999.com/technology/2014/12/06/vimforprose/
 [wwv]: https://lilii.co/aardvark/writing-with-vim
 [vic]: https://labs.tomasino.org/vim-in-context.html
 [rewp]: http://usevim.com/2015/05/27/reedes/
@@ -615,8 +617,8 @@ with its own Markdown variant.
 
 # Future development
 
-If you’ve spotted a problem or have an idea on improving this plugin,
-please post it to the github project issue page or submit a pull request.
+If you’ve spotted a problem or have an idea on improving _pencil_,
+please report it as an issue, or better yet submit a pull request.
 
 ```
 <!-- vim: set tw=73 :-->
