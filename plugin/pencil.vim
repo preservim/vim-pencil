@@ -181,9 +181,9 @@ com -nargs=0 PFormat        call pencil#setAutoFormat(1)
 com -nargs=0 PFormatOff     call pencil#setAutoFormat(0)
 com -nargs=0 PFormatToggle  call pencil#setAutoFormat(-1)
 
-" NOTE: legacy commands will be disabled by default on 31-Dec-15
+" NOTE: legacy commands have been disabled by default as of 31-Dec-15
 if !exists('g:pencil#legacyCommands')
-  let g:pencil#legacyCommands = 1
+  let g:pencil#legacyCommands = 0
 en
 if g:pencil#legacyCommands
   com -nargs=0 DropPencil    call pencil#init({'wrap': 'off' })
