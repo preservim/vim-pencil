@@ -243,7 +243,7 @@ fun! pencil#init(...) abort
       setl breakat-=@         " avoid breaking at email addresses
     en
 
-    if has('syntax')
+    if exists('&colorcolumn')
       setl colorcolumn=0      " doesn't align as expected
     en
   el
@@ -255,7 +255,7 @@ fun! pencil#init(...) abort
       setl breakat<
     en
 
-    if has('syntax')
+    if exists('&colorcolumn')
       setl colorcolumn<
     en
   en
