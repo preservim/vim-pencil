@@ -425,9 +425,9 @@ fun! pencil#init(...) abort
     " map <cr> only if not already mapped
     if empty(maparg('<cr>', 'n'))
       ino <buffer> <cr> <c-g>u<cr>
-      let b:pencil#cr_mapped = 1
+      let b:pencil_cr_mapped = 1
     el
-      let b:pencil#cr_mapped = 0
+      let b:pencil_cr_mapped = 0
     en
   el
     sil! iu <buffer> .
@@ -440,7 +440,7 @@ fun! pencil#init(...) abort
     sil! iu <buffer> <c-w>
 
     " unmap <cr> only if we mapped it ourselves
-    if exists('b:pencil#cr_mapped') && b:pencil#cr_mapped
+    if exists('b:pencil_cr_mapped') && b:pencil_cr_mapped
       sil! iu <buffer> <cr>
     en
   en

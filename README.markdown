@@ -66,11 +66,13 @@ tool in expressing yourself. For more details on vi-style editing, see...
 * [Your problem with Vim is that you don't grok vi][gv] (December 2011)
 * [Intro to Vim's Grammar][ig] (January 2013)
 * [Why Atom Can’t Replace Vim, Learning the lesson of vi][wa] (March 2014)
+* [Language of Vim/Neovim][lovn] (January 2015)
 
 [ls]: http://yanpritzker.com/2011/12/16/learn-to-speak-vim-verbs-nouns-and-modifiers/
 [gv]: http://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118
 [ig]: http://takac.github.io/2013/01/30/vim-grammar/
 [wa]: https://medium.com/p/433852f4b4d1
+[lovn]: http://allsyed.com/language-of-vim-neovim/
 
 # Installation
 
@@ -552,7 +554,7 @@ Bloggers and developers discuss _pencil_ and its brethern:
 * [Quick tops for writing prose with Vim][qtfwp] (2014) - by @benoliver999
 * [UseVim: Reed Esau's Writing Plugins][rewp] (2015) - by @alexyoung
 * [Tomasino Labs: Vim in Context][vic] (2015) - by @jamestomasino
-* [Writing with Vim][wwv] (2015) - by Pat Ambrosio 
+* [Writing with Vim][wwv] (2015) - by Pat Ambrosio
 
 Other plugins of specific interest to writers:
 
