@@ -421,7 +421,14 @@ fun! pencil#init(...) abort
     ino <buffer> : :<c-g>u
     ino <buffer> <c-u> <c-g>u<c-u>
     ino <buffer> <c-w> <c-g>u<c-w>
-    ino <buffer> <cr> <c-g>u<cr>
+
+    " map <cr> only if not already mapped
+    if empty(maparg('<cr>', 'n'))
+      ino <buffer> <cr> <c-g>u<cr>
+      let b:pencil#cr_mapped = 1
+    el
+      let b:pencil#cr_mapped = 0
+    en
   el
     sil! iu <buffer> .
     sil! iu <buffer> !
@@ -431,7 +438,11 @@ fun! pencil#init(...) abort
     sil! iu <buffer> :
     sil! iu <buffer> <c-u>
     sil! iu <buffer> <c-w>
-    sil! iu <buffer> <cr>
+
+    " unmap <cr> only if we mapped it ourselves
+    if exists('b:pencil#cr_mapped') && b:pencil#cr_mapped
+      sil! iu <buffer> <cr>
+    en
   en
 endf
 
