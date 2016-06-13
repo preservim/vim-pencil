@@ -423,7 +423,7 @@ fun! pencil#init(...) abort
     ino <buffer> <c-w> <c-g>u<c-w>
 
     " map <cr> only if not already mapped
-    if empty(maparg('<cr>', 'n'))
+    if empty(maparg('<cr>', 'i'))
       ino <buffer> <cr> <c-g>u<cr>
       let b:pencil_cr_mapped = 1
     el
