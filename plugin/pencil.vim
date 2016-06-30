@@ -101,7 +101,7 @@ if !exists('g:pencil#autoformat_config')
         \   },
         \   'tex': {
         \     'black': [
-        \       'tex(BeginEndName|Delimiter|DocType|InputFile|Math|RefZone|Title)',
+        \       'tex(BeginEndName|Delimiter|DocType|InputFile|Math|RefZone|Statement|Title)',
         \       'texSection$',
         \     ],
         \     'enforce-previous-line': 1,
