@@ -261,8 +261,8 @@ with autoformat disabled.
 Optionally, you can map a key in your `.vimrc` to toggle Vim's autoformat:
 
 ```vim
-noremap <buffer> <silent> <F7> :<C-u>PFormatToggle<cr>
-inoremap <buffer> <silent> <F7> <C-o>:PFormatToggle<cr>
+noremap <silent> <F7> :<C-u>PFormatToggle<cr>
+inoremap <silent> <F7> <C-o>:PFormatToggle<cr>
 ```
 
 ## Manual formatting
