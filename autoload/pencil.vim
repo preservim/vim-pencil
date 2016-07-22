@@ -388,10 +388,10 @@ fun! pencil#init(...) abort
   en
 
   if b:pencil_wrap_mode
-    nn <buffer> <silent> j gj
-    nn <buffer> <silent> k gk
-    vn <buffer> <silent> j gj
-    vn <buffer> <silent> k gk
+    exe 'nn <buffer> <silent> ' . Mapkey("j", "n") . ' gj'
+    exe 'nn <buffer> <silent> ' . Mapkey("k", "n") . ' gk'
+    exe 'vn <buffer> <silent> ' . Mapkey("j", "v") . ' gj'
+    exe 'vn <buffer> <silent> ' . Mapkey("k", "v") . ' gk'
     no <buffer> <silent> <Up>   gk
     no <buffer> <silent> <Down> gj
 
@@ -493,5 +493,21 @@ fun! s:doModelines() abort
     endfo
   en
 endf
+
+function! Mapkey (keys, mode)
+    " Pass in a key sequence and the first letter of a vim mode.
+    " Returns key mapping mapped to it in that mode, else 0 if none.
+    " example:
+    "   :nnoremap <Tab> :bn<CR>
+    "   :call Mapkey(':bn<CR>', 'n')
+    "   " returns <Tab>
+    redir => mappings | silent! map | redir END
+    for map in split(mappings, '\n')
+        let seq = matchstr(map, '\s\+\zs\S*')
+        if maparg(seq, a:mode) == a:keys
+            return seq
+        endif
+    endfor
+endfunction
 
 " vim:ts=2:sw=2:sts=2
