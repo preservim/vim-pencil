@@ -564,11 +564,13 @@ Bloggers and developers discuss _pencil_ and its brethern:
 
 Other plugins of specific interest to writers:
 
+* [danielbmarques/vim-ditto][vd] - highlight repeated words
 * [tpope/vim-abolish][ab] - search for, substitute, and abbr. multiple variants of a word
 * [tommcdo/vim-exchange][ex] - easy text exchange operator for Vim
 * [junegunn/limelight.vim][jl] - focus mode that brightens current paragraph
 * [junegunn/goyo.vim][jg] - distraction-free editing mode
 
+[vd]: https://github.com/danielbmarques/vim-ditto
 [qtfwp]: http://benoliver999.com/technology/2014/12/06/vimforprose/
 [wwv]: https://lilii.co/aardvark/writing-with-vim
 [vic]: https://labs.tomasino.org/vim-in-context.html
