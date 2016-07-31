@@ -271,16 +271,22 @@ Note that you need not rely on Vim’s autoformat exclusively and can
 manually reformat paragraphs with standard Vim commands:
 
 * `gqip` or `gwip` - format current paragraph
-* `vipJ` - unformat (i.e., join all lines with hard line breaks) in current paragraph
+* `vapJgwip` - merge two paragraphs (current and next) and format
 * `ggVGgq` or `:g/^/norm gqq` - format all paragraphs in buffer
-* `:%norm vipJ` - unformat all paragraphs in buffer
 
 Optionally, you can map these operations to underutilized keys in your
 `.vimrc`:
 
 ```vim
 nnoremap <silent> Q gwip
+nnoremap <silent> <leader>Q vapJgwip
 ```
+
+Or you may wish to ‘unformat’, (i.e., remove hard line breaks) when using
+soft line wrap.
+
+* `vipJ` - join all lines in current paragraph
+* `:%norm vipJ` - unformat all paragraphs in buffer
 
 ## Default textwidth
 
