@@ -21,9 +21,9 @@ smooth the path to writing prose.
 * Adjusts navigation key mappings to suit the wrap mode
 * Creates undo points on common punctuation during Insert mode, including
   deletion via line `<C-U>` and word `<C-W>`
-* When using hard line breaks, _pencil_ enables Vim’s autoformat while
-  inserting text, except for tables and code blocks where you won’t want
-  it
+* Makes use of Vim’s powerful autoformat while inserting text, except for
+  tables and code blocks where you won’t want it.
+* *NEW* Optional key mapping to suspend autoformat for the Insert.
 * Buffer-scoped configuration (with a few minor exceptions, _pencil_ preserves
   your global settings)
 * Support for Vim’s Conceal feature to hide markup defined by Syntax plugins
@@ -223,26 +223,14 @@ to set the behavior for the current buffer:
 _The ‘autoformat’ feature affects *HardPencil* (hard line break) mode
 only._
 
-When inserting text while in *HardPencil* mode, Vim’s autoformat feature
-will be enabled by default and can offer many of the same benefits as
-soft line wrap.
+When inserting text while in *HardPencil* mode, Vim’s powerful autoformat
+feature will be _enabled_ by default and can offer many of the same
+benefits as soft line wrap.
 
-One useful exception (aka 'blacklisting'): if used with popular
-prose-oriented syntax plugins, _pencil_ will **not** enable autoformat when
-you enter Insert mode from inside a code block or table. (See the
-advanced section below for more details on the blacklisting feature.)
-
-Where you need to manually enable/disable autoformat for the current
-buffer, you can do so with a command:
-
-* `PFormat` - allows autoformat to be enabled (if not blacklisted)
-* `PFormatOff` - prevents autoformat from enabling (blacklist all)
-* `PFormatToggle` - toggle to allow if off, etc.
-
-To set the default behavior, add to your `.vimrc`:
+To set the default behavior in your `.vimrc`:
 
 ```vim
-let g:pencil#autoformat = 1      " 0=manual, 1=auto (def)
+let g:pencil#autoformat = 1      " 0=disable, 1=enable (def)
 ```
 
 You can override this default during initialization, as in:
@@ -250,20 +238,38 @@ You can override this default during initialization, as in:
 ```vim
 augroup pencil
   autocmd!
-  autocmd FileType text call pencil#init({'wrap': 'hard', 'autoformat': 0})
+  autocmd FileType markdown call pencil#init({'wrap': 'hard', 'autoformat': 1})
+  autocmd FileType text     call pencil#init({'wrap': 'hard', 'autoformat': 0})
   ...
 augroup END
 ```
 
-...where by default, files of type `text` will use hard line endings, but
-with autoformat disabled.
+...where buffers of type `markdown` and `text` will use hard line breaks,
+but `text` buffers will have autoformat disabled.
 
-Optionally, you can map a key in your `.vimrc` to toggle Vim's autoformat:
+## Suspend automatic formatting for the Insert
+
+There are two useful exceptions where autoformat (when enabled for the
+buffer) will be _temporarily disabled_ for the current Insert:
+
+First is _pencil’s_ 'blacklisting' feature: if used with popular
+prose-oriented syntax plugins, _pencil_ will suspend autoformat when you
+enter Insert mode from inside a code block or table.
+
+[**NEW**] Second, where blacklisting falls short, you can optionally map
+a buffer-scoped ‘modifier’ key to suspend autoformat during the next
+Insert:
 
 ```vim
-noremap <silent> <F7> :<C-u>PFormatToggle<cr>
-inoremap <silent> <F7> <C-o>:PFormatToggle<cr>
+let g:pencil#map#suspend_af = 'K'   " default is no mapping
 ```
+
+Using the above mapping, with `Ko` you’ll enter Insert mode with the
+cursor on a new line, but autoformat will suspend for that Insert. Using
+`o` by itself will retain autoformat.
+
+(See the advanced section below for details on how blacklisting is
+implemented and configured).
 
 ## Manual formatting
 
@@ -382,7 +388,8 @@ let g:airline_section_x = '%{PencilMode()}'
 ```
 
 The default indicators now include ‘auto’ for when Vim’s autoformat is
-activated in hard line break mode.
+active in hard line break mode. (If autoformat is suspended for the
+Insert, it’ll show the ‘hard’ indicator.)
 
 ```vim
 let g:pencil#mode_indicators = {'hard': 'H', 'auto': 'A', 'soft': 'S', 'off': '',}
@@ -435,6 +442,27 @@ augroup END
 Alternatives include `after/ftplugin` modules as well as refactoring initialization
 statements into a function.
 
+### Autoformat manual control
+
+_The ‘autoformat’ feature affects *HardPencil* (hard line break) mode
+only._
+
+To suspend autoformat for the next Insert, see above.
+
+Where you need to manually enable/disable autoformat for the current
+buffer, you can do so with a command:
+
+* `PFormat` - enable autoformat for buffer (can still be disabled via blacklisting)
+* `PFormatOff` - disable autoformat for buffer
+* `PFormatToggle` - toggle to enable if disabled, etc.
+
+You can map a key in your `.vimrc` to toggle Vim's autoformat:
+
+```vim
+noremap <silent> <F7> :<C-u>PFormatToggle<cr>
+inoremap <silent> <F7> <C-o>:PFormatToggle<cr>
+```
+
 ### Autoformat blacklisting (and whitelisting)
 
 _The ‘autoformat’ feature affects *HardPencil* (hard line break) mode
@@ -442,16 +470,15 @@ only._
 
 When editing formatted text, such as a table or code block, Vim’s
 autoformat will wreak havoc with the formatting. In these cases you will
-want to temporarily deactivate autoformat, such as with the `PFormatOff`
-or `PFormatToggle` commands described above. However, in most cases, you
+want to suspend autoformat for the Insert. However, in most cases, you
 won’t need to do this.
 
 _pencil_ will detect the syntax highlight group at the cursor position to
-determine whether or not autoformat should be activated.
+determine whether or not autoformat should be suspended.
 
-If you haven’t explicitly disabled autoformat, it will be activated at
+If you haven’t explicitly disabled autoformat, it will be suspended at
 the time you enter Insert mode provided that the syntax highlighting
-group at the cursor position is _not_ in the blacklist.
+group at the cursor position is in the blacklist.
 
 Blacklists are now declared by file type. The default blacklists (and
 whitelists) are declared in the `plugin/pencil.vim` module. Here’s an
@@ -477,12 +504,12 @@ excerpt showing the configuration for the ‘markdown’ file type:
 
 For example, if editing a file of type ‘markdown’ and you enter Insert
 mode from inside a `markdownFencedCodeBlock` highlight group, then Vim’s
-autoformat will _not_ be activated.
+autoformat will be suspended for the Insert.
 
 The whitelist will override the blacklist and allow Vim’s autoformat to
-be activated if text that would normally be blacklisted doesn’t dominate
-the entire line. This allows autoformat to work with `inline` code and
-links.
+be avoid suspension if text that would normally be blacklisted doesn’t
+dominate the entire line. This allows autoformat to work with `inline`
+code and links.
 
 ### Auto-detecting wrap mode
 

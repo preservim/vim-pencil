@@ -56,6 +56,12 @@ fun! s:maybe_enable_autoformat() abort
   " don't enable autoformat if in a blacklisted code block or table,
   " allowing for reprieve via whitelist in certain cases
 
+  " a flag to suspend autoformat for the Insert
+  if b:pencil_suspend_af
+    let b:pencil_suspend_af = 0   " clear the flag
+    return
+  en
+
   let l:ft = get(g:pencil#autoformat_aliases, &ft, &ft)
   let l:af_cfg = get(g:pencil#autoformat_config, l:ft, {})
   let l:black = get(l:af_cfg, 'black', [])
@@ -149,7 +155,7 @@ fun! s:maybe_enable_autoformat() abort
 endf
 
 fun! pencil#setAutoFormat(af) abort
-  " 1=auto, 0=manual, -1=toggle
+  " 1=enable, 0=disable, -1=toggle
   if !exists('b:last_autoformat')
     let b:last_autoformat = 0
   en
@@ -179,6 +185,9 @@ endf
 "   'wrap': 'detect|off|hard|soft|toggle'
 fun! pencil#init(...) abort
   let l:args = a:0 ? a:1 : {}
+
+  " flag to suspend autoformat for the next Insert
+  let b:pencil_suspend_af = 0
 
   if !exists('b:pencil_wrap_mode')
     let b:pencil_wrap_mode = s:WRAP_MODE_OFF
@@ -232,6 +241,14 @@ fun! pencil#init(...) abort
       setl textwidth<
     en
     setl nowrap
+
+    " flag to suspend autoformat for next Insert
+    " optional user-defined mapping
+    if exists('g:pencil#map#suspend_af') &&
+     \ g:pencil#map#suspend_af != ''
+      exe 'no <buffer> <silent> ' . g:pencil#map#suspend_af . ' :let b:pencil_suspend_af=1<CR>'
+    en
+
   elsei b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
     setl textwidth=0
     setl wrap
