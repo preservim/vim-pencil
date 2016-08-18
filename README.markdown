@@ -21,15 +21,18 @@ smooth the path to writing prose.
 * Adjusts navigation key mappings to suit the wrap mode
 * Creates undo points on common punctuation during Insert mode, including
   deletion via line `<C-U>` and word `<C-W>`
-* Makes use of Vim’s powerful autoformat while inserting text, except for
-  tables and code blocks where you won’t want it.
-* *NEW* Optional key mapping to suspend autoformat for the Insert.
 * Buffer-scoped configuration (with a few minor exceptions, _pencil_ preserves
   your global settings)
 * Support for Vim’s Conceal feature to hide markup defined by Syntax plugins
   (e.g., `_` and `*` markup for styled text in \_*Markdown*\_)
 * Support for display of mode indicator (`␍` and `⤸`, e.g.) in the status line
 * Pure Vimscript with no dependencies
+
+In addition, when using hard line break mode:
+
+* Makes use of Vim’s powerful autoformat while inserting text, except for
+  tables and code blocks where you won’t want it.
+* *NEW* Optional key mapping to suspend autoformat for the Insert.
 
 Need spell-check, distraction-free editing, and other features? Vim is about
 customization. To complete your editing environment, learn to configure Vim and
@@ -198,11 +201,11 @@ augroup pencil
 augroup END
 ```
 
-In the example above, for files of type `markdown` this plugin will
+In the example above, for buffers of type `markdown` this plugin will
 auto-detect the line wrap approach, with soft line wrap as the default.
 
-For files of type `text`, it will initialize with hard line breaks, even
-if auto-detect might suggest soft line wrap.
+For buffers of type `text`, it will initialize with hard line breaks,
+even if auto-detect might suggest soft line wrap.
 
 ## Commands
 
@@ -276,7 +279,7 @@ implemented and configured).
 Note that you need not rely on Vim’s autoformat exclusively and can
 manually reformat paragraphs with standard Vim commands:
 
-* `gqip` or `gwip` - format current paragraph
+* `gqip` or `gwip` - format current paragraph (see `:help gq`)
 * `vapJgwip` - merge two paragraphs (current and next) and format
 * `ggVGgq` or `:g/^/norm gqq` - format all paragraphs in buffer
 
@@ -284,7 +287,8 @@ Optionally, you can map these operations to underutilized keys in your
 `.vimrc`:
 
 ```vim
-nnoremap <silent> Q gwip
+nnoremap <silent> Q gqip
+xnoremap <silent> Q gq
 nnoremap <silent> <leader>Q vapJgwip
 ```
 
@@ -470,15 +474,13 @@ only._
 
 When editing formatted text, such as a table or code block, Vim’s
 autoformat will wreak havoc with the formatting. In these cases you will
-want to suspend autoformat for the Insert. However, in most cases, you
-won’t need to do this.
+want autoformat suspended for the duration of the Insert.
 
-_pencil_ will detect the syntax highlight group at the cursor position to
-determine whether or not autoformat should be suspended.
-
-If you haven’t explicitly disabled autoformat, it will be suspended at
-the time you enter Insert mode provided that the syntax highlighting
-group at the cursor position is in the blacklist.
+When entering Insert mode, _pencil_ will determine the highlight group at
+the cursor position. If that group has been blacklisted, _pencil_ will
+suspend autoformat for the Insert. For example, if editing a buffer of
+type ‘markdown’, autoformat will be suspended if you invoke Insert mode
+from inside a `markdownFencedCodeBlock` highlight group.
 
 Blacklists are now declared by file type. The default blacklists (and
 whitelists) are declared in the `plugin/pencil.vim` module. Here’s an
@@ -502,14 +504,9 @@ excerpt showing the configuration for the ‘markdown’ file type:
         \ }
 ```
 
-For example, if editing a file of type ‘markdown’ and you enter Insert
-mode from inside a `markdownFencedCodeBlock` highlight group, then Vim’s
-autoformat will be suspended for the Insert.
-
-The whitelist will override the blacklist and allow Vim’s autoformat to
-be avoid suspension if text that would normally be blacklisted doesn’t
-dominate the entire line. This allows autoformat to work with `inline`
-code and links.
+The whitelist will override the blacklist and enable Vim’s autoformat if
+text that would normally be blacklisted doesn’t dominate the entire line.
+This allows autoformat to work with `inline` code and links.
 
 ### Auto-detecting wrap mode
 
@@ -517,7 +514,8 @@ If you didn't explicitly specify a wrap mode during initialization,
 _pencil_ will attempt to detect it.
 
 It will first look for a `textwidth` (or `tw`) specified in a modeline.
-Failing that, _pencil_ will then sample lines from the start of the file.
+Failing that, _pencil_ will then sample lines from the start of the
+buffer.
 
 #### Detect via modeline
 
@@ -538,7 +536,8 @@ command upon loading the file into a buffer:
 ```
 
 It tells _pencil_ to assume hard line breaks, regardless of whether or
-not soft line wrap is the default editing mode for files of type ‘markdown’.
+not soft line wrap is the default editing mode for buffers of type
+‘markdown’.
 
 You explicitly specify soft wrap mode by specifying a textwidth of `0`:
 
@@ -551,12 +550,12 @@ reasons) the textwidth will still be set by this plugin.
 
 #### Detect via sampling
 
-If no modeline with a textwidth is found, _pencil_ will sample the initial
-lines from the file, looking for those excessively-long.
+If no modeline with a textwidth is found, _pencil_ will sample the
+initial lines from the buffer, looking for those excessively-long.
 
 There are two settings you can add to your `.vimrc` to tweak this behavior.
 
-The maximum number of lines to sample from the start of the file:
+The maximum number of lines to sample from the start of the buffer:
 
 ```vim
 let g:pencil#softDetectSample = 20
@@ -654,8 +653,8 @@ with its own Markdown variant.
 
 # Future development
 
-If you’ve spotted a problem or have an idea on improving _pencil_,
-please report it as an issue, or better yet submit a pull request.
+If you’ve spotted a problem or have an idea on improving _pencil_, please
+report it as an issue, or better yet submit a pull request.
 
 ```
 <!-- vim: set tw=73 :-->
