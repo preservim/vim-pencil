@@ -147,12 +147,26 @@ git clone https://github.com/reedes/vim-pencil
 
 # Configuration
 
-## Basic initialization
+## Initializing by command
 
-Initializing _pencil_ by `FileType` is _optional_, though doing so will
+You can manually enable, disable, and toggle _pencil_ as a command:
+
+* `Pencil` - initialize _pencil_ with auto-detect for the current buffer
+* `NoPencil` (or `PencilOff`) - removes navigation mappings and restores buffer to global settings
+* `TogglePencil` (or `PencilToggle`) - if on, turns off; if off, initializes with auto-detect
+
+Because auto-detect might not work as intended, you can invoke a command
+to set the behavior for the current buffer:
+
+* `SoftPencil` (or `PencilSoft`) - initialize _pencil_ with soft line wrap mode
+* `HardPencil` (or `PencilHard`) - initialize _pencil_ with hard line break mode (and Vim’s autoformat)
+
+## Initializing by file type
+
+Initializing _pencil_ by file type is _optional_, though doing so will
 automatically set up your buffers for editing prose.
 
-Add support for your desired filetypes to your `.vimrc`:
+Add support for your desired file types to your `.vimrc`:
 
 ```vim
 set nocompatible
@@ -206,20 +220,6 @@ auto-detect the line wrap approach, with soft line wrap as the default.
 
 For buffers of type `text`, it will initialize with hard line breaks,
 even if auto-detect might suggest soft line wrap.
-
-## Commands
-
-You can enable, disable, and toggle _pencil_ as a command:
-
-* `Pencil` - initialize _pencil_ with auto-detect for the current buffer
-* `NoPencil` (or `PencilOff`) - removes navigation mappings and restores buffer to global settings
-* `TogglePencil` (or `PencilToggle`) - if on, turns off; if off, initializes with auto-detect
-
-Because auto-detect might not work as intended, you can invoke a command
-to set the behavior for the current buffer:
-
-* `SoftPencil` (or `PencilSoft`) - initialize _pencil_ with soft line wrap mode
-* `HardPencil` (or `PencilHard`) - initialize _pencil_ with hard line break mode (and Vim’s autoformat)
 
 ## Automatic formatting
 
@@ -279,8 +279,8 @@ implemented and configured).
 Note that you need not rely on Vim’s autoformat exclusively and can
 manually reformat paragraphs with standard Vim commands:
 
-* `gqip` or `gwip` - format current paragraph (see `:help gq`)
-* `vapJgwip` - merge two paragraphs (current and next) and format
+* `gqap` - format current paragraph (see `:help gq` for details)
+* `vapJgqap` - merge two paragraphs (current and next) and format
 * `ggVGgq` or `:g/^/norm gqq` - format all paragraphs in buffer
 
 Optionally, you can map these operations to underutilized keys in your
@@ -289,7 +289,7 @@ Optionally, you can map these operations to underutilized keys in your
 ```vim
 nnoremap <silent> Q gqip
 xnoremap <silent> Q gq
-nnoremap <silent> <leader>Q vapJgwip
+nnoremap <silent> <leader>Q vapJgqap
 ```
 
 Or you may wish to ‘unformat’, (i.e., remove hard line breaks) when using
@@ -417,11 +417,43 @@ has not been initialized.
 
 ### Advanced initialization
 
-Configurable options for `pencil#init()` include: `autoformat`,
-`concealcursor`, `conceallevel`, `cursorwrap`, `joinspaces`, `textwidth`,
-and `wrap`. These are detailed above.
+You may want to refactor initialization statements into a function in
+your `.vimrc`:
 
-You can override _pencil_ and other configuration settings when initializing:
+```vim
+function! Prose()
+  call pencil#init()
+  call lexical#init()
+  call litecorrect#init()
+  call textobj#quote#init()
+  call textobj#sentence#init()
+
+  " manual reformatting shortcuts
+  nnoremap <buffer> <silent> Q gqip
+  xnoremap <buffer> <silent> Q gq
+  nnoremap <buffer> <silent> <leader>Q vapJgqap
+
+  " force top correction on most recent misspelling
+  nnoremap <buffer> <c-s> [s1z=<c-o>
+  inoremap <buffer> <c-s> <c-g>u<Esc>[s1z=`]A<c-g>u
+
+  " Replace common punctuation
+  iab <buffer> -- –
+  iab <buffer> --- —
+  iab <buffer> ... …
+  iab <buffer> << «
+  iab <buffer> >> »
+endfunction
+
+" automatically initialize buffer by file type
+autocmd FileType markdown,mkd,text call Prose()
+
+" invoke manually by command for other file types
+com -nargs=0 Prose call Prose()
+```
+
+For highly-granular control, you can override _pencil_ and other configuration
+settings when initializing buffers by file type:
 
 ```vim
 augroup pencil
@@ -443,8 +475,9 @@ augroup pencil
 augroup END
 ```
 
-Alternatives include `after/ftplugin` modules as well as refactoring initialization
-statements into a function.
+Configurable options for `pencil#init()` include: `autoformat`,
+`concealcursor`, `conceallevel`, `cursorwrap`, `joinspaces`, `textwidth`,
+and `wrap`. These are detailed above.
 
 ### Autoformat manual control
 
