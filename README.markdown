@@ -287,7 +287,7 @@ Optionally, you can map these operations to underutilized keys in your
 `.vimrc`:
 
 ```vim
-nnoremap <silent> Q gqip
+nnoremap <silent> Q gqap
 xnoremap <silent> Q gq
 nnoremap <silent> <leader>Q vapJgqap
 ```
@@ -300,8 +300,8 @@ soft line wrap.
 
 ## Default textwidth
 
-You can configure the textwidth to be used in **HardPencil** mode when no
-textwidth is set globally, locally, or available via modeline. It
+You can configure the textwidth to be used in **Hard Pencil** mode when no
+textwidth is set globally, locally, or available via modeling. It
 defaults to `74`, but you can change that value in your `.vimrc`:
 
 ```vim
@@ -337,7 +337,7 @@ Syntax and Colorscheme plugins is currently spotty.
 You can change _pencil’s_ default settings for conceal in your `.vimrc`:
 
 ```vim
-let g:pencil#conceallevel = 3     " 0=disable, 1=onechar, 2=hidechar, 3=hideall (def)
+let g:pencil#conceallevel = 3     " 0=disable, 1=one char, 2=hide char, 3=hide all (def)
 let g:pencil#concealcursor = 'c'  " n=normal, v=visual, i=insert, c=command (def)
 ```
 
@@ -359,10 +359,10 @@ To use Vim’s Conceal feature with Markdown, you will need to install:
 1. [tpope/vim-markdown][tm] as it’s currently the only Markdown syntax
    plugin that supports conceal.
 
-2. a monospaced font (such as [Cousine][co]) featuring the _italic_,
+2. A monospaced font (such as [Cousine][co]) featuring the _italic_,
    **bold**, and ***bold italic*** style variant for styled text.
 
-3. a colorscheme (such as [reedes/vim-colors-pencil][cp]) which supports
+3. A colorscheme (such as [reedes/vim-colors-pencil][cp]) which supports
    the Markdown-specific highlight groups for styled text.
 
 You should then only see the `_` and `*` markup for the cursor line and in
@@ -418,7 +418,7 @@ has not been initialized.
 ### Advanced initialization
 
 You may want to refactor initialization statements into a function in
-your `.vimrc`:
+your `.vimrc` to set up a buffer for writing:
 
 ```vim
 function! Prose()
@@ -429,7 +429,7 @@ function! Prose()
   call textobj#sentence#init()
 
   " manual reformatting shortcuts
-  nnoremap <buffer> <silent> Q gqip
+  nnoremap <buffer> <silent> Q gqap
   xnoremap <buffer> <silent> Q gq
   nnoremap <buffer> <silent> <leader>Q vapJgqap
 
@@ -437,19 +437,21 @@ function! Prose()
   nnoremap <buffer> <c-s> [s1z=<c-o>
   inoremap <buffer> <c-s> <c-g>u<Esc>[s1z=`]A<c-g>u
 
-  " Replace common punctuation
-  iab <buffer> -- –
-  iab <buffer> --- —
-  iab <buffer> ... …
-  iab <buffer> << «
-  iab <buffer> >> »
+  " replace common punctuation
+  iabbrev <buffer> -- –
+  iabbrev <buffer> --- —
+  iabbrev <buffer> << «
+  iabbrev <buffer> >> »
+
+  " open most folds
+  setlocal foldlevel=6
 endfunction
 
 " automatically initialize buffer by file type
 autocmd FileType markdown,mkd,text call Prose()
 
 " invoke manually by command for other file types
-com -nargs=0 Prose call Prose()
+command! -nargs=0 Prose call Prose()
 ```
 
 For highly-granular control, you can override _pencil_ and other configuration
@@ -486,7 +488,7 @@ only._
 
 To suspend autoformat for the next Insert, see above.
 
-Where you need to manually enable/disable autoformat for the current
+When you need to manually enable/disable autoformat for the current
 buffer, you can do so with a command:
 
 * `PFormat` - enable autoformat for buffer (can still be disabled via blacklisting)
