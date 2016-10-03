@@ -77,7 +77,7 @@ if !exists('g:pencil#autoformat_config')
         \       'htmlH[0-9]',
         \       'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
         \       'markdown(FencedCodeBlock|InlineCode)',
-        \       'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode)',
+        \       'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode|Snippet|NonListItemBlock)',
         \       'mmdTable[A-Za-z0-9]*',
         \     ],
         \     'white': [
@@ -182,6 +182,7 @@ com -nargs=0 PFormatOff     call pencil#setAutoFormat(0)
 com -nargs=0 PFormatToggle  call pencil#setAutoFormat(-1)
 
 " NOTE: legacy commands have been disabled by default as of 31-Dec-15
+"       These will be removed entirely on 31-Dec-16
 if !exists('g:pencil#legacyCommands')
   let g:pencil#legacyCommands = 0
 en
