@@ -77,7 +77,7 @@ if !exists('g:pencil#autoformat_config')
         \       'htmlH[0-9]',
         \       'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
         \       'markdown(FencedCodeBlock|InlineCode)',
-        \       'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode|Snippet|NonListItemBlock)',
+        \       'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode|Snippet)',
         \       'mmdTable[A-Za-z0-9]*',
         \     ],
         \     'white': [
