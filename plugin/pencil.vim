@@ -111,6 +111,16 @@ if !exists('g:pencil#autoformat_config')
         \       'txtCode',
         \     ],
         \   },
+        \   'pandoc': {
+        \     'black': [
+        \       '^pandoc.*Code.*',
+        \       'pandocHTML',
+        \       'pandocLaTeXMathBlock',
+        \       '^pandoc.*List.*',
+        \       '^pandoc.*Table.*',
+        \       'pandocYAMLHeader',
+        \     ],
+        \   }
         \ }
 en
 if !exists('g:pencil#autoformat_aliases')
