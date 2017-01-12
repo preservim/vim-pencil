@@ -57,7 +57,7 @@ switch away from the familiar word processor. Instead, you need
 a compelling reason—one that can appeal to a writer’s love for language
 and the tools of writing.
 
-You can find that reason in Vim's mysterious command sequences. Take `cas`
+You can find that reason in Vim’s mysterious command sequences. Take `cas`
 for instance. You might see it as a mnemonic for _Change Around Sentence_
 to replace an existing sentence. But dig a bit deeper to discover that
 such commands have a grammar of their own, comprised of nouns, verbs, and
@@ -66,8 +66,8 @@ specific language_ for manipulating text, one that can become a powerful
 tool in expressing yourself. For more details on vi-style editing, see...
 
 * [Learn to speak vim – verbs, nouns, and modifiers!][ls] (December 2011)
-* [Your problem with Vim is that you don't grok vi][gv] (December 2011)
-* [Intro to Vim's Grammar][ig] (January 2013)
+* [Your problem with Vim is that you don’t grok vi][gv] (December 2011)
+* [Intro to Vim’s Grammar][ig] (January 2013)
 * [Why Atom Can’t Replace Vim, Learning the lesson of vi][wa] (March 2014)
 * [Language of Vim/Neovim][lovn] (January 2015)
 
@@ -199,7 +199,7 @@ also](#see-also) section below.
 
 Coders will have the most experience with the former, and writers the
 latter. But whatever your background, chances are that you must contend
-with both conventions. This plugin doesn't force you to choose a side—you
+with both conventions. This plugin doesn’t force you to choose a side—you
 can configure each buffer independently.
 
 In most cases you can set a default to suit your preference and let
@@ -223,10 +223,10 @@ even if auto-detect might suggest soft line wrap.
 
 ## Automatic formatting
 
-_The ‘autoformat’ feature affects *HardPencil* (hard line break) mode
+_The ‘autoformat’ feature affects `HardPencil` (hard line break) mode
 only._
 
-When inserting text while in *HardPencil* mode, Vim’s powerful autoformat
+When inserting text while in `HardPencil` mode, Vim’s powerful autoformat
 feature will be _enabled_ by default and can offer many of the same
 benefits as soft line wrap.
 
@@ -255,11 +255,11 @@ but `text` buffers will have autoformat disabled.
 There are two useful exceptions where autoformat (when enabled for the
 buffer) will be _temporarily disabled_ for the current Insert:
 
-First is _pencil’s_ 'blacklisting' feature: if used with popular
+**First** is _pencil’s_ ‘blacklisting’ feature: if used with popular
 prose-oriented syntax plugins, _pencil_ will suspend autoformat when you
 enter Insert mode from inside a code block or table.
 
-[**NEW**] Second, where blacklisting falls short, you can optionally map
+**Second**, where blacklisting falls short, you can optionally map
 a buffer-scoped ‘modifier’ key to suspend autoformat during the next
 Insert:
 
@@ -270,6 +270,8 @@ let g:pencil#map#suspend_af = 'K'   " default is no mapping
 Using the above mapping, with `Ko` you’ll enter Insert mode with the
 cursor on a new line, but autoformat will suspend for that Insert. Using
 `o` by itself will retain autoformat.
+
+By default no modifier key is mapped.
 
 (See the advanced section below for details on how blacklisting is
 implemented and configured).
@@ -300,9 +302,10 @@ soft line wrap.
 
 ## Default textwidth
 
-You can configure the textwidth to be used in **Hard Pencil** mode when no
-textwidth is set globally, locally, or available via modeling. It
-defaults to `74`, but you can change that value in your `.vimrc`:
+You can configure the textwidth to be used in `HardPencil` (hard line
+break) mode when no textwidth is set globally, locally, or available via
+modeline. It defaults to `74`, but you can change that value in your
+`.vimrc`:
 
 ```vim
 let g:pencil#textwidth = 74
@@ -331,7 +334,7 @@ let g:pencil#cursorwrap = 1     " 0=disable, 1=enable (def)
 
 ## Concealing \_\_markup\_\_
 
-_pencil_ enables Vim's powerful Conceal feature, although support among
+_pencil_ enables Vim’s powerful Conceal feature, although support among
 Syntax and Colorscheme plugins is currently spotty.
 
 You can change _pencil’s_ default settings for conceal in your `.vimrc`:
@@ -445,6 +448,16 @@ function! Prose()
 
   " open most folds
   setlocal foldlevel=6
+
+  " replace typographical quotes (reedes/vim-textobj-quote)
+  map <silent> <buffer> <leader>qc <Plug>ReplaceWithCurly
+  map <silent> <buffer> <leader>qs <Plug>ReplaceWithStraight
+
+  " highlight words (reedes/vim-wordy)
+  noremap <silent> <buffer> <F8> :<C-u>NextWordy<cr>
+  xnoremap <silent> <buffer> <F8> :<C-u>NextWordy<cr>
+  inoremap <silent> <buffer> <F8> <C-o>:NextWordy<cr>
+
 endfunction
 
 " automatically initialize buffer by file type
@@ -483,7 +496,7 @@ and `wrap`. These are detailed above.
 
 ### Autoformat manual control
 
-_The ‘autoformat’ feature affects *HardPencil* (hard line break) mode
+_The ‘autoformat’ feature affects `HardPencil` (hard line break) mode
 only._
 
 To suspend autoformat for the next Insert, see above.
@@ -495,7 +508,7 @@ buffer, you can do so with a command:
 * `PFormatOff` - disable autoformat for buffer
 * `PFormatToggle` - toggle to enable if disabled, etc.
 
-You can map a key in your `.vimrc` to toggle Vim's autoformat:
+You can map a key in your `.vimrc` to toggle Vim’s autoformat:
 
 ```vim
 noremap <silent> <F7> :<C-u>PFormatToggle<cr>
@@ -504,7 +517,7 @@ inoremap <silent> <F7> <C-o>:PFormatToggle<cr>
 
 ### Autoformat blacklisting (and whitelisting)
 
-_The ‘autoformat’ feature affects *HardPencil* (hard line break) mode
+_The ‘autoformat’ feature affects `HardPencil` (hard line break) mode
 only._
 
 When editing formatted text, such as a table or code block, Vim’s
@@ -545,7 +558,7 @@ This allows autoformat to work with `inline` code and links.
 
 ### Auto-detecting wrap mode
 
-If you didn't explicitly specify a wrap mode during initialization,
+If you didn’t explicitly specify a wrap mode during initialization,
 _pencil_ will attempt to detect it.
 
 It will first look for a `textwidth` (or `tw`) specified in a modeline.
@@ -615,11 +628,11 @@ If no such lines found, _pencil_ falls back to the default wrap mode.
 
 Bloggers and developers discuss _pencil_ and its brethern:
 
-* [Reed Esau's growing list of Vim plugins for writers][regl] (2014) - by @pengwynn
+* [Reed Esau’s growing list of Vim plugins for writers][regl] (2014) - by @pengwynn
 * [Distraction Free Writing in Vim][dfwiv] (2014) - by @tlattimore
 * [Safari Blog: Turning vim into an IDE through vim plugins][tviai] (2014) - by @jameydeorio
 * [Quick tops for writing prose with Vim][qtfwp] (2014) - by @benoliver999
-* [UseVim: Reed Esau's Writing Plugins][rewp] (2015) - by @alexyoung
+* [UseVim: Reed Esau’s Writing Plugins][rewp] (2015) - by @alexyoung
 * [Tomasino Labs: Vim in Context][vic] (2015) - by @jamestomasino
 * [Writing with Vim][wwv] (2015) - by Pat Ambrosio
 
@@ -646,10 +659,24 @@ Other plugins of specific interest to writers:
 
 Markdown syntax plugins
 
-* [tpope/vim-markdown][tvm] - the latest version of the syntax plugin that ships with Vim
+Markdown users typically won’t need to install a syntax plugin unless
+they want the latest version of Pope’s syntax highlighting:
+
+* [tpope/vim-markdown][tvm] - (recommended) the latest version of Pope’s
+  syntax plugin which ships with Vim
+
+Those using tables and footnotes should consider installing this plugin:
+
+* [mattly/vim-markdown-enhancements][mvme]
+
+Alternatives to Tim Pope’s syntax highlighting include:
+
 * [plasticboy/vim-markdown][pvm]
 * [gabrielelana/vim-markdown][gvm]
-* [mattly/vim-markdown-enhancements][mvme] - highlighting for tables and footnotes
+
+Note that the plasticboy and gabrielelana plugins may incorrectly
+reformat bulleted lists when Vim’s autoformat is active in _pencil_’s
+HardPencil mode.
 
 [tvm]: http://github.com/tpope/vim-markdown
 [pvm]: http://github.com/plasticboy/vim-markdown
@@ -663,7 +690,7 @@ If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
 * [vim-litecorrect][lc] - lightweight auto-correction for Vim
 * [vim-one][vo] - make use of Vim’s _+clientserver_ capabilities
 * [vim-textobj-quote][qu] - extends Vim to support typographic (‘curly’) quotes
-* [vim-textobj-sentence][ts] - improving on Vim's native sentence motion command
+* [vim-textobj-sentence][ts] - improving on Vim’s native sentence motion command
 * [vim-thematic][th] - modify Vim’s appearance to suit your task and environment
 * [vim-wheel][wh] - screen-anchored cursor movement for Vim
 * [vim-wordy][wo] - uncovering usage problems in writing
