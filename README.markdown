@@ -634,7 +634,6 @@ Bloggers and developers discuss _pencil_ and its brethern:
 * [Quick tops for writing prose with Vim][qtfwp] (2014) - by @benoliver999
 * [UseVim: Reed Esau’s Writing Plugins][rewp] (2015) - by @alexyoung
 * [Tomasino Labs: Vim in Context][vic] (2015) - by @jamestomasino
-* [Writing with Vim][wwv] (2015) - by Pat Ambrosio
 
 Other plugins of specific interest to writers:
 
@@ -646,9 +645,8 @@ Other plugins of specific interest to writers:
 
 [vd]: https://github.com/danielbmarques/vim-ditto
 [qtfwp]: http://benoliver999.com/technology/2014/12/06/vimforprose/
-[wwv]: https://lilii.co/aardvark/writing-with-vim
-[vic]: https://labs.tomasino.org/vim-in-context.html
-[rewp]: http://usevim.com/2015/05/27/reedes/
+[vic]: https://labs.tomasino.org/vim-in-context/
+[rewp]: https://medium.com/usevim/reed-esaus-writing-plugins-5b6c65bc808f
 [tviai]: https://www.safaribooksonline.com/blog/2014/11/23/way-vim-ide/
 [regl]: http://wynnnetherland.com/journal/reed-esau-s-growing-list-of-vim-plugins-for-writers/
 [dfwiv]: http://tlattimore.com/blog/distraction-free-writing-in-vim/
