@@ -411,6 +411,10 @@ fun! pencil#init(...) abort
     vn <buffer> <silent> k gk
     no <buffer> <silent> <Up>   gk
     no <buffer> <silent> <Down> gj
+    nn <buffer> <silent> gj j
+    nn <buffer> <silent> gk k
+    vn <buffer> <silent> gj j
+    vn <buffer> <silent> gk k
 
     " preserve behavior of up/down keys in popups
     call s:imap(1, '<Up>'  , '<C-o>g<Up>'  )
@@ -422,6 +426,10 @@ fun! pencil#init(...) abort
     sil! vu  <buffer> k
     sil! unm <buffer> <Up>
     sil! unm <buffer> <Down>
+    sil! nun <buffer> gj j
+    sil! nun <buffer> gk k
+    sil! vu <buffer> gj j
+    sil! vu <buffer> gk k
 
     sil! iu <buffer> <Up>
     sil! iu <buffer> <Down>
