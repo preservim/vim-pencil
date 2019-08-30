@@ -716,6 +716,4 @@ with its own Markdown variant.
 If you’ve spotted a problem or have an idea on improving _pencil_, please
 report it as an issue, or better yet submit a pull request.
 
-```
 <!-- vim: set tw=73 :-->
-```
