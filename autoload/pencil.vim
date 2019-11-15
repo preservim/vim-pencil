@@ -8,7 +8,7 @@
 
 scriptencoding utf-8
 
-if exists("autoloaded_pencil") | fini | en
+if exists('autoloaded_pencil') | fini | en
 let autoloaded_pencil = 1
 
 let s:WRAP_MODE_DEFAULT = -1
@@ -49,9 +49,9 @@ endf
 
 fun! s:imap(preserve_completion, key, icmd) abort
   if a:preserve_completion
-    exe ":ino <buffer> <silent> <expr> " . a:key . " pumvisible() ? \"" . a:key . "\" : \"" . a:icmd . "\""
+    exe ':ino <buffer> <silent> <expr> ' . a:key . " pumvisible() ? '" . a:key . "' : '" . a:icmd . "'"
   el
-    exe ":ino <buffer> <silent> " . a:key . " " . a:icmd
+    exe ':ino <buffer> <silent> ' . a:key . ' ' . a:icmd
   en
 endf
 
@@ -175,7 +175,7 @@ fun! pencil#setAutoFormat(af) abort
     sil! au! pencil_autoformat * <buffer>
     if l:nu_af && !l:is_hard
       echohl WarningMsg
-      echo "autoformat can only be enabled in hard line break mode"
+      echo 'autoformat can only be enabled in hard line break mode'
       echohl NONE
       return
     en
@@ -195,7 +195,7 @@ fun! pencil#init(...) abort
   if !exists('b:pencil_wrap_mode')
     let b:pencil_wrap_mode = s:WRAP_MODE_OFF
   en
-  if !exists("b:max_textwidth")
+  if !exists('b:max_textwidth')
     let b:max_textwidth = -1
   en
 
@@ -408,10 +408,10 @@ fun! pencil#init(...) abort
   en
 
   if b:pencil_wrap_mode
-    exe 'nn <buffer> <silent> ' . Mapkey("j", "n") . ' gj'
-    exe 'nn <buffer> <silent> ' . Mapkey("k", "n") . ' gk'
-    exe 'vn <buffer> <silent> ' . Mapkey("j", "v") . ' gj'
-    exe 'vn <buffer> <silent> ' . Mapkey("k", "v") . ' gk'
+    exe 'nn <buffer> <silent> ' . Mapkey('j', 'n') . ' gj'
+    exe 'nn <buffer> <silent> ' . Mapkey('k', 'n') . ' gk'
+    exe 'vn <buffer> <silent> ' . Mapkey('j', 'v') . ' gj'
+    exe 'vn <buffer> <silent> ' . Mapkey('k', 'v') . ' gk'
     no <buffer> <silent> <Up>   gk
     no <buffer> <silent> <Down> gj
     nn <buffer> <silent> gj j
@@ -507,16 +507,16 @@ endf
 " modeline(s) and max line length
 " Hat tip to https://github.com/ciaranm/securemodelines
 fun! s:doModelines() abort
-  if line("$") > &modelines
+  if line('$') > &modelines
     let l:lines={ }
     call map(filter(getline(1, &modelines) +
-          \ getline(line("$") - &modelines, "$"),
+          \ getline(line('$') - &modelines, '$'),
           \ 'v:val =~# ":"'), 'extend(l:lines, { v:val : 0 } )')
     for l:line in keys(l:lines)
       call s:doModeline(l:line)
     endfo
   el
-    for l:line in getline(1, "$")
+    for l:line in getline(1, '$')
       call s:doModeline(l:line)
     endfo
   en
