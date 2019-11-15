@@ -522,7 +522,7 @@ fun! s:doModelines() abort
   en
 endf
 
-function! Mapkey (keys, mode)
+function! Mapkey (keys, mode) abort
     " Pass in a key sequence and the first letter of a vim mode.
     " Returns key mapping mapped to it in that mode, else 0 if none.
     " example:
