@@ -5,7 +5,9 @@
 " Created:     December 28, 2013
 " License:     The MIT License (MIT)
 " ============================================================================
-"
+
+scriptencoding utf-8
+
 if exists('g:loaded_pencil') || &cp | fini | en
 let g:loaded_pencil = 1
 

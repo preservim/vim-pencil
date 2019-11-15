@@ -5,6 +5,9 @@
 " Created:     December 28, 2013
 " License:     The MIT License (MIT)
 " ============================================================================
+
+scriptencoding utf-8
+
 if exists("autoloaded_pencil") | fini | en
 let autoloaded_pencil = 1
 
