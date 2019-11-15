@@ -33,7 +33,7 @@ fun! PencilMode()
     if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
       return get(g:pencil#mode_indicators, 'soft', 'S')
     elsei b:pencil_wrap_mode ==# s:WRAP_MODE_HARD
-      if &fo =~ 'a'
+      if &fo =~# 'a'
         return get(g:pencil#mode_indicators, 'auto', 'A')
       el
         return get(g:pencil#mode_indicators, 'hard', 'H')

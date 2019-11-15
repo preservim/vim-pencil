@@ -248,7 +248,7 @@ fun! pencil#init(...) abort
     " flag to suspend autoformat for next Insert
     " optional user-defined mapping
     if exists('g:pencil#map#suspend_af') &&
-     \ g:pencil#map#suspend_af != ''
+     \ g:pencil#map#suspend_af !=# ''
       exe 'no <buffer> <silent> ' . g:pencil#map#suspend_af . ' :let b:pencil_suspend_af=1<CR>'
     en
 
@@ -478,7 +478,7 @@ endf
 fun! s:doOne(item) abort
   let l:matches = matchlist(a:item, '^\([a-z]\+\)=\([a-zA-Z0-9_\-.]\+\)$')
   if len(l:matches) > 1
-    if l:matches[1] =~ 'textwidth\|tw'
+    if l:matches[1] =~# 'textwidth\|tw'
       let l:tw = str2nr(l:matches[2])
       if l:tw > b:max_textwidth
         let b:max_textwidth = l:tw
@@ -511,7 +511,7 @@ fun! s:doModelines() abort
     let l:lines={ }
     call map(filter(getline(1, &modelines) +
           \ getline(line("$") - &modelines, "$"),
-          \ 'v:val =~ ":"'), 'extend(l:lines, { v:val : 0 } )')
+          \ 'v:val =~# ":"'), 'extend(l:lines, { v:val : 0 } )')
     for l:line in keys(l:lines)
       call s:doModeline(l:line)
     endfo
