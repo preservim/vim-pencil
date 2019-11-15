@@ -1,5 +1,7 @@
 # vim-pencil
 
+[![Vint](https://github.com/reedes/vim-pencil/workflows/Vint/badge.svg)](https://github.com/reedes/vim-pencil/actions?workflow=Vint)
+
 > Rethinking Vim as a tool for writers
 
 <br/>
