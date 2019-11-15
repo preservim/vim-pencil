@@ -65,8 +65,8 @@ fun! s:maybe_enable_autoformat() abort
     return
   en
 
-  let l:ft = get(g:pencil#autoformat_aliases, &ft, &ft)
-  let l:af_cfg = get(g:pencil#autoformat_config, l:ft, {})
+  let l:filetype = get(g:pencil#autoformat_aliases, &filetype, &filetype)
+  let l:af_cfg = get(g:pencil#autoformat_config, l:filetype, {})
   let l:black = get(l:af_cfg, 'black', [])
   let l:white = get(l:af_cfg, 'white', [])
   let l:has_black_re = len(l:black) > 0

@@ -8,12 +8,12 @@
 
 scriptencoding utf-8
 
-if exists('g:loaded_pencil') || &cp | fini | en
+if exists('g:loaded_pencil') || &compatible | fini | en
 let g:loaded_pencil = 1
 
 " Save 'cpoptions' and set Vim default to enable line continuations.
-let s:save_cpo = &cpo
-set cpo&vim
+let s:save_cpoptions = &cpoptions
+set cpoptions&vim
 
 let s:WRAP_MODE_DEFAULT = -1
 let s:WRAP_MODE_OFF     = 0
@@ -33,7 +33,7 @@ fun! PencilMode()
     if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
       return get(g:pencil#mode_indicators, 'soft', 'S')
     elsei b:pencil_wrap_mode ==# s:WRAP_MODE_HARD
-      if &fo =~# 'a'
+      if &formatoptions =~# 'a'
         return get(g:pencil#mode_indicators, 'auto', 'A')
       el
         return get(g:pencil#mode_indicators, 'hard', 'H')
@@ -205,7 +205,7 @@ if g:pencil#legacyCommands
   com -nargs=0 ShiftPencil   call pencil#setAutoFormat(-1)
 en
 
-let &cpo = s:save_cpo
-unlet s:save_cpo
+let &cpoptions = s:save_cpoptions
+unlet s:save_cpoptions
 
 " vim:ts=2:sw=2:sts=2
