@@ -522,20 +522,17 @@ fun! s:doModelines() abort
   en
 endf
 
+" Pass in a key sequence and the first letter of a vim mode. Returns key
+" mapping mapped to it in that mode, else the original key sequence if none.
 function! Mapkey (keys, mode) abort
-    " Pass in a key sequence and the first letter of a vim mode.
-    " Returns key mapping mapped to it in that mode, else 0 if none.
-    " example:
-    "   :nnoremap <Tab> :bn<CR>
-    "   :call Mapkey(':bn<CR>', 'n')
-    "   " returns <Tab>
-    redir => mappings | silent! map | redir END
-    for map in split(mappings, '\n')
-        let seq = matchstr(map, '\s\+\zs\S*')
-        if maparg(seq, a:mode) == a:keys
-            return seq
-        endif
-    endfor
+  redir => mappings | silent! map | redir END
+  for map in split(mappings, '\n')
+    let seq = matchstr(map, '\s\+\zs\S*')
+    if maparg(seq, a:mode) == a:keys
+      return seq
+    endif
+  endfor
+  return a:keys
 endfunction
 
 " vim:ts=2:sw=2:sts=2
