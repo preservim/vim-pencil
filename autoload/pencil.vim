@@ -386,12 +386,16 @@ fun! pencil#init(...) abort
   en
 
   if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
-    nn <buffer> <silent> $ g$
-    nn <buffer> <silent> 0 g0
-    vn <buffer> <silent> $ g$
-    vn <buffer> <silent> 0 g0
+    exe 'nn <buffer> <silent>' . Mapkey('$', 'n') . ' g$'
+    exe 'nn <buffer> <silent>' . Mapkey('0', 'n') . ' g0'
+    exe 'vn <buffer> <silent>' . Mapkey('$', 'v') . ' g$'
+    exe 'vn <buffer> <silent>' . Mapkey('0', 'v') . ' g0'
     no <buffer> <silent> <Home> g<Home>
     no <buffer> <silent> <End>  g<End>
+    nn <buffer> <silent> g0 0
+    nn <buffer> <silent> g$ $
+    vn <buffer> <silent> g0 0
+    vn <buffer> <silent> g$ $
 
     " preserve behavior of home/end keys in popups
     call s:imap(1, '<Home>', '<C-o>g<Home>')
@@ -522,20 +526,17 @@ fun! s:doModelines() abort
   en
 endf
 
+" Pass in a key sequence and the first letter of a vim mode. Returns key
+" mapping mapped to it in that mode, else the original key sequence if none.
 function! Mapkey (keys, mode) abort
-    " Pass in a key sequence and the first letter of a vim mode.
-    " Returns key mapping mapped to it in that mode, else 0 if none.
-    " example:
-    "   :nnoremap <Tab> :bn<CR>
-    "   :call Mapkey(':bn<CR>', 'n')
-    "   " returns <Tab>
-    redir => mappings | silent! map | redir END
-    for map in split(mappings, '\n')
-        let seq = matchstr(map, '\s\+\zs\S*')
-        if maparg(seq, a:mode) == a:keys
-            return seq
-        endif
-    endfor
+  redir => mappings | silent! map | redir END
+  for map in split(mappings, '\n')
+    let seq = matchstr(map, '\s\+\zs\S*')
+    if maparg(seq, a:mode) == a:keys
+      return seq
+    endif
+  endfor
+  return a:keys
 endfunction
 
 " vim:ts=2:sw=2:sts=2
