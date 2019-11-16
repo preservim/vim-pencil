@@ -392,6 +392,10 @@ fun! pencil#init(...) abort
     exe 'vn <buffer> <silent>' . Mapkey('0', 'v') . ' g0'
     no <buffer> <silent> <Home> g<Home>
     no <buffer> <silent> <End>  g<End>
+    nn <buffer> <silent> g0 0
+    nn <buffer> <silent> g$ $
+    vn <buffer> <silent> g0 0
+    vn <buffer> <silent> g$ $
 
     " preserve behavior of home/end keys in popups
     call s:imap(1, '<Home>', '<C-o>g<Home>')
