@@ -386,10 +386,10 @@ fun! pencil#init(...) abort
   en
 
   if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
-    nn <buffer> <silent> $ g$
-    nn <buffer> <silent> 0 g0
-    vn <buffer> <silent> $ g$
-    vn <buffer> <silent> 0 g0
+    exe 'nn <buffer> <silent>' . Mapkey('$', 'n') . ' g$'
+    exe 'nn <buffer> <silent>' . Mapkey('0', 'n') . ' g0'
+    exe 'vn <buffer> <silent>' . Mapkey('$', 'v') . ' g$'
+    exe 'vn <buffer> <silent>' . Mapkey('0', 'v') . ' g0'
     no <buffer> <silent> <Home> g<Home>
     no <buffer> <silent> <End>  g<End>
 
