@@ -101,7 +101,6 @@ if !exists('g:pencil#autoformat_config')
         \       'rst(CodeBlock|Directive|ExDirective|LiteralBlock|Sections)',
         \       'rst(Comment|Delimiter|ExplicitMarkup)',
         \     ],
-        \     'enforce-previous-line': 1,
         \   },
         \   'tex': {
         \     'black': [
