@@ -98,7 +98,8 @@ if !exists('g:pencil#autoformat_config')
         \   },
         \   'rst': {
         \     'black': [
-        \       'rst(CodeBlock|Directive|LiteralBlock|Sections)',
+        \       'rst(CodeBlock|Directive|ExDirective|LiteralBlock|Sections)',
+        \       'rst(Comment|Delimiter|ExplicitMarkup|SimpleTable)',
         \     ],
         \   },
         \   'tex': {
