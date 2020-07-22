@@ -128,6 +128,7 @@ viminstallplugin <git repo> eg:
 viminstallplugin https://github.com/reedes/vim-pencil 
 ```
 
+#### Vundle
 ```vim
 Plugin 'reedes/vim-pencil'
 ```
