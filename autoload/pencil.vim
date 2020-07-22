@@ -5,7 +5,10 @@
 " Created:     December 28, 2013
 " License:     The MIT License (MIT)
 " ============================================================================
-if exists("autoloaded_pencil") | fini | en
+
+scriptencoding utf-8
+
+if exists('autoloaded_pencil') | fini | en
 let autoloaded_pencil = 1
 
 let s:WRAP_MODE_DEFAULT = -1
@@ -46,9 +49,9 @@ endf
 
 fun! s:imap(preserve_completion, key, icmd) abort
   if a:preserve_completion
-    exe ":ino <buffer> <silent> <expr> " . a:key . " pumvisible() ? \"" . a:key . "\" : \"" . a:icmd . "\""
+    exe ':ino <buffer> <silent> <expr> ' . a:key . " pumvisible() ? '" . a:key . "' : '" . a:icmd . "'"
   el
-    exe ":ino <buffer> <silent> " . a:key . " " . a:icmd
+    exe ':ino <buffer> <silent> ' . a:key . ' ' . a:icmd
   en
 endf
 
@@ -62,8 +65,8 @@ fun! s:maybe_enable_autoformat() abort
     return
   en
 
-  let l:ft = get(g:pencil#autoformat_aliases, &ft, &ft)
-  let l:af_cfg = get(g:pencil#autoformat_config, l:ft, {})
+  let l:filetype = get(g:pencil#autoformat_aliases, &filetype, &filetype)
+  let l:af_cfg = get(g:pencil#autoformat_config, l:filetype, {})
   let l:black = get(l:af_cfg, 'black', [])
   let l:white = get(l:af_cfg, 'white', [])
   let l:has_black_re = len(l:black) > 0
@@ -172,7 +175,7 @@ fun! pencil#setAutoFormat(af) abort
     sil! au! pencil_autoformat * <buffer>
     if l:nu_af && !l:is_hard
       echohl WarningMsg
-      echo "autoformat can only be enabled in hard line break mode"
+      echo 'autoformat can only be enabled in hard line break mode'
       echohl NONE
       return
     en
@@ -192,7 +195,7 @@ fun! pencil#init(...) abort
   if !exists('b:pencil_wrap_mode')
     let b:pencil_wrap_mode = s:WRAP_MODE_OFF
   en
-  if !exists("b:max_textwidth")
+  if !exists('b:max_textwidth')
     let b:max_textwidth = -1
   en
 
@@ -245,7 +248,7 @@ fun! pencil#init(...) abort
     " flag to suspend autoformat for next Insert
     " optional user-defined mapping
     if exists('g:pencil#map#suspend_af') &&
-     \ g:pencil#map#suspend_af != ''
+     \ g:pencil#map#suspend_af !=# ''
       exe 'no <buffer> <silent> ' . g:pencil#map#suspend_af . ' :let b:pencil_suspend_af=1<CR>'
     en
 
@@ -383,12 +386,16 @@ fun! pencil#init(...) abort
   en
 
   if b:pencil_wrap_mode ==# s:WRAP_MODE_SOFT
-    nn <buffer> <silent> $ g$
-    nn <buffer> <silent> 0 g0
-    vn <buffer> <silent> $ g$
-    vn <buffer> <silent> 0 g0
+    exe 'nn <buffer> <silent>' . Mapkey('$', 'n') . ' g$'
+    exe 'nn <buffer> <silent>' . Mapkey('0', 'n') . ' g0'
+    exe 'vn <buffer> <silent>' . Mapkey('$', 'v') . ' g$'
+    exe 'vn <buffer> <silent>' . Mapkey('0', 'v') . ' g0'
     no <buffer> <silent> <Home> g<Home>
     no <buffer> <silent> <End>  g<End>
+    nn <buffer> <silent> g0 0
+    nn <buffer> <silent> g$ $
+    vn <buffer> <silent> g0 0
+    vn <buffer> <silent> g$ $
 
     " preserve behavior of home/end keys in popups
     call s:imap(1, '<Home>', '<C-o>g<Home>')
@@ -405,10 +412,10 @@ fun! pencil#init(...) abort
   en
 
   if b:pencil_wrap_mode
-    nn <buffer> <silent> j gj
-    nn <buffer> <silent> k gk
-    vn <buffer> <silent> j gj
-    vn <buffer> <silent> k gk
+    exe 'nn <buffer> <silent> ' . Mapkey('j', 'n') . ' gj'
+    exe 'nn <buffer> <silent> ' . Mapkey('k', 'n') . ' gk'
+    exe 'vn <buffer> <silent> ' . Mapkey('j', 'v') . ' gj'
+    exe 'vn <buffer> <silent> ' . Mapkey('k', 'v') . ' gk'
     no <buffer> <silent> <Up>   gk
     no <buffer> <silent> <Down> gj
     nn <buffer> <silent> gj j
@@ -475,7 +482,7 @@ endf
 fun! s:doOne(item) abort
   let l:matches = matchlist(a:item, '^\([a-z]\+\)=\([a-zA-Z0-9_\-.]\+\)$')
   if len(l:matches) > 1
-    if l:matches[1] =~ 'textwidth\|tw'
+    if l:matches[1] =~# 'textwidth\|tw'
       let l:tw = str2nr(l:matches[2])
       if l:tw > b:max_textwidth
         let b:max_textwidth = l:tw
@@ -504,19 +511,32 @@ endf
 " modeline(s) and max line length
 " Hat tip to https://github.com/ciaranm/securemodelines
 fun! s:doModelines() abort
-  if line("$") > &modelines
+  if line('$') > &modelines
     let l:lines={ }
     call map(filter(getline(1, &modelines) +
-          \ getline(line("$") - &modelines, "$"),
-          \ 'v:val =~ ":"'), 'extend(l:lines, { v:val : 0 } )')
+          \ getline(line('$') - &modelines, '$'),
+          \ 'v:val =~# ":"'), 'extend(l:lines, { v:val : 0 } )')
     for l:line in keys(l:lines)
       call s:doModeline(l:line)
     endfo
   el
-    for l:line in getline(1, "$")
+    for l:line in getline(1, '$')
       call s:doModeline(l:line)
     endfo
   en
 endf
+
+" Pass in a key sequence and the first letter of a vim mode. Returns key
+" mapping mapped to it in that mode, else the original key sequence if none.
+function! Mapkey (keys, mode) abort
+  redir => mappings | silent! map | redir END
+  for map in split(mappings, '\n')
+    let seq = matchstr(map, '\s\+\zs\S*')
+    if maparg(seq, a:mode) == a:keys
+      return seq
+    endif
+  endfor
+  return a:keys
+endfunction
 
 " vim:ts=2:sw=2:sts=2
