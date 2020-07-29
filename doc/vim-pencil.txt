@@ -8,7 +8,7 @@
 
             Rethinking Vim as a tool for writers 
 
-CONTENTS                                                             *vimwiki*
+CONTENTS                                                             *vim-pencil*
 
     1. Intro                         |vim-pencil-intro|
     2. Features                      |vim-pencil-features|
