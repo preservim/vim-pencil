@@ -181,18 +181,18 @@ en
 
 " Commands
 
-com -nargs=0 Pencil         call pencil#init({'wrap': 'on' })
-com -nargs=0 PencilOff      call pencil#init({'wrap': 'off' })
-com -nargs=0 NoPencil       call pencil#init({'wrap': 'off' })
-com -nargs=0 HardPencil     call pencil#init({'wrap': 'hard'})
-com -nargs=0 PencilHard     call pencil#init({'wrap': 'hard'})
-com -nargs=0 SoftPencil     call pencil#init({'wrap': 'soft'})
-com -nargs=0 PencilSoft     call pencil#init({'wrap': 'soft'})
-com -nargs=0 PencilToggle   call pencil#init({'wrap': 'toggle'})
-com -nargs=0 TogglePencil   call pencil#init({'wrap': 'toggle'})
-com -nargs=0 PFormat        call pencil#setAutoFormat(1)
-com -nargs=0 PFormatOff     call pencil#setAutoFormat(0)
-com -nargs=0 PFormatToggle  call pencil#setAutoFormat(-1)
+command-bar -nargs=0 Pencil         call pencil#init({'wrap': 'on' })
+command-bar -nargs=0 PencilOff      call pencil#init({'wrap': 'off' })
+command-bar -nargs=0 NoPencil       call pencil#init({'wrap': 'off' })
+command-bar -nargs=0 HardPencil     call pencil#init({'wrap': 'hard'})
+command-bar -nargs=0 PencilHard     call pencil#init({'wrap': 'hard'})
+command-bar -nargs=0 SoftPencil     call pencil#init({'wrap': 'soft'})
+command-bar -nargs=0 PencilSoft     call pencil#init({'wrap': 'soft'})
+command-bar -nargs=0 PencilToggle   call pencil#init({'wrap': 'toggle'})
+command-bar -nargs=0 TogglePencil   call pencil#init({'wrap': 'toggle'})
+command-bar -nargs=0 PFormat        call pencil#setAutoFormat(1)
+command-bar -nargs=0 PFormatOff     call pencil#setAutoFormat(0)
+command-bar -nargs=0 PFormatToggle  call pencil#setAutoFormat(-1)
 
 " NOTE: legacy commands have been disabled by default as of 31-Dec-15
 "       These will be removed entirely on 31-Dec-16
