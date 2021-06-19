@@ -77,7 +77,7 @@ tool in expressing yourself. For more details on vi-style editing, see...
 [gv]: http://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118
 [ig]: http://takac.github.io/2013/01/30/vim-grammar/
 [wa]: https://medium.com/p/433852f4b4d1
-[lovn]: http://allsyed.com/language-of-vim-neovim/
+[lovn]: https://allsyed.com/posts/language-of-vim-neovim/
 
 # Installation
 
