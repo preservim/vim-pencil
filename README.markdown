@@ -7,7 +7,7 @@
 <br/>
 
 - - -
-![demo](http://i.imgur.com/0KYl5vU.gif)
+![demo](https://i.imgur.com/0KYl5vU.gif)
 - - -
 
 # Features
@@ -73,79 +73,27 @@ tool in expressing yourself. For more details on vi-style editing, see...
 * [Why Atom Can’t Replace Vim, Learning the lesson of vi][wa] (March 2014)
 * [Language of Vim/Neovim][lovn] (January 2015)
 
-[ls]: http://yanpritzker.com/2011/12/16/learn-to-speak-vim-verbs-nouns-and-modifiers/
-[gv]: http://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118
-[ig]: http://takac.github.io/2013/01/30/vim-grammar/
+[ls]: https://yanpritzker.com/2011/12/16/learn-to-speak-vim-verbs-nouns-and-modifiers/
+[gv]: https://stackoverflow.com/a/1220118/
+[ig]: https://takac.github.io/2013/01/30/vim-grammar/
 [wa]: https://medium.com/p/433852f4b4d1
 [lovn]: https://allsyed.com/posts/language-of-vim-neovim/
 
 # Installation
 
-_pencil_ is best installed using a Vim package manager, such as
-[Vundle][vnd], [Plug][plg], [NeoBundle][nbn], or [Pathogen][pth].
+You can install using your favorite Vim package manager. (E.g.,
+[Pathogen][pathogen], [Vundle][vundle], or [Plug][plug].) If you are using
+a recent version of vim or neovim, you can also use native package
+support. (See [:help packages][packages].)
 
 _For those new to Vim: before installing this plugin, consider getting
 comfortable with the basics of Vim by working through one of the many
 tutorials available._
 
-[vnd]: https://github.com/gmarik/Vundle.vim
-[plg]: https://github.com/junegunn/vim-plug
-[nbn]: https://github.com/Shougo/neobundle.vim
-[pth]: https://github.com/tpope/vim-pathogen
-
-#### Vundle
-
-Add to your `.vimrc` and save:
-
-```vim
-Plugin 'reedes/vim-pencil'
-```
-
-…then run the following in Vim:
-
-```vim
-:source %
-:PluginInstall
-```
-
-#### Plug
-
-Add to your `.vimrc` and save:
-
-```vim
-Plug 'reedes/vim-pencil'
-```
-
-…then run the following in Vim:
-
-```vim
-:source %
-:PlugInstall
-```
-
-#### NeoBundle
-
-Add to your `.vimrc` and save:
-
-```vim
-NeoBundle 'reedes/vim-pencil'
-```
-
-…then run the following in Vim:
-
-```vim
-:source %
-:NeoBundleInstall
-```
-
-#### Pathogen
-
-Run the following in a terminal:
-
-```bash
-cd ~/.vim/bundle
-git clone https://github.com/reedes/vim-pencil
-```
+[pathogen]: https://github.com/tpope/vim-pathogen
+[vundle]: https://github.com/VundleVim/Vundle.vim
+[plug]: https://github.com/junegunn/vim-plug
+[packages]: https://vimhelp.org/repeat.txt.html#packages
 
 # Configuration
 
@@ -367,7 +315,7 @@ To use Vim’s Conceal feature with Markdown, you will need to install:
 2. A monospaced font (such as [Cousine][co]) featuring the _italic_,
    **bold**, and ***bold italic*** style variant for styled text.
 
-3. A colorscheme (such as [reedes/vim-colors-pencil][cp]) which supports
+3. A colorscheme (such as [preservim/vim-colors-pencil][cp]) which supports
    the Markdown-specific highlight groups for styled text.
 
 You should then only see the `_` and `*` markup for the cursor line and in
@@ -376,8 +324,8 @@ visual selections.
 **Terminal users:** consult your terminal’s documentation to configure your
 terminal to support **bold** and _italic_ styles.
 
-[co]: http://www.google.com/fonts/specimen/Cousine
-[tm]: http://github.com/tpope/vim-markdown
+[co]: https://fonts.google.com/specimen/Cousine
+[tm]: https://github.com/tpope/vim-markdown
 
 ## Status line indicator
 
@@ -416,7 +364,7 @@ your `.vimrc`.
 Note that `PencilMode()` will return blank for buffers in which _pencil_
 has not been initialized.
 
-[va]: http://github.com/bling/vim-airline
+[va]: https://github.com/bling/vim-airline
 
 ## Advanced pencil
 
@@ -646,16 +594,16 @@ Other plugins of specific interest to writers:
 * [junegunn/goyo.vim][jg] - distraction-free editing mode
 
 [vd]: https://github.com/danielbmarques/vim-ditto
-[qtfwp]: http://benoliver999.com/technology/2014/12/06/vimforprose/
+[qtfwp]: https://benoliver999.com/technology/2014/12/06/vimforprose/
 [vic]: https://labs.tomasino.org/vim-in-context/
 [rewp]: https://medium.com/usevim/reed-esaus-writing-plugins-5b6c65bc808f
 [tviai]: https://www.safaribooksonline.com/blog/2014/11/23/way-vim-ide/
 [regl]: http://wynnnetherland.com/journal/reed-esau-s-growing-list-of-vim-plugins-for-writers/
 [dfwiv]: http://tlattimore.com/blog/distraction-free-writing-in-vim/
-[ab]: http://github.com/tpope/vim-abolish
-[ex]: http://github.com/tommcdo/vim-exchange
-[jl]: http://github.com/junegunn/limelight.vim
-[jg]: http://github.com/junegunn/goyo.vim
+[ab]: https://github.com/tpope/vim-abolish
+[ex]: https://github.com/tommcdo/vim-exchange
+[jl]: https://github.com/junegunn/limelight.vim
+[jg]: https://github.com/junegunn/goyo.vim
 
 Markdown syntax plugins
 
@@ -671,24 +619,24 @@ Those using tables and footnotes should consider installing this plugin:
 
 Alternatives to Tim Pope’s syntax highlighting include:
 
-* [plasticboy/vim-markdown][pvm]
+* [preservim/vim-markdown][pvm]
 * [gabrielelana/vim-markdown][gvm]
 
 Note that the plasticboy and gabrielelana plugins may incorrectly
 reformat bulleted lists when Vim’s autoformat is active in _pencil_’s
 HardPencil mode.
 
-[tvm]: http://github.com/tpope/vim-markdown
-[pvm]: http://github.com/plasticboy/vim-markdown
-[gvm]: http://github.com/gabrielelana/vim-markdown
-[mvme]: http://github.com/mattly/vim-markdown-enhancements
+[tvm]: https://github.com/tpope/vim-markdown
+[pvm]: https://github.com/preservim/vim-markdown
+[gvm]: https://github.com/gabrielelana/vim-markdown
+[mvme]: https://github.com/mattly/vim-markdown-enhancements
 
-If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
+If you find the _pencil_ plugin useful, check out these others originally
+by [@reedes][re]:
 
 * [vim-colors-pencil][cp] - color scheme for Vim inspired by IA Writer
 * [vim-lexical][lx] - building on Vim’s spell-check and thesaurus/dictionary completion
 * [vim-litecorrect][lc] - lightweight auto-correction for Vim
-* [vim-one][vo] - make use of Vim’s _+clientserver_ capabilities
 * [vim-textobj-quote][qu] - extends Vim to support typographic (‘curly’) quotes
 * [vim-textobj-sentence][ts] - improving on Vim’s native sentence motion command
 * [vim-thematic][th] - modify Vim’s appearance to suit your task and environment
@@ -699,25 +647,29 @@ If you find the _pencil_ plugin useful, check out these others by [@reedes][re]:
 Unimpressed by _pencil_? [vim-pandoc][vp] offers prose-oriented features
 with its own Markdown variant.
 
-[cp]: http://github.com/reedes/vim-colors-pencil
-[lc]: http://github.com/reedes/vim-litecorrect
-[lx]: http://github.com/reedes/vim-lexical
-[qu]: http://github.com/reedes/vim-textobj-quote
-[re]: http://github.com/reedes
+[cp]: https://github.com/preservim/vim-colors-pencil
+[lc]: https://github.com/preservim/vim-litecorrect
+[lx]: https://github.com/preservim/vim-lexical
+[qu]: https://github.com/preservim/vim-textobj-quote
+[re]: https://github.com/reedes
 [tc]: https://www.youtube.com/watch?v=Nim4_f5QUxA
-[th]: http://github.com/reedes/vim-thematic
-[ts]: http://github.com/reedes/vim-textobj-sentence
-[tv]: http://ianhocking.com/2013/11/17/to-vim/
-[vo]: http://github.com/reedes/vim-one
-[vw]: http://therandymon.com/woodnotes/vim-for-writers/vimforwriters.html
-[wh]: http://github.com/reedes/vim-wheel
-[wo]: http://github.com/reedes/vim-wordy
-[wc]: http://github.com/reedes/vim-wordchipper
-[vp]: http://github.com/vim-pandoc/vim-pandoc
+[th]: https://github.com/preservim/vim-thematic
+[ts]: https://github.com/preservim/vim-textobj-sentence
+[tv]: https://ianhocking.com/2013/11/17/to-vim/
+[vo]: https://github.com/preservim/vim-one
+[vw]: https://therandymon.com/woodnotes/vim-for-writers/vimforwriters.html
+[wh]: https://github.com/preservim/vim-wheel
+[wo]: https://github.com/preservim/vim-wordy
+[wc]: https://github.com/preservim/vim-wordchipper
+[vp]: https://github.com/vim-pandoc/vim-pandoc
 
 # Future development
 
 If you’ve spotted a problem or have an idea on improving _pencil_, please
-report it as an issue, or better yet submit a pull request.
+report it [as an issue][issues], or better yet submit [a pull
+request][pull-request].
+
+[issues]: https://github.com/preservim/vim-pencil/issues
+[pull-request]: https://github.com/preservim/vim-pencil/pulls
 
 <!-- vim: set tw=73 :-->

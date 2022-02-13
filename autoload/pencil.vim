@@ -1,7 +1,7 @@
 " ============================================================================
 " File:        pencil.vim
 " Description: autoload functions for vim-pencil plugin
-" Maintainer:  Reed Esau <github.com/reedes>
+" Maintainer:  preservim <https://github.com/preservim>
 " Created:     December 28, 2013
 " License:     The MIT License (MIT)
 " ============================================================================
