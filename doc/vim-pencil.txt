@@ -120,51 +120,8 @@ For more details on vi-style editing, see...
 4. Installation                                         *vim-pencil-initialize*
 
 pencil is best installed using a Vim package manager, such as Vundle, Plug,
-NeoBundle, or Pathogen.
-
-For those new to Vim: before installing this plugin, consider getting
-comfortable with the basics of Vim by working through one of the many
-tutorials available.
-
-Vundle:
-
-    Add to your .vimrc and save:
-
-        Plugin 'reedes/vim-pencil'
-
-    …then run the following in Vim:
-
-        :source %
-        :PluginInstall
-
-Plug:
-
-    Add to your .vimrc and save:
-
-        Plug 'reedes/vim-pencil'
-
-    …then run the following in Vim:
-
-        :source %
-        :PlugInstall
-
-NeoBundle:
-
-    Add to your .vimrc and save:
-
-        NeoBundle 'reedes/vim-pencil'
-
-    …then run the following in Vim:
-
-        :source %
-        :NeoBundleInstall
-
-Pathogen:
-
-    Run the following in a terminal:
-
-        cd ~/.vim/bundle
-        git clone https://github.com/reedes/vim-pencil
+NeoBundle, or Pathogen. If you are using a recent version of vim or neovim,
+you can also use native package support. (See |packages|.)
 
 ------------------------------------------------------------------------------
 4.1. Initializing by command                       *vim-pencil-init-by-command*
@@ -610,12 +567,12 @@ Detect via sampling
 If you’ve spotted a problem or have an idea on improving pencil, please report
 it as an issue, or better yet submit a pull request.
 
-See https://github.com/reedes/vim-pencil for details
+See https://github.com/preservim/vim-pencil for details
 
 ==============================================================================
 17. Development                                          *vim-pencil-development*
 
-Github: https://github.com/reedes/vim-pencil
+Github: https://github.com/preservim/vim-pencil
 
 For Contributors and their Github usernames please see the github repository
 
