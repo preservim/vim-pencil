@@ -78,9 +78,10 @@ if !exists('g:pencil#autoformat_config')
         \     'black': [
         \       'htmlH[0-9]',
         \       'markdown(Code|H[0-9]|Url|IdDeclaration|Link|Rule|Highlight[A-Za-z0-9]+)',
-        \       'markdown(FencedCodeBlock|InlineCode)',
+        \       'markdown(FencedCodeBlock|InlineCode|YamlHead)',
         \       'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode|Snippet)',
         \       'mmdTable[A-Za-z0-9]*',
+        \       '^yaml*',
         \     ],
         \     'white': [
         \      'markdown(Code|Link)',
