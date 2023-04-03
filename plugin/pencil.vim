@@ -81,7 +81,7 @@ if !exists('g:pencil#autoformat_config')
         \       'markdown(FencedCodeBlock|InlineCode|YamlHead)',
         \       'mkd(Code|Rule|Delimiter|Link|ListItem|IndentCode|Snippet)',
         \       'mmdTable[A-Za-z0-9]*',
-        \       '^yaml*',
+        \       '^yaml',
         \     ],
         \     'white': [
         \      'markdown(Code|Link)',
